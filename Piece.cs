@@ -1,17 +1,21 @@
 ﻿using System;
 
-public class Piece
+namespace KitBoxApp
 {
-    private int price;
-
-    public int Price
+    public class Piece
     {
-        get { return price; }
-    }
+        private int price;
 
-    public bool IsInStock(int)
-    {
-       //will be implemented at the second 
-        return false;
+        public int Price
+        {
+            get { return price; }
+        }
+
+        public bool IsInStock(int)
+        {
+            //will be implemented at the second 
+            return false;
+        }
     }
 }
+ 

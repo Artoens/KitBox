@@ -1,10 +1,18 @@
 ﻿using System;
 
-public class Knob : Piece
+namespace KitBoxApp
 {
-    private int diameter;
-    public int Diameter
+    public class Knob : Piece
     {
-        get { return diameter; }
+        private int diameter;
+        public int Diameter
+        {
+            get { return diameter; }
+        }
+
+        public Knob(int diameter)
+        {
+            this.diameter = diameter;
+        }
     }
 }
