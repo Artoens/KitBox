@@ -18,7 +18,6 @@ namespace KitBoxApp
             foreach(Product product in order.GenerateOrder())
             {
                 //Display the list onto the interface
-                //Console.WriteLine(product.ToString());
             }
         }
     }

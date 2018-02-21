@@ -14,7 +14,7 @@ namespace KitBoxApp
         public Product(int quantity, Piece piece)
         {
             this.quantity = quantity;
-            this.piece = Piece;
+            this.piece = piece;
         }
 
         public int Quantity

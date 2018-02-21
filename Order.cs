@@ -13,13 +13,22 @@ namespace KitBoxApp
 
         public Order()
         {
-
+            this.itemList = new List<Item>();
+            this.productList = new List<Product>();
         }
 
         public List<Product> GenerateOrder()
         {
             //Should check this line => aims at copying the list into a new one
-            List<Product> newList = new List<Product>(productList);
+            List<Product> newList = new List<Product>();
+
+            foreach (Item i in itemList)
+            {
+                foreach(Product p in this.ItemToProduct(i))
+                {
+                    newList.Add(p);
+                }
+            }
 
             return newList;
         }
@@ -41,7 +50,9 @@ namespace KitBoxApp
             List<Product> productList = new List<Product>();
 
             //Generate products
-            //productList.Add(product);
+            Piece piece = new Cleat(14, 400);
+            Product product = new Product(8, piece);
+            productList.Add(product);
 
             return productList;
         }

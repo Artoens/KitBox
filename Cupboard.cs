@@ -16,6 +16,7 @@ namespace KitBoxApp
         {
             this.length = length;
             this.depth = depth;
+            this.compartments = new List<Compartment>();
         }
 
         public int Length

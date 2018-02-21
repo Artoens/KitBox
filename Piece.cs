@@ -21,4 +21,5 @@ public abstract class Piece
     }*/
 
     abstract public Piece Copy();
+    abstract public string ToString();
 }
