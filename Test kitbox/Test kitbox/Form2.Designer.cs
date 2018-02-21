@@ -31,8 +31,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DoorN = new System.Windows.Forms.RadioButton();
+            this.DoorY = new System.Windows.Forms.RadioButton();
+            this.Color = new System.Windows.Forms.Label();
+            this.Height = new System.Windows.Forms.Label();
             this.Cancel = new System.Windows.Forms.Button();
             this.Done = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.Door = new System.Windows.Forms.Label();
+            this.ColorD = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -54,12 +63,61 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ColorD);
+            this.panel1.Controls.Add(this.Door);
+            this.panel1.Controls.Add(this.comboBox3);
+            this.panel1.Controls.Add(this.comboBox2);
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.DoorN);
+            this.panel1.Controls.Add(this.DoorY);
+            this.panel1.Controls.Add(this.Color);
+            this.panel1.Controls.Add(this.Height);
             this.panel1.Controls.Add(this.Cancel);
             this.panel1.Controls.Add(this.Done);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(226, 258);
             this.panel1.TabIndex = 6;
+            // 
+            // DoorN
+            // 
+            this.DoorN.AutoSize = true;
+            this.DoorN.Location = new System.Drawing.Point(168, 93);
+            this.DoorN.Name = "DoorN";
+            this.DoorN.Size = new System.Drawing.Size(39, 17);
+            this.DoorN.TabIndex = 7;
+            this.DoorN.TabStop = true;
+            this.DoorN.Text = "No";
+            this.DoorN.UseVisualStyleBackColor = true;
+            // 
+            // DoorY
+            // 
+            this.DoorY.AutoSize = true;
+            this.DoorY.Location = new System.Drawing.Point(77, 93);
+            this.DoorY.Name = "DoorY";
+            this.DoorY.Size = new System.Drawing.Size(43, 17);
+            this.DoorY.TabIndex = 6;
+            this.DoorY.TabStop = true;
+            this.DoorY.Text = "Yes";
+            this.DoorY.UseVisualStyleBackColor = true;
+            // 
+            // Color
+            // 
+            this.Color.AutoSize = true;
+            this.Color.Location = new System.Drawing.Point(7, 60);
+            this.Color.Name = "Color";
+            this.Color.Size = new System.Drawing.Size(31, 13);
+            this.Color.TabIndex = 5;
+            this.Color.Text = "Color";
+            // 
+            // Height
+            // 
+            this.Height.AutoSize = true;
+            this.Height.Location = new System.Drawing.Point(7, 29);
+            this.Height.Name = "Height";
+            this.Height.Size = new System.Drawing.Size(38, 13);
+            this.Height.TabIndex = 4;
+            this.Height.Text = "Height";
             // 
             // Cancel
             // 
@@ -76,8 +134,50 @@
             this.Done.Name = "Done";
             this.Done.Size = new System.Drawing.Size(75, 23);
             this.Done.TabIndex = 2;
-            this.Done.Text = "button1";
+            this.Done.Text = "Done";
             this.Done.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(77, 29);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 8;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(77, 60);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 9;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(77, 117);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 10;
+            // 
+            // Door
+            // 
+            this.Door.AutoSize = true;
+            this.Door.Location = new System.Drawing.Point(10, 93);
+            this.Door.Name = "Door";
+            this.Door.Size = new System.Drawing.Size(30, 13);
+            this.Door.TabIndex = 11;
+            this.Door.Text = "Door";
+            // 
+            // ColorD
+            // 
+            this.ColorD.AutoSize = true;
+            this.ColorD.Location = new System.Drawing.Point(23, 120);
+            this.ColorD.Name = "ColorD";
+            this.ColorD.Size = new System.Drawing.Size(31, 13);
+            this.ColorD.TabIndex = 12;
+            this.ColorD.Text = "Color";
             // 
             // Form2
             // 
@@ -91,6 +191,7 @@
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -102,5 +203,14 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.Button Done;
+        private System.Windows.Forms.RadioButton DoorN;
+        private System.Windows.Forms.RadioButton DoorY;
+        private System.Windows.Forms.Label Color;
+        private System.Windows.Forms.Label Height;
+        private System.Windows.Forms.Label ColorD;
+        private System.Windows.Forms.Label Door;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

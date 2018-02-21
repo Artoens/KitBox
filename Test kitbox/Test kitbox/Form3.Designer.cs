@@ -31,9 +31,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.OtherLevel = new System.Windows.Forms.Label();
+            this.LevelY = new System.Windows.Forms.Button();
+            this.LevelN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -43,52 +43,52 @@
             this.pictureBox1.Location = new System.Drawing.Point(244, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(265, 449);
-            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 273);
+            this.treeView1.Location = new System.Drawing.Point(11, 273);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(226, 188);
-            this.treeView1.TabIndex = 10;
+            this.treeView1.TabIndex = 7;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Controls.Add(this.LevelN);
+            this.panel1.Controls.Add(this.OtherLevel);
+            this.panel1.Controls.Add(this.LevelY);
+            this.panel1.Location = new System.Drawing.Point(11, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(226, 258);
-            this.panel1.TabIndex = 9;
+            this.panel1.TabIndex = 6;
             // 
-            // label1
+            // OtherLevel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 92);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Another level?";
+            this.OtherLevel.AutoSize = true;
+            this.OtherLevel.Location = new System.Drawing.Point(68, 82);
+            this.OtherLevel.Name = "OtherLevel";
+            this.OtherLevel.Size = new System.Drawing.Size(78, 13);
+            this.OtherLevel.TabIndex = 3;
+            this.OtherLevel.Text = "An other level?";
             // 
-            // button1
+            // LevelY
             // 
-            this.button1.Location = new System.Drawing.Point(22, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Yes";
-            this.button1.UseVisualStyleBackColor = true;
+            this.LevelY.Location = new System.Drawing.Point(15, 150);
+            this.LevelY.Name = "LevelY";
+            this.LevelY.Size = new System.Drawing.Size(75, 23);
+            this.LevelY.TabIndex = 2;
+            this.LevelY.Text = "Yes";
+            this.LevelY.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // LevelN
             // 
-            this.button2.Location = new System.Drawing.Point(126, 150);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "No";
-            this.button2.UseVisualStyleBackColor = true;
+            this.LevelN.Location = new System.Drawing.Point(137, 149);
+            this.LevelN.Name = "LevelN";
+            this.LevelN.Size = new System.Drawing.Size(75, 23);
+            this.LevelN.TabIndex = 4;
+            this.LevelN.Text = "No";
+            this.LevelN.UseVisualStyleBackColor = true;
             // 
             // Form3
             // 
@@ -112,8 +112,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label OtherLevel;
+        private System.Windows.Forms.Button LevelY;
+        private System.Windows.Forms.Button LevelN;
     }
 }
