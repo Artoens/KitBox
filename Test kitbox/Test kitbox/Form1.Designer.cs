@@ -28,92 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.Dim = new System.Windows.Forms.Label();
+            this.comboBoxDim = new System.Windows.Forms.ComboBox();
             this.Next = new System.Windows.Forms.Button();
-            this.Dimentions = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // Dim
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(245, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(265, 449);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.Dim.AutoSize = true;
+            this.Dim.Location = new System.Drawing.Point(12, 36);
+            this.Dim.Name = "Dim";
+            this.Dim.Size = new System.Drawing.Size(61, 13);
+            this.Dim.TabIndex = 0;
+            this.Dim.Text = "Dimensions";
             // 
-            // treeView1
+            // comboBoxDim
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 273);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(226, 188);
-            this.treeView1.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.Next);
-            this.panel1.Controls.Add(this.Dimentions);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(226, 258);
-            this.panel1.TabIndex = 3;
+            this.comboBoxDim.FormattingEnabled = true;
+            this.comboBoxDim.Location = new System.Drawing.Point(79, 33);
+            this.comboBoxDim.Name = "comboBoxDim";
+            this.comboBoxDim.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxDim.TabIndex = 1;
             // 
             // Next
             // 
-            this.Next.Location = new System.Drawing.Point(147, 232);
+            this.Next.Location = new System.Drawing.Point(124, 204);
             this.Next.Name = "Next";
             this.Next.Size = new System.Drawing.Size(75, 23);
             this.Next.TabIndex = 2;
             this.Next.Text = "Next";
             this.Next.UseVisualStyleBackColor = true;
-            // 
-            // Dimentions
-            // 
-            this.Dimentions.FormattingEnabled = true;
-            this.Dimentions.Location = new System.Drawing.Point(68, 32);
-            this.Dimentions.Name = "Dimentions";
-            this.Dimentions.Size = new System.Drawing.Size(155, 21);
-            this.Dimentions.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Dimentions";
+            this.Next.Click += new System.EventHandler(this.Next_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 473);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(211, 239);
+            this.ControlBox = false;
+            this.Controls.Add(this.Next);
+            this.Controls.Add(this.comboBoxDim);
+            this.Controls.Add(this.Dim);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label Dim;
+        private System.Windows.Forms.ComboBox comboBoxDim;
         private System.Windows.Forms.Button Next;
-        private System.Windows.Forms.ComboBox Dimentions;
-        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -12,9 +12,17 @@ namespace Test_kitbox
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        ParentForm parent;
+
+        public Form2(ParentForm parent)
         {
+            this.parent = parent;
             InitializeComponent();
+        }
+
+        private void Done_Click(object sender, EventArgs e)
+        {
+            parent.Next();
         }
     }
 }
