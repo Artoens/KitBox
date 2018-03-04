@@ -21,5 +21,6 @@ public abstract class Piece
     }*/
 
     abstract public Piece Copy();
-    abstract public string ToString();
+
+    abstract override public string ToString();
 }

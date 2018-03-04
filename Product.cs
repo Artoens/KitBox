@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KitBoxApp
-{
-    class Product
+namespace Test_kitbox
+{ 
+    public class Product
     {
         private int quantity;
         private Piece piece;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KitBoxApp
+namespace Test_kitbox
 {
     class Cupboard : Item
     {
@@ -65,6 +65,28 @@ namespace KitBoxApp
         {
             if(index >= 0 && index <= compartments.Count)
             compartments.RemoveAt(index);
+        }
+
+        public List<Product> ItemToProduct()
+        {
+            List<Product> productList = new List<Product>();
+
+            foreach(Compartment comp in compartments)
+            {
+                //To be completed according to the catalog and the DB
+                //Exemple :
+                
+                /*Piece piece = null;
+
+                piece = Catalog.FindCleat(comp.Height);
+                if(piece != null)
+                {
+                    productList.Add(new Product(4, piece));
+                }*/
+                
+            }
+
+            return productList;
         }
     }
 }
