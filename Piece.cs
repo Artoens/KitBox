@@ -1,21 +1,26 @@
 ﻿using System;
 
-namespace KitBoxApp
+public abstract class Piece
 {
-    public class Piece
+    protected int price;
+
+    public Piece(int price)
     {
-        private int price;
-
-        public int Price
-        {
-            get { return price; }
-        }
-
-        public bool IsInStock(int)
-        {
-            //will be implemented at the second 
-            return false;
-        }
+        this.price = price;
     }
+
+    public int Price
+    {
+        get { return price; }
+    }
+
+    //IMPLEMENTED WITH DATABASE
+    /*public bool IsInStock(int askedNumber)
+    {
+
+    }*/
+
+    abstract public Piece Copy();
+
+    abstract override public string ToString();
 }
- 

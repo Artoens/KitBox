@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KitBoxApp
+namespace Test_kitbox
 {
     public class Door : Piece
     {
@@ -23,16 +23,21 @@ namespace KitBoxApp
             get { return color; }
         }
 
-        public Door(int length, int height, string color)
+        public Door(int length, int height, string color, int price) : base (price)
         {
             this.length = length;
             this.height = height;
             this.color = color;
         }
 
-        public Door Copy()
+        override public Piece Copy()
         {
-            return new Door(this.length, this.height, this.color);
+            return new Door(this.length, this.height, this.color, this.price);
+        }
+
+        public override string ToString()
+        {
+            return "Door";
         }
     }
 }

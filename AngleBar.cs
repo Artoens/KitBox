@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KitBoxApp
+namespace Test_kitbox
 {
     public class AngleBar : Piece
     {
@@ -15,15 +15,21 @@ namespace KitBoxApp
         {
             get { return color; }
         }
-        public AngleBar(int height, string color)
+
+        public AngleBar(int height, string color, int price) : base (price)
         {
             this.height = height;
             this.color = color;
         }
 
-        public AngleBar Copy()
+        override public Piece Copy()
         {
-            return new AngleBar(this.height, this.color);
+            return new AngleBar(this.height, this.color, this.price);
+        }
+
+        public override string ToString()
+        {
+            return "AngelBar";
         }
     }
 }

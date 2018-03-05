@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KitBoxApp
+namespace Test_kitbox
 {
     public class Knob : Piece
     {
@@ -10,9 +10,19 @@ namespace KitBoxApp
             get { return diameter; }
         }
 
-        public Knob(int diameter)
+        public Knob(int diameter, int price) : base (price)
         {
             this.diameter = diameter;
+        }
+
+        override public Piece Copy()
+        {
+            return new Knob(this.diameter, this.price);
+        }
+
+        public override string ToString()
+        {
+            return "Knob";
         }
     }
 }

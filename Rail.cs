@@ -1,5 +1,5 @@
 ﻿using System;
-namespace KitBoxApp
+namespace Test_kitbox
 {
     public class Rail : Piece
     {
@@ -17,15 +17,20 @@ namespace KitBoxApp
             get { return length; }
         }
 
-        public Rail(string type, int length)
+        public Rail(string type, int length, int price) : base(price)
         {
             this.type = type;
             this.length = length;
         }
 
-        public Rail Copy()
+        override public Piece Copy()
         {
-            return new Rail(this.type, this.length);
+            return new Rail(this.type, this.length, this.price);
+        }
+
+        public override string ToString()
+        {
+            return "Rail";
         }
     }
 }

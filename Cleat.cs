@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KitBoxApp
+namespace Test_kitbox
 {
     public class Cleat : Piece
     {
@@ -10,14 +10,19 @@ namespace KitBoxApp
             get { return height; }
         }
 
-        public Cleat(int height)
+        public Cleat(int height, int price) : base(price)
         {
             this.height = height;
         }
 
-        public Cleat Copy()
+        override public Piece Copy()
         {
-            return new Cleat(this.height);
+            return new Cleat(this.height, this.price);
+        }
+
+        public override string ToString()
+        {
+            return "Cleat - height : " + this.height + " price : " + this.price;
         }
     }
 }
