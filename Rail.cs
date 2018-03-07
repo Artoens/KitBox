@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace Test_kitbox
 {
     public class Rail : Piece

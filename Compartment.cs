@@ -36,7 +36,7 @@ namespace Test_kitbox
             //Not checked yet
             set { this.mainColor = value; }
         }
-
+        
         public bool DoorPresence
         {
             get { return door; }

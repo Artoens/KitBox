@@ -78,7 +78,7 @@ namespace Test_kitbox
                 
                 /*Piece piece = null;
 
-                piece = Catalog.FindCleat(comp.Height);
+                piece = Catalog.FindCleat(comp.Height - 2);
                 if(piece != null)
                 {
                     productList.Add(new Product(4, piece));

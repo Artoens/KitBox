@@ -8,11 +8,28 @@ namespace Test_kitbox
 {
     static class Catalog
     {
-        public static List<Piece> pieceList = new List<Piece>();
-        
-        //PieceList property
-        //AddItem
-        //RemoveItem eventually
+        private static List<Piece> pieceList = new List<Piece>();
+
+        public static List<Piece> PieceList
+        {
+            get
+            {
+                List<Piece> newList = new List<Piece>();
+
+                foreach (Piece i in pieceList)
+                {
+                    newList.Add(i);
+                }
+
+                return newList;
+            }
+        }
+
+        public static void AddPiece(Piece piece)
+        {
+            pieceList.Add(piece);
+        }
+
         //UpdateFromDB
 
         public static Piece FindCleat(int height)
