@@ -24,6 +24,11 @@ namespace Test_kitbox
             }
         }
 
+        public int Number
+        {
+            get { return numberOfDim; }
+        }
+
         public int GetDimension(int i)
         {
             if (i < numberOfDim)
