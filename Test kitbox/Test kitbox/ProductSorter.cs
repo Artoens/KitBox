@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
+    //USE THIS CLASS TO SORT PRODUCT LISTS -> REMOVE DOUBLES -> EASY STOCK CHECK
     public static class ProductSorter
     {
         public static List<Product> AvoidDoubles(List<Product> productList)
