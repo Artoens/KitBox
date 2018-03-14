@@ -3,26 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.data.SQLite;
 
 namespace Test_kitbox
 {
     static class Catalog
     {
-        private static List<Piece> pieceList = new List<Piece>();
-
-        public static List<Piece> PieceList
+        public static list<String> GetPieces()
         {
-            get
+            List<String> pieces = new List<String>();
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=/Users/eliseraxhon/Desktop/3BAC/kitbox"))
             {
-                List<Piece> newList = new List<Piece>();
-
-                foreach (Piece i in pieceList)
+                connect.Open();
+                using (SQLiteConnection fmd = connect.CreateCommand())
                 {
-                    newList.Add(i);
+                    //Piece piece;
+                    fmd.CommandText = @"SELECT DISTINCT ID_Piece FROM Link_Piece_Sup";
+                    fmd.CommandType = CommandType.Text;
+                    SQLiteDataReader r = fmd.ExecuteReader();
+                    while (r.Read())
+                    {
+                        pieces.Add(Convert.ToString(r["ID_Piece"]));
+                    }
                 }
-
-                return newList;
             }
+            return pieces;
+        }
+
+        get
+        {
+            List<Piece> newList = new List<Piece>();
+
+            foreach (Piece i in pieceList)
+            {
+                newList.Add(i);
+            }
+
+            return newList;
         }
 
         public static void AddPiece(Piece piece)
