@@ -1,4 +1,6 @@
-﻿namespace Test_kitbox
+﻿using System.Collections.Generic;
+
+namespace Test_kitbox
 {
     partial class Form1
     {
@@ -49,6 +51,7 @@
             this.comboBoxDim.Name = "comboBoxDim";
             this.comboBoxDim.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDim.TabIndex = 1;
+            this.comboBoxDim.SelectedIndexChanged += new System.EventHandler(this.comboBoxDim_SelectedIndexChanged);
             // 
             // Next
             // 

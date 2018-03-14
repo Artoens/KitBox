@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    class Cupboard : Item
+    public class Cupboard : Item
     {
         private int length;
         private int depth;
@@ -87,6 +87,11 @@ namespace Test_kitbox
             }
 
             return productList;
+        }
+
+        public override string ToString()
+        {
+            return "Cupboard " + length.ToString() + "x" +depth.ToString();
         }
     }
 }

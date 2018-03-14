@@ -26,6 +26,17 @@ namespace Test_kitbox
 
             MessageBox.Show(dimension.ToString());*/
 
+            //IMPORT PANEL MANUALLY TO GET DIMENSIONS
+            Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);
+            Catalog.AddPiece(panelTB);
+            panelTB = new Panel(60, 0, 30, "blue", "TB", 47);
+            Catalog.AddPiece(panelTB);
+            panelTB = new Panel(50, 0, 20, "red", "TB", 34);
+            Catalog.AddPiece(panelTB);
+
+            Order order = new Order();
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ParentForm());

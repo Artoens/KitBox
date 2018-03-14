@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    static class Catalog
+    public static class Catalog
     {
         private static List<Piece> pieceList = new List<Piece>();
 

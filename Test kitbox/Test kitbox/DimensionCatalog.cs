@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    static class DimensionCatalog
+    public static class DimensionCatalog
     {
         /// <summary>
         /// This methods checks all the available dimensions from the list of panels in the catalog

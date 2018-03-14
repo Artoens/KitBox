@@ -50,6 +50,8 @@
     <Compile Include="Cleat.cs" />
     <Compile Include="Compartment.cs" />
     <Compile Include="Cupboard.cs" />
+    <Compile Include="Dimension.cs" />
+    <Compile Include="DimensionCatalog.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
