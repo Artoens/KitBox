@@ -36,7 +36,6 @@ namespace Test_kitbox
 
             Order order = new Order();
 
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ParentForm());
