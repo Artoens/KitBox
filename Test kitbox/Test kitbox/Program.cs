@@ -25,7 +25,7 @@ namespace Test_kitbox
             Dimension dimension = new Dimension(new int[] {20,40,60}, 3);
 
             MessageBox.Show(dimension.ToString());*/
-
+            Catalog.GetPieces();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ParentForm());
