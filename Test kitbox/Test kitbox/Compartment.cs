@@ -60,7 +60,7 @@ namespace Test_kitbox
             string result = mainColor + " Compartment " + height.ToString();
             if (door)
             {
-                result += doorColor + " D";
+                result += " " + doorColor + " D";
             }
             return result;
         }

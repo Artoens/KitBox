@@ -112,6 +112,7 @@
             this.DoorY.TabStop = true;
             this.DoorY.Text = "Yes";
             this.DoorY.UseVisualStyleBackColor = true;
+            this.DoorY.CheckedChanged += new System.EventHandler(this.DoorY_CheckedChanged);
             // 
             // DoorN
             // 
@@ -123,6 +124,7 @@
             this.DoorN.TabStop = true;
             this.DoorN.Text = "No";
             this.DoorN.UseVisualStyleBackColor = true;
+            this.DoorN.CheckedChanged += new System.EventHandler(this.DoorN_CheckedChanged);
             // 
             // Done
             // 
@@ -164,6 +166,7 @@
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.ShowIcon = false;
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
