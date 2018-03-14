@@ -122,7 +122,7 @@ namespace Test_kitbox
                 if (piece is Panel)
                 {
                     panel = piece as Panel;
-                    if (colorList.Contains(panel.Color))
+                    if (!colorList.Contains(panel.Color))
                     {
                         colorList.Add(panel.Color);
                     }

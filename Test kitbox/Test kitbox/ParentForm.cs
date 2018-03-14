@@ -50,8 +50,8 @@ namespace Test_kitbox
         public void Next()
         {
             top++;
-            UpdateTreeVieuw();
             LoadForm();
+            UpdateTreeVieuw();
         }
         public void Back()
         {
@@ -60,7 +60,12 @@ namespace Test_kitbox
         }
         public void UpdateTreeVieuw()
         {
+            treeView1.Nodes.Clear();
             treeView1.Nodes.Add(cupboard.ToString());
+            foreach(Compartment compartment in cupboard.GetAllCompartments())
+            {
+                treeView1.Nodes[0].Nodes.Add(compartment.ToString());
+            }
         }
 
     }

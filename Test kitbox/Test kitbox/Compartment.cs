@@ -52,5 +52,14 @@ namespace Test_kitbox
             //Not checked yet
             set { this.doorColor = value; }
         }
+        public override string ToString()
+        {
+            string result =  mainColor + " Compartment " + height.ToString();
+            if (door)
+            {
+                result += doorColor + " D";
+            }
+            return result;
+        }
     }
 }

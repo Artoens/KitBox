@@ -51,6 +51,16 @@ namespace Test_kitbox
             get { return compartments.Count; }
         }
 
+        public List<Compartment> GetAllCompartments()
+        {
+            List<Compartment> list =  new List<Compartment>();
+            for (int i = 0; i < compartments.Count; i++)
+            {
+                list.Add(GetCompartment(i));
+            }
+            return list;
+        }
+
         public void AddCompartment(Compartment newCompartment)
         {
             if(compartments.Count < 7)
