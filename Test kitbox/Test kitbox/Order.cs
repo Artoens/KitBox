@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    class Order
+    public class Order
     {
         private List<Item> itemList;
         private List<Product> productList;
