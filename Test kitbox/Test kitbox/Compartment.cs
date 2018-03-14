@@ -14,12 +14,13 @@ namespace Test_kitbox
         private string doorColor;
         private Cupboard cupboard;
 
-        public Compartment(int height, string mainColor, bool door, string doorColor)
+        public Compartment(int height, string mainColor, bool door, string doorColor, Cupboard cupboard)
         {
             this.height = height;
             this.mainColor = mainColor;
             this.door = door;
             this.doorColor = doorColor;
+            this.cupboard = cupboard;
         }
 
         public int Height 
