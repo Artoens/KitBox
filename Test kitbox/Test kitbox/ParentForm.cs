@@ -12,9 +12,17 @@ namespace Test_kitbox
 {
     public partial class ParentForm : Form
     {
-        int top = -1;
+        int top = 0;
         int count;
         List<Form> frm = new List<Form>();
+        Order order = new Order();
+        Cupboard cupboard = new Cupboard(0, 0);
+
+        public Cupboard Cup
+        {
+            get { return cupboard; }
+            set { cupboard = value; }
+        }
 
         public ParentForm()
         {
@@ -27,7 +35,7 @@ namespace Test_kitbox
 
         private void ParentForm_Load(object sender, EventArgs e)
         {
-            Next();
+            LoadForm();
         }
 
         private void LoadForm()
@@ -42,6 +50,7 @@ namespace Test_kitbox
         public void Next()
         {
             top++;
+            UpdateTreeVieuw();
             LoadForm();
         }
         public void Back()
@@ -49,5 +58,10 @@ namespace Test_kitbox
             top--;
             LoadForm();
         }
+        public void UpdateTreeVieuw()
+        {
+            treeView1.Nodes.Add(cupboard.ToString());
+        }
+
     }
 }

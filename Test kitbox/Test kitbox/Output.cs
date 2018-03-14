@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    class Output
+    public class Output
     {
         public Output()
         {

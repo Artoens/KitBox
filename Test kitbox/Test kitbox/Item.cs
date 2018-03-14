@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    interface Item
+    public interface Item
     {
         List<Product> ItemToProduct();
     }

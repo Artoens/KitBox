@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    class Compartment
+    public class Compartment
     {
         private int height;
         private string mainColor;
