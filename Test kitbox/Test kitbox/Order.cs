@@ -34,10 +34,10 @@ namespace Test_kitbox
         }
 
         //IMPLEMENTED WITH DATABASE
-        /*public bool CheckStock(Product product)
+        public bool CheckStock(Product product)
         {
-
-        }*/
+            return true;
+        }
 
         //IMPLEMENTED WITH DATABASE
         /*public bool UpdateDatabase()
