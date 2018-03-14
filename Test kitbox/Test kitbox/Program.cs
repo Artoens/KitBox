@@ -15,13 +15,16 @@ namespace Test_kitbox
         static void Main()
         {
 
-            Piece piece = new Cleat(8, 25);
-            Catalog.pieceList.Add(piece);
+            /*Piece piece = new Cleat(8, 25);
+            Catalog.AddPiece(piece);
 
             piece = new Cleat(4, 12);
-            Catalog.pieceList.Add(piece);
+            Catalog.AddPiece(piece);
 
             Cupboard cupboard = new Cupboard(60, 40);
+            Dimension dimension = new Dimension(new int[] {20,40,60}, 3);
+
+            MessageBox.Show(dimension.ToString());*/
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
