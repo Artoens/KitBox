@@ -43,7 +43,8 @@ namespace Test_kitbox
                 compartments[index].Height,
                 compartments[index].MainColor,
                 compartments[index].DoorPresence,
-                compartments[index].DoorColor);
+                compartments[index].DoorColor,
+                this);
         }
 
         public int NumberCompartments
