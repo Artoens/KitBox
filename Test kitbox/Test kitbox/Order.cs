@@ -45,7 +45,7 @@ namespace Test_kitbox
 
         }*/
 
-        public List<Product> ItemToProduct(Item item)
+        public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
 

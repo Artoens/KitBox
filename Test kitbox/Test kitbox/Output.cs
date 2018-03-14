@@ -45,11 +45,24 @@ namespace Test_kitbox
             List<string> lines = new List<string>
                 {
                     "List of the" + now + "for" + "client",
-                    " "
+                    " ", "n° / item / availibility"
                 };
-            foreach (Product item in order.GenerateOrder())
+            order.ItemToProduct().
+            foreach (Product item in order.ItemToProduct())
             {
-                order.item
+                int n = 1;
+                line = n.ToString() + "/" + item.ToString() + "/";
+                if (order.CheckStock(item))
+                {
+                    line += "Available";
+                }
+                else
+                {
+                    line += "Not in Stock";
+                }
+                
+               lines.Add(line);
+                n += 1;
             }
         }
     }
