@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,26 +11,153 @@ namespace Test_kitbox
     {
         private static List<Piece> pieceList = new List<Piece>();
 
-        public static List<String> GetPieces()
+        //INUTILE
+        public static List<String> TestGetPieces()
         {
             List<String> pieces = new List<String>();
-            using(SQLiteConnection connect = new SQLiteConnection(@"Data Source=/Users/eliseraxhon/Desktop/3BAC/kitbox/BD/Final/Kitbox.db;Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    //Piece piece;
-                    fmd.CommandText = @"SELECT DISTINCT ID_Piece FROM Link_Piece_Sup";
+                    fmd.CommandText = @"SELECT DISTINCT Piece_Code FROM Link_Piece_Sup";
                     SQLiteDataReader r = fmd.ExecuteReader();
+                    
                     while (r.Read())
                     {
-                        pieces.Add(Convert.ToString(r["ID_Piece"]));
+                        pieces.Add(Convert.ToString(r["Piece_Code"]));
                     }
                 }
-            }
 
+                //met tous les ID_link dans une liste
+                // Dans une boucle : checker quel type de piece c'est (cleat,...)
+                //En fonction du type, ajouter un piece :
+                //Piece piece = new Cleat(50, 20);
+                //Ajouter le piece à la List<Piece>
+            }
             return pieces;
         }
+
+        //UTILE
+        public static List<String> GetPieces()
+        {
+            List<String> pieces = new List<String>();
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    //demande tous les objects avec leur nom de référence
+                    fmd.CommandText = @"SELECT * FROM Piece INNER JOIN Reference ON Piece.ID_Piece = Reference.ID_Piece";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+
+                    while (q.Read())
+                    {
+                        string reference = Convert.ToString(q["Reference"]);
+
+                        if (reference == "Angle bar")
+                        {
+                            int height = Convert.ToInt16(q["Height"]);
+                            string color = Convert.ToString(q["Color"]);
+                            int price = Convert.ToInt16(q["Price"]); //Attention, le prix est un float non ?
+                            Piece AngleBar = new AngleBar(height, color, price);
+                            pieceList.Add(AngleBar);
+                        }
+
+                        if (reference == "Panel")
+                        {
+                            int length = Convert.ToInt16(q["Length"]);
+                            int height = Convert.ToInt16(q["height"]);
+                            int depth = Convert.ToInt16(q["Depth"]);
+                            string color = Convert.ToString(q["Color"]);
+                            string type; //C'est quoi type?
+                            int price = Convert.ToInt16(q["Price"]);
+                            Piece Panel = new Panel(length, height, depth, color, type, price);
+                            pieceList.Add(Panel);
+                        }
+
+                        if (reference == "Door")
+                        {
+                            int length = Convert.ToInt16(q["Length"]);
+                            int height = Convert.ToInt16(q["height"]);
+                            string color = Convert.ToString(q["Color"]);
+                            int price = Convert.ToInt16(q["Price"]);
+                            Piece Door = new Door(length, height, color, price);
+                            pieceList.Add(Door);
+                        }
+
+                        if (reference == "Cleat")
+                        {
+                            int height = Convert.ToInt16(q["height"]);
+                            int price = Convert.ToInt16(q["Price"]);
+                            Piece Cleat = new Cleat(height, price);
+                            pieceList.Add(Cleat);
+                        }
+
+                        if (reference == "Rail")
+                        {
+                            string type; //C'est quoi type?
+                            int length = Convert.ToInt16(q["Length"]);
+                            int price = Convert.ToInt16(q["Price"]);
+                            Piece Rail = new Rail(type, length, price);
+                            pieceList.Add(Rail);
+                        }
+
+                        if (reference == "Knob")
+                        {
+                            int diameter = Convert.ToInt16(q["Dimensions"]); //ATTENTION changer le diamètre dans la table par juste le chiffre
+                            int price = Convert.ToInt16(q["Price"]);
+                            Piece Knob = new Knob(diameter, price);
+                            pieceList.Add(Knob);
+                        }
+                    }
+                }
+
+        }
+
+
+
+                    fmd.CommandText = @"SELECT "
+                }
+
+                //met tous les ID_link dans une liste
+                // Dans une boucle : checker quel type de piece c'est (cleat,...)
+                //En fonction du type, ajouter un piece :
+                //Piece piece = new Cleat(50, 20);
+                //Ajouter le piece à la List<Piece>
+            }
+            return pieces;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public static List<Piece> PieceList
         {
