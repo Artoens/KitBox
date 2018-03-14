@@ -10,6 +10,7 @@ namespace Test_kitbox
     {
         public Output()
         {
+            
 
         }
 
@@ -19,6 +20,14 @@ namespace Test_kitbox
             {
                 //Display the list onto the interface
             }
+        }
+        public void MakeBill()
+        {
+
+        }
+        public void MakeList()
+        {
+
         }
     }
 }

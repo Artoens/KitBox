@@ -22,9 +22,9 @@ namespace Test_kitbox
             //Should check this line => aims at copying the list into a new one
             List<Product> newList = new List<Product>();
 
-            foreach (Item i in itemList)
+            foreach (Item item in itemList)
             {
-                foreach(Product p in this.ItemToProduct(i))
+                foreach(Product p in item.ItemToProduct())
                 {
                     newList.Add(p);
                 }
