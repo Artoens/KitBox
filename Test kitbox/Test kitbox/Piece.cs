@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 public abstract class Piece
 {
@@ -15,10 +15,21 @@ public abstract class Piece
     }
 
     //IMPLEMENTED WITH DATABASE
-    /*public bool IsInStock(int askedNumber)
-    {
+    //Je suppose que askedNumber est le Piece_ID
 
-    }*/
+    public bool IsInStock(int askedNumber)
+    {
+        using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
+        {
+            fmd.CommandText = @"SELECT Amount FROM Stock where Piece_ID = askedNumber";
+            SQLiteDataReader q = fmd.ExecuteReader();
+            if(q.read())
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
     abstract public Piece Copy();
 
