@@ -28,12 +28,12 @@ namespace Test_kitbox
         private void LevelN_Click(object sender, EventArgs e)
         {
             Order order = new Order();
-            order.AddItem(parent.Cup);
+            order.AddItem(parent.Cup);/*
             foreach (Compartment comp in parent.Cup.GetAllCompartments())
             {
                 order.AddItem(comp);
             }
-            parent.Close();
+            parent.Close();*/
             Form4 form4 = new Form4(order);
         }
     }
