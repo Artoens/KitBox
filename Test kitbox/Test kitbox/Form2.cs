@@ -23,7 +23,7 @@ namespace Test_kitbox
 
         private void Done_Click(object sender, EventArgs e)
         {
-            if (comboBoxH.Text != "" && comboBoxC.Text != "" && comboBoxH.Text != "" && (DoorY.Checked || DoorN.Checked))
+            if (comboBoxH.Text != "" && comboBoxC.Text != "" && comboBoxH.Text != "" && (DoorY.Checked && comboBox3.Text !="" || DoorN.Checked))
             {
                 parent.Cup.AddCompartment(new Compartment(Int32.Parse(comboBoxH.Text),comboBoxC.Text, DoorY.Checked, comboBox3.Text, parent.Cup));
                 /*
