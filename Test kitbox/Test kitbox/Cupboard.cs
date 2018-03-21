@@ -47,7 +47,7 @@ namespace Test_kitbox
                 this);
         }
 
-        public int NumberCompartments
+        public int NumberCompartments   
         {
             get { return compartments.Count; }
         }

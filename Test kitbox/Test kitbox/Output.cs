@@ -8,6 +8,7 @@ namespace Test_kitbox
 {
     public class Output
     {
+        DateTime now = DateTime.Now;
         public string InterfaceOuput(Order order)
         {
             string linesString = "";
@@ -29,7 +30,6 @@ namespace Test_kitbox
          
         public List<string> MakeBill(Order order)
         {
-            DateTime now = DateTime.Now;
             string line = null;
             int totalPrice = 0;
             int compartmentPrices = 0;
@@ -97,7 +97,6 @@ namespace Test_kitbox
 
         public void MakeList(Order order)
         {
-            DateTime now = DateTime.Now;
             string line = null;
             string path = (@"../../../List of" + now + ".txt");
             List<string> lines = new List<string>
