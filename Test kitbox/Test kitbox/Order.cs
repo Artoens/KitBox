@@ -69,5 +69,10 @@ namespace Test_kitbox
             if (index >= 0 && index <= itemList.Count)
                 itemList.RemoveAt(index);
         }
+
+        public List<Item> ItemList
+        {
+            get { return itemList; }
+        }
     }
 }

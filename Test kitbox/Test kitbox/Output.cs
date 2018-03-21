@@ -8,53 +8,93 @@ namespace Test_kitbox
 {
     public class Output
     {
-        public Output()
+        public string InterfaceOuput(Order order)
         {
-
-
-        }
-
-        public void PrettyOrder(Order order)
-        {
-            foreach (Product product in order.GenerateOrder())
+            string linesString = "";
+            foreach (string line in MakeBill(order))
             {
-                //Display the list onto the interface
+                linesString += line + '\n';
             }
+            return linesString;
         }
-        //il manque 
-        public void MakeBill(Order order)
+
+        public void MakeFiles(Order order)
+        {
+            List<string> lines = MakeBill(order);
+            lines.ToArray();
+            string path = (@"../../../Bill of" + now + ".txt");
+            MakeBill(order).ToArray();
+            System.IO.File.WriteAllLines(path, lines);
+        }
+         
+        public List<string> MakeBill(Order order)
         {
             DateTime now = DateTime.Now;
             string line = null;
-            string path = (@"../../../Bill of" + now + ".txt");
             int totalPrice = 0;
-            int cupboardPrices = 0; //ça
+            int compartmentPrices = 0;
+            Cupboard cupboard;
             foreach (Product product in order.GenerateOrder())
             {
-                totalPrice += product.Piece.Price;
+                totalPrice += product.Price;
             }
-
+            foreach (Item item in order.ItemList)
+            {
+                if (item is Cupboard)
+                {
+                    cupboard = item as Cupboard;
+                    foreach (Compartment compartment in cupboard.GetAllCompartments())
+                    {
+                        foreach (Product product in compartment.ItemToProduct())
+                        {
+                            compartmentPrices += product.Price;
+                        }
+                    }
+                }
+            }
 
             List<string> lines = new List<string>
                 {
                     "Bill made on the" + now + "for the client",
                     " ",
-                    "Item bought/price/availibility",
-                    "cupboard/" + ((totalPrice-cupboardPrices)/100).ToString() + ""//pour ici
+                    "Item bought/price/availability",
+                    "cupboard/" + ((totalPrice-compartmentPrices)/100).ToString() + ""//pour ici
                 };
-            foreach (Product product in order.GenerateOrder())
-            {
-                //ici aussi il manque un truc
-                lines.Add(line);
+
+            int i = 1;
+            string availability = "Available";
+            foreach (Item item in order.ItemList)
+             {
+                if(item is Cupboard)
+                {
+                    cupboard = item as Cupboard;
+                    foreach (Compartment compartment in cupboard.GetAllCompartments())
+                    {
+                        int price = 0;
+                        foreach (Product product in compartment.ItemToProduct())
+                        {
+                            price += product.Price;
+
+                            if (!order.CheckStock(product))
+                            {
+                                availability = "Not in stock";
+                            }
+                        }
+                        line = "compartment n°" + i.ToString() + "/" + price.ToString() + "/" + availability;
+                        i += 1;
+                        lines.Add(line);
+                    }
+                }
             }
             string totalPriceString = "Total price: " + (totalPrice/100).ToString();
             lines.Add(totalPriceString);
             double vat = totalPrice * 1.21 / 100;
             string vatPrice = "Total price with VAT: " + vat.ToString();
             lines.Add(vatPrice);
-            lines.ToArray();
-            System.IO.File.WriteAllLines(path, lines);
+            return lines;
         }
+
+
         public void MakeList(Order order)
         {
             DateTime now = DateTime.Now;
@@ -66,7 +106,7 @@ namespace Test_kitbox
                     " ",
                     "n° / item / availibility"
                 };
-            foreach (Product item in order.ItemToProduct())
+            foreach (Product item in ProductSorter.RemoveDoubles(order.ItemToProduct()))
             {
                 int n = 1;
                 line = n.ToString() + "/" + item.ToString() + "/";
