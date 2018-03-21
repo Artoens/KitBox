@@ -62,6 +62,11 @@ namespace Test_kitbox
             return list;
         }
 
+        public List<Compartment> Compartments
+        {
+            get { return compartments; }
+        }
+
         public void AddCompartment(Compartment newCompartment)
         {
             if(compartments.Count < 7)
@@ -76,6 +81,11 @@ namespace Test_kitbox
         {
             if(index >= 0 && index <= compartments.Count)
             compartments.RemoveAt(index);
+        }
+
+        public void RemoveLastCompartment()
+        {
+                compartments.RemoveAt(compartments.Count - 1);
         }
 
         public List<Product> ItemToProduct()
