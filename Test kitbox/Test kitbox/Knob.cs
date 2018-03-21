@@ -10,7 +10,7 @@ namespace Test_kitbox
             get { return diameter; }
         }
 
-        public Knob(int diameter, int price) : base (price)
+        public Knob(int diameter, int price, string id) : base (price, id)
         {
             this.diameter = diameter;
         }

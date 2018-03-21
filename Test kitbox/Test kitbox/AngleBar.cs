@@ -16,7 +16,7 @@ namespace Test_kitbox
             get { return color; }
         }
 
-        public AngleBar(int height, string color, int price) : base (price)
+        public AngleBar(int height, string color, int price, string id) : base (price, id)
         {
             this.height = height;
             this.color = color;

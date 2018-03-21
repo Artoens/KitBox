@@ -17,7 +17,7 @@ namespace Test_kitbox
             get { return length; }
         }
 
-        public Rail(string type, int length, int price) : base(price)
+        public Rail(string type, int length, int price, string id) : base(price, id)
         {
             this.type = type;
             this.length = length;

@@ -34,7 +34,7 @@ namespace Test_kitbox
             get { return type; }
         }
 
-        public Panel(int length, int height,int depth, string color, string type, int price) : base(price)
+        public Panel(int length, int height,int depth, string color, string type, int price, string) : base(price, id)
         {
             this.length = length;
             this.height = height;

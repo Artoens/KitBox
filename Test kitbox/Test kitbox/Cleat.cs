@@ -10,7 +10,7 @@ namespace Test_kitbox
             get { return height; }
         }
 
-        public Cleat(int height, int price) : base(price)
+        public Cleat(int height, int price, string id) : base(price, id)
         {
             this.height = height;
         }
