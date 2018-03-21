@@ -22,9 +22,9 @@ namespace Test_kitbox
             //Should check this line => aims at copying the list into a new one
             List<Product> newList = new List<Product>();
 
-            foreach (Item i in itemList)
+            foreach (Item item in itemList)
             {
-                foreach(Product p in this.ItemToProduct(i))
+                foreach(Product p in item.ItemToProduct())
                 {
                     newList.Add(p);
                 }
@@ -34,10 +34,10 @@ namespace Test_kitbox
         }
 
         //IMPLEMENTED WITH DATABASE
-        /*public bool CheckStock(Product product)
+        public bool CheckStock(Product product)
         {
-
-        }*/
+            return true;
+        }
 
         //IMPLEMENTED WITH DATABASE
         /*public bool UpdateDatabase()
@@ -45,7 +45,7 @@ namespace Test_kitbox
 
         }*/
 
-        public List<Product> ItemToProduct(Item item)
+        public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
 
@@ -68,6 +68,11 @@ namespace Test_kitbox
         {
             if (index >= 0 && index <= itemList.Count)
                 itemList.RemoveAt(index);
+        }
+
+        public List<Item> ItemList
+        {
+            get { return itemList; }
         }
     }
 }

@@ -22,6 +22,11 @@ namespace Test_kitbox
             get { return quantity; }
         }
 
+        public int Price
+        {
+            get { return quantity * piece.Price; }
+        }
+
         public Piece Piece
         {
             //Should return a copy
