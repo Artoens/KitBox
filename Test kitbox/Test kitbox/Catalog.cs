@@ -47,7 +47,6 @@ namespace Test_kitbox
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    //demande tous les objects avec leur nom de référence
                     fmd.CommandText = @"SELECT * FROM Piece INNER JOIN Reference ON Piece.ID_Piece = Reference.ID_Piece";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
@@ -114,8 +113,6 @@ namespace Test_kitbox
                 }
 
         }
-
-
 
                     fmd.CommandText = @"SELECT "
                 }

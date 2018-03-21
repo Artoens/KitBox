@@ -70,6 +70,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.SQLite.Mac">
+      <HintPath>packages\System.Data.SQLite.Mac.1.0.104.2\lib\net45\System.Data.SQLite.Mac.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AngleBar.cs" />
@@ -154,6 +157,7 @@
     <None Include="docs\MySqlCommandBuilder.xml" />
     <None Include="docs\MySqlCommand.xml" />
     <None Include="packages.config" />
+    <None Include="libsqlite3.dylib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

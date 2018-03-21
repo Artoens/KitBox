@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace Test_kitbox
 {
@@ -34,16 +35,54 @@ namespace Test_kitbox
         }
 
         //IMPLEMENTED WITH DATABASE
-        /*public bool CheckStock(Product product)
+        public bool CheckStock(Product product)
         {
+            int quantity = product.Quantity;
+            Piece piece = product.Piece;
 
-        }*/
 
-        //IMPLEMENTED WITH DATABASE
-        /*public bool UpdateDatabase()
-        {
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    if(piece is AngleBar)
+                    {
+                        fmd.CommandText = @"SELECT *
+                                            FROM Stock s
+                                            INNER JOIN Object o
+                                                ON o.Piece_Code = s.Piece_Code 
+                                                WHERE o.Height = piece[0] AND o.Price = piece[2]
+                                            INNER JOIN Color c
+                                                ON c.ID_Color = o.ID_Color
+                                            WHERE c.Color = piece[1]";
+                        SQLiteDataReader q = fmd.ExecuteReader();
+                        int dbQuantity = 0;
+                            
+                        while (q.Read())
+                        {
+                            dbQuantity ++;
+                        }
+                        if (dbQuantity == quantity)
+                        {
+                            return true;
+                        }
+                    }
 
-        }*/
+
+
+
+
+
+
+
+                    }
+
+                    //IMPLEMENTED WITH DATABASE
+                    public bool UpdateDatabase()
+                    {
+
+                    }
 
         public List<Product> ItemToProduct(Item item)
         {
