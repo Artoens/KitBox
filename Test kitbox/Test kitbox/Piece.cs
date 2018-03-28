@@ -1,26 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public abstract class Piece
+namespace Test_kitbox
 {
-    protected int price;
-
-    public Piece(int price)
+    public abstract class Piece
     {
-        this.price = price;
+        protected int price;
+
+        public Piece(int price)
+        {
+            this.price = price;
+        }
+
+        public int Price
+        {
+            get { return price; }
+        }
+
+        //IMPLEMENTED WITH DATABASE
+        /*public bool IsInStock(int askedNumber)
+        {
+
+        }*/
+
+        public List<Supplier> GetSupplierList()
+        {
+                    List<Supplier> newList = new List<Supplier>();
+                    return newList;
+        }
+
+        abstract public Piece Copy();
+
+        abstract override public string ToString();
     }
-
-    public int Price
-    {
-        get { return price; }
-    }
-
-    //IMPLEMENTED WITH DATABASE
-    /*public bool IsInStock(int askedNumber)
-    {
-
-    }*/
-
-    abstract public Piece Copy();
-
-    abstract override public string ToString();
 }
