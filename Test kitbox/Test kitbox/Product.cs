@@ -20,6 +20,12 @@ namespace Test_kitbox
         public int Quantity
         {
             get { return quantity; }
+            set {
+                    if (value is int)
+                    {
+                        quantity = value;
+                    }
+                }
         }
 
         public int Price
@@ -31,6 +37,13 @@ namespace Test_kitbox
         {
             //Should return a copy
             get { return piece.Copy(); }
+            set
+            {
+                if (value is Piece)
+                {
+                    piece = value;
+                }
+            }
         }
 
         //Not done yet
