@@ -26,7 +26,7 @@ namespace Test_kitbox
 
             MessageBox.Show(dimension.ToString());*/
             Catalog.GetPieces();
-            MessageBox.Show(DimensionCatalog.GetCompartmentDimensions().Count.ToString());
+            MessageBox.Show(DimensionCatalog.GetCompartmentColors().Count.ToString());
 
            /* //IMPORT PANEL MANUALLY TO GET DIMENSIONS
             Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);
