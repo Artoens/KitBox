@@ -17,7 +17,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Knob(this.diameter, this.price);
+            return new Knob(this.diameter, this.price, this.id);
         }
 
         public override string ToString()

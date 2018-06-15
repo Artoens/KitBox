@@ -17,7 +17,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Cleat(this.height, this.price);
+            return new Cleat(this.height, this.price, this.id);
         }
 
         public override string ToString()

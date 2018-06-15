@@ -32,7 +32,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Door(this.length, this.height, this.color, this.price);
+            return new Door(this.length, this.height, this.color, this.price, this.id);
         }
 
         public override string ToString()

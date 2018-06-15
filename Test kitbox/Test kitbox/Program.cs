@@ -27,7 +27,7 @@ namespace Test_kitbox
             MessageBox.Show(dimension.ToString());*/
             Catalog.GetPieces();
 
-            //IMPORT PANEL MANUALLY TO GET DIMENSIONS
+           /* //IMPORT PANEL MANUALLY TO GET DIMENSIONS
             Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);
             Catalog.AddPiece(panelTB);
             panelTB = new Panel(60, 0, 30, "blue", "TB", 47);
@@ -46,7 +46,7 @@ namespace Test_kitbox
             Piece door = new Door(60, 42, "blue", 25);
             Catalog.AddPiece(door);
             door = new Door(60, 41, "red", 25);
-            Catalog.AddPiece(door);
+            Catalog.AddPiece(door);*/
 
 
             Order order = new Order();
