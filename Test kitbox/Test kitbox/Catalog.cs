@@ -14,24 +14,25 @@ namespace Test_kitbox
         public static List<String> GetPieces()
         {
             List<String> pieces = new List<String>();
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\\Users\\sambe\\Desktop\\ECAM\\projet info\\KitBox\\Kitbox.db;Version=3;"))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT * FROM Piece INNER JOIN Reference ON Piece.ID_Piece = Reference.ID_Piece";
+                    fmd.CommandText = @"SELECT * FROM Piece INNER JOIN Reference ON Piece.ID_Piece = Reference.ID_Piece
+INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
                     while (q.Read())
                     {
                         string reference = Convert.ToString(q["Reference"]);
+                        int price = Convert.ToInt16(q["Price_Client"]);
+                        string id = Convert.ToString(q["Piece_Code"]);
 
                         if (reference == "Angle bar")
                         {
                             int height = Convert.ToInt16(q["Height"]);
                             string color = Convert.ToString(q["Color"]);
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_Code"]);
                             Piece AngleBar = new AngleBar(height, color, price, id);
                             pieceList.Add(AngleBar);
                         }
@@ -39,12 +40,10 @@ namespace Test_kitbox
                         else if (reference == "B_Panel")
                         {
                             int length = Convert.ToInt16(q["Length"]);
-                            int height = Convert.ToInt16(q["height"]);
+                            int height = Convert.ToInt16(q["Height"]);
                             int depth = Convert.ToInt16(q["Depth"]);
                             string color = Convert.ToString(q["Color"]);
-                            string type = "Panel back";                                             
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
+                            string type = "Panel back";            
                             Piece Panel = new Panel(length, height, depth, color, type, price, id);
                             pieceList.Add(Panel);
                         }
@@ -52,12 +51,10 @@ namespace Test_kitbox
                         else if (reference == "LR_Panel")
                         {
                             int length = Convert.ToInt16(q["Length"]);
-                            int height = Convert.ToInt16(q["height"]);
+                            int height = Convert.ToInt16(q["Height"]);
                             int depth = Convert.ToInt16(q["Depth"]);
                             string color = Convert.ToString(q["Color"]);
-                            string type = "Panel left right";                                             
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
+                            string type = "Panel left right";           
                             Piece Panel = new Panel(length, height, depth, color, type, price, id);
                             pieceList.Add(Panel);
                         }
@@ -65,12 +62,10 @@ namespace Test_kitbox
                         else if (reference == "TB_Panel")
                         {
                             int length = Convert.ToInt16(q["Length"]);
-                            int height = Convert.ToInt16(q["height"]);
+                            int height = Convert.ToInt16(q["Height"]);
                             int depth = Convert.ToInt16(q["Depth"]);
                             string color = Convert.ToString(q["Color"]);
-                            string type = "Panel top bottom";                                             
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
+                            string type = "Panel top bottom";            
                             Piece Panel = new Panel(length, height, depth, color, type, price, id);
                             pieceList.Add(Panel);
                         }
@@ -78,19 +73,15 @@ namespace Test_kitbox
                         else if (reference == "Door")
                         {
                             int length = Convert.ToInt16(q["Length"]);
-                            int height = Convert.ToInt16(q["height"]);
+                            int height = Convert.ToInt16(q["Height"]);
                             string color = Convert.ToString(q["Color"]);
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
                             Piece Door = new Door(length, height, color, price, id);
                             pieceList.Add(Door);
                         }
 
                         else if (reference == "Cleat")
                         {
-                            int height = Convert.ToInt16(q["height"]);
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
+                            int height = Convert.ToInt16(q["Height"]);
                             Piece Cleat = new Cleat(height, price, id);
                             pieceList.Add(Cleat);
                         }
@@ -99,8 +90,6 @@ namespace Test_kitbox
                         {
                             string type = "Rail back"; 
                             int length = Convert.ToInt16(q["Length"]);
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
                         }
@@ -109,8 +98,6 @@ namespace Test_kitbox
                         {
                             string type = "Rail front";
                             int length = Convert.ToInt16(q["Length"]);
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
                         }
@@ -119,8 +106,6 @@ namespace Test_kitbox
                         {
                             string type = "Rail left right";
                             int length = Convert.ToInt16(q["Length"]);
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
                         }
@@ -128,8 +113,6 @@ namespace Test_kitbox
                         else if (reference == "Knob")
                         {
                             int diameter = Convert.ToInt16(q["Dimensions"]); //ATTENTION changer le diamètre dans la table par juste le chiffre
-                            int price = Convert.ToInt16(q["Price"]);
-                            string id = Convert.ToString(q["Piece_ID"]);
                             Piece Knob = new Knob(diameter, price, id);
                             pieceList.Add(Knob);
                         }
