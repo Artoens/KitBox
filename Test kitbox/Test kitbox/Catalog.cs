@@ -175,7 +175,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
                     angleBar = piece as AngleBar;
                     if (angleBar.Height >= height && angleBar.Color == color)
                     {
-                        if(shortestAngleBar.Height > angleBar.Height)
+                        if(shortestAngleBar == null || shortestAngleBar.Height > angleBar.Height)
                         {
                             shortestAngleBar = angleBar;
                         }

@@ -30,13 +30,33 @@ namespace Test_kitbox
 
         public int Price
         {
-            get { return quantity * piece.Price; }
+            get
+            {
+                if(piece == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return quantity * piece.Price;
+                }
+            }
         }
 
         public Piece Piece
         {
             //Should return a copy
-            get { return piece.Copy(); }
+            get
+            {
+                if (piece == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return piece.Copy();
+                }
+            }
             set
             {
                 if (value is Piece)
