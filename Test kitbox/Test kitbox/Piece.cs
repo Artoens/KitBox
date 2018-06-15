@@ -23,11 +23,11 @@ namespace Test_kitbox
 
         }*/
 
-        public List<Supplier> GetSupplierList()
+       /* public List<Supplier> GetSupplierList()
         {
                     List<Supplier> newList = new List<Supplier>();
                     return newList;
-        }
+        }*/
 
         abstract public Piece Copy();
 
