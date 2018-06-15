@@ -71,7 +71,7 @@ namespace Test_kitbox
             Piece piece;
             Product product;
 
-            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGH HAVE BEEN FORGOTTEN
+            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGHT HAVE BEEN FORGOTTEN
             piece = Catalog.FindCleat(this.Height - 4);//Compartment height = Cleat height + 2cm per rail (2 rails)
             product = new Product(4, piece);
             productList.Add(product);
