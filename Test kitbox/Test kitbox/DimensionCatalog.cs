@@ -16,6 +16,7 @@ namespace Test_kitbox
         {
             List<Dimension> dimensionList = new List<Dimension>();
 
+            bool alreadyIn;
             Panel panel;
 
             foreach (Piece piece in Catalog.PieceList)
@@ -27,7 +28,21 @@ namespace Test_kitbox
                     if (panel.Type == "TB")//Top-Bottom panel
                     {
                         Dimension dimension = new Dimension(new int[] { panel.Depth, panel.Length }, 2);
-                        dimensionList.Add(dimension);
+
+                        alreadyIn = false;
+                        foreach(Dimension dim in dimensionList)
+                        {
+                            if(dim.ToString() == dimension.ToString())
+                            {
+                                alreadyIn = true;
+                                break;
+                            }
+                        }
+
+                        if (!alreadyIn)
+                        {
+                            dimensionList.Add(dimension);
+                        }
                     }
                 }
             }
@@ -43,6 +58,7 @@ namespace Test_kitbox
             List<Dimension> dimensionList = new List<Dimension>();
             List<int> sidePanelDimList = new List<int>(), backPanelDimList = new List<int>(), doorDimList = new List<int>();
 
+            bool alreadyIn;
             Panel panel;
             Door door;
 
@@ -69,6 +85,7 @@ namespace Test_kitbox
 
                     doorDimList.Add(door.Height);
                 }
+
             }
 
             //Add the dimension to the available dimensions if all the pieces are available (panels, doors, rails ?)
@@ -76,7 +93,22 @@ namespace Test_kitbox
             {
                 if (sidePanelDimList.Contains(height) && backPanelDimList.Contains(height) && doorDimList.Contains(height))
                 {
-                    dimensionList.Add(new Dimension(new int[] { height }, 1));
+                    Dimension dimension = new Dimension(new int[] { height }, 1);
+
+                    alreadyIn = false;
+                    foreach (Dimension dim in dimensionList)
+                    {
+                        if (dim.ToString() == dimension.ToString())
+                        {
+                            alreadyIn = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadyIn)
+                    {
+                        dimensionList.Add(dimension);
+                    }
                 }
             }
 

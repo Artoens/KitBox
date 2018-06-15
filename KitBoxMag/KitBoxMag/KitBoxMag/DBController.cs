@@ -12,7 +12,7 @@ namespace KitBoxMag
         SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;");
         private static List<Piece> pieceList = new List<Piece>();
         //ATTENTION il faudra faire une classe order!!
-        private static List<Order> OrderList = new List<Order>();
+        private static List<ClientOrder> OrderList = new List<ClientOrder>();
 
         //First method OK
         public static List<Piece> GetAllPiecesOrdered()
@@ -66,7 +66,8 @@ namespace KitBoxMag
 
         }
 
-        //Third method
+        //Third method OK
+        //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
         List<ClientOrder> GetAllClientsOrder()
         {
                 using (connect)
@@ -83,10 +84,12 @@ namespace KitBoxMag
                         {
                             string ID = Convert.ToString(q["ID_Order"]);
                             int price_order = Convert.ToInt16(q["Price"]);
-                            new Order new_order = OrderedParallelQuery(ID, price_order);
-                            OrderList.Add();
+                            ClientOrder newOrder = new ClientOrder(ID, price_order);
+                            OrderList.Add(newOrder);
                         }
                     }
+
+                    return OrderList;
 
                 }
             }

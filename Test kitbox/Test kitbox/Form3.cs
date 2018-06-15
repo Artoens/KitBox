@@ -35,6 +35,8 @@ namespace Test_kitbox
             }
             parent.Close();*/
             Form4 form4 = new Form4(order);
+            parent.Hide();
+            form4.Show();
         }
     }
 }
