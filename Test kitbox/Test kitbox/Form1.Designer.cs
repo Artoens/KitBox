@@ -33,6 +33,8 @@ namespace Test_kitbox
             this.Dim = new System.Windows.Forms.Label();
             this.comboBoxDim = new System.Windows.Forms.ComboBox();
             this.Next = new System.Windows.Forms.Button();
+            this.ComboAngleBarColor = new System.Windows.Forms.ComboBox();
+            this.AngleBar = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Dim
@@ -47,9 +49,9 @@ namespace Test_kitbox
             // comboBoxDim
             // 
             this.comboBoxDim.FormattingEnabled = true;
-            this.comboBoxDim.Location = new System.Drawing.Point(79, 33);
+            this.comboBoxDim.Location = new System.Drawing.Point(96, 33);
             this.comboBoxDim.Name = "comboBoxDim";
-            this.comboBoxDim.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxDim.Size = new System.Drawing.Size(104, 21);
             this.comboBoxDim.TabIndex = 1;
             this.comboBoxDim.SelectedIndexChanged += new System.EventHandler(this.comboBoxDim_SelectedIndexChanged);
             // 
@@ -63,12 +65,31 @@ namespace Test_kitbox
             this.Next.UseVisualStyleBackColor = true;
             this.Next.Click += new System.EventHandler(this.Next_Click);
             // 
+            // ComboAngleBarColor
+            // 
+            this.ComboAngleBarColor.FormattingEnabled = true;
+            this.ComboAngleBarColor.Location = new System.Drawing.Point(96, 75);
+            this.ComboAngleBarColor.Name = "ComboAngleBarColor";
+            this.ComboAngleBarColor.Size = new System.Drawing.Size(104, 21);
+            this.ComboAngleBarColor.TabIndex = 3;
+            // 
+            // AngleBar
+            // 
+            this.AngleBar.AutoSize = true;
+            this.AngleBar.Location = new System.Drawing.Point(12, 78);
+            this.AngleBar.Name = "AngleBar";
+            this.AngleBar.Size = new System.Drawing.Size(78, 13);
+            this.AngleBar.TabIndex = 4;
+            this.AngleBar.Text = "Angle bar color";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(211, 239);
             this.ControlBox = false;
+            this.Controls.Add(this.AngleBar);
+            this.Controls.Add(this.ComboAngleBarColor);
             this.Controls.Add(this.Next);
             this.Controls.Add(this.comboBoxDim);
             this.Controls.Add(this.Dim);
@@ -88,6 +109,8 @@ namespace Test_kitbox
         private System.Windows.Forms.Label Dim;
         private System.Windows.Forms.ComboBox comboBoxDim;
         private System.Windows.Forms.Button Next;
+        private System.Windows.Forms.ComboBox ComboAngleBarColor;
+        private System.Windows.Forms.Label AngleBar;
     }
 }
 
