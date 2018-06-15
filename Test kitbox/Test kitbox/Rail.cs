@@ -17,7 +17,7 @@ namespace Test_kitbox
             get { return length; }
         }
 
-        public Rail(string type, int length, int price) : base(price)
+        public Rail(string type, int length, int price, string id) : base(price, id)
         {
             this.type = type;
             this.length = length;
@@ -25,7 +25,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Rail(this.type, this.length, this.price);
+            return new Rail(this.type, this.length, this.price, this.id);
         }
 
         public override string ToString()
