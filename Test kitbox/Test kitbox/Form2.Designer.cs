@@ -32,8 +32,8 @@
             this.labelC = new System.Windows.Forms.Label();
             this.labelD = new System.Windows.Forms.Label();
             this.labelCD = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxH = new System.Windows.Forms.ComboBox();
+            this.comboBoxC = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.DoorY = new System.Windows.Forms.RadioButton();
             this.DoorN = new System.Windows.Forms.RadioButton();
@@ -77,21 +77,22 @@
             this.labelCD.TabIndex = 3;
             this.labelCD.Text = "Color";
             // 
-            // comboBox1
+            // comboBoxH
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(78, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 4;
+            this.comboBoxH.FormattingEnabled = true;
+            this.comboBoxH.Location = new System.Drawing.Point(78, 21);
+            this.comboBoxH.Name = "comboBoxH";
+            this.comboBoxH.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxH.TabIndex = 4;
+            this.comboBoxH.SelectedIndexChanged += new System.EventHandler(this.comboBoxH_SelectedIndexChanged);
             // 
-            // comboBox2
+            // comboBoxC
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(78, 45);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 5;
+            this.comboBoxC.FormattingEnabled = true;
+            this.comboBoxC.Location = new System.Drawing.Point(78, 45);
+            this.comboBoxC.Name = "comboBoxC";
+            this.comboBoxC.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxC.TabIndex = 5;
             // 
             // comboBox3
             // 
@@ -111,6 +112,7 @@
             this.DoorY.TabStop = true;
             this.DoorY.Text = "Yes";
             this.DoorY.UseVisualStyleBackColor = true;
+            this.DoorY.CheckedChanged += new System.EventHandler(this.DoorY_CheckedChanged);
             // 
             // DoorN
             // 
@@ -122,6 +124,7 @@
             this.DoorN.TabStop = true;
             this.DoorN.Text = "No";
             this.DoorN.UseVisualStyleBackColor = true;
+            this.DoorN.CheckedChanged += new System.EventHandler(this.DoorN_CheckedChanged);
             // 
             // Done
             // 
@@ -153,8 +156,8 @@
             this.Controls.Add(this.DoorN);
             this.Controls.Add(this.DoorY);
             this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxC);
+            this.Controls.Add(this.comboBoxH);
             this.Controls.Add(this.labelCD);
             this.Controls.Add(this.labelD);
             this.Controls.Add(this.labelC);
@@ -163,6 +166,7 @@
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.ShowIcon = false;
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,8 +178,8 @@
         private System.Windows.Forms.Label labelC;
         private System.Windows.Forms.Label labelD;
         private System.Windows.Forms.Label labelCD;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxH;
+        private System.Windows.Forms.ComboBox comboBoxC;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.RadioButton DoorY;
         private System.Windows.Forms.RadioButton DoorN;

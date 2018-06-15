@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    static class DimensionCatalog
+    public static class DimensionCatalog
     {
         /// <summary>
         /// This methods checks all the available dimensions from the list of panels in the catalog
         /// </summary>
         /// <returns>A list of all the available dimensions for a cupboard</returns>
-        static public List<Dimension>GetDimensions()
+        static public List<Dimension> GetDimensions()
         {
             List<Dimension> dimensionList = new List<Dimension>();
 
             Panel panel;
 
-            foreach(Piece piece in Catalog.PieceList)
+            foreach (Piece piece in Catalog.PieceList)
             {
                 if (piece is Panel)
                 {
@@ -63,7 +63,7 @@ namespace Test_kitbox
                     }
                 }
 
-                if(piece is Door)
+                if (piece is Door)
                 {
                     door = piece as Door;
 
@@ -72,9 +72,9 @@ namespace Test_kitbox
             }
 
             //Add the dimension to the available dimensions if all the pieces are available (panels, doors, rails ?)
-            foreach(int height in sidePanelDimList)
+            foreach (int height in sidePanelDimList)
             {
-                if(sidePanelDimList.Contains(height) && backPanelDimList.Contains(height) && doorDimList.Contains(height))
+                if (sidePanelDimList.Contains(height) && backPanelDimList.Contains(height) && doorDimList.Contains(height))
                 {
                     dimensionList.Add(new Dimension(new int[] { height }, 1));
                 }
@@ -98,7 +98,7 @@ namespace Test_kitbox
                 if (piece is Door)
                 {
                     door = piece as Door;
-                    if(colorList.Contains(door.Color))
+                    if (!colorList.Contains(door.Color))
                     {
                         colorList.Add(door.Color);
                     }
@@ -122,12 +122,79 @@ namespace Test_kitbox
                 if (piece is Panel)
                 {
                     panel = piece as Panel;
-                    if (colorList.Contains(panel.Color))
+                    if (!colorList.Contains(panel.Color))
                     {
                         colorList.Add(panel.Color);
                     }
                 }
             }
+            return colorList;
+        }
+
+        /// <summary>
+        /// This methods checks all the available colors from the list of doors in the catalog
+        /// It lists available colors according to the selecter height
+        /// </summary>
+        /// <returns>A list of the available door colors</returns>
+        static public List<string> GetDoorColors(int height)
+        {
+            List<string> colorList = new List<string>();
+
+            Door door;
+
+            foreach (Piece piece in Catalog.PieceList)
+            {
+                if (piece is Door)
+                {
+                    door = piece as Door;
+                    if (door.Height == height && !colorList.Contains(door.Color))
+                    {
+                        colorList.Add(door.Color);
+                    }
+                }
+            }
+            return colorList;
+        }
+
+        /// <summary>
+        /// This methods checks all the available colors from the list of panels in the catalog
+        /// It lists available colors according to the selecter height
+        /// </summary>
+        /// <returns>A list of the available compartment colors</returns>
+        static public List<string> GetCompartmentColors(int height)
+        {
+            List<string> colorList = new List<string>();
+            List<string> sidePanelColorList = new List<string>(), backPanelColorList = new List<string>();
+
+            Panel panel;
+
+            foreach (Piece piece in Catalog.PieceList)
+            {
+                if (piece is Panel)
+                {
+                    panel = piece as Panel;
+
+                    if (panel.Type == "LR")//Left-Right panel
+                    {
+                        sidePanelColorList.Add(panel.Color);
+                    }
+
+                    if (panel.Type == "B")//Back panel
+                    {
+                        backPanelColorList.Add(panel.Color);
+                    }
+                }
+            }
+
+            //Add the color to the available colors if all the pieces are available (panels B, panels LR)
+            foreach (string color in sidePanelColorList)
+            {
+                if (sidePanelColorList.Contains(color) && backPanelColorList.Contains(color))
+                {
+                    colorList.Add(color);
+                }
+            }
+
             return colorList;
         }
     }

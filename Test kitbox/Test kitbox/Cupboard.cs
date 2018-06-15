@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    class Cupboard : Item
+    public class Cupboard : Item
     {
         private int length;
         private int depth;
@@ -43,12 +43,28 @@ namespace Test_kitbox
                 compartments[index].Height,
                 compartments[index].MainColor,
                 compartments[index].DoorPresence,
-                compartments[index].DoorColor);
+                compartments[index].DoorColor,
+                this);
         }
 
-        public int NumberCompartments
+        public int NumberCompartments   
         {
             get { return compartments.Count; }
+        }
+
+        public List<Compartment> GetAllCompartments()
+        {
+            List<Compartment> list =  new List<Compartment>();
+            for (int i = 0; i < compartments.Count; i++)
+            {
+                list.Add(GetCompartment(i));
+            }
+            return list;
+        }
+
+        public List<Compartment> Compartments
+        {
+            get { return compartments; }
         }
 
         public void AddCompartment(Compartment newCompartment)
@@ -67,26 +83,41 @@ namespace Test_kitbox
             compartments.RemoveAt(index);
         }
 
+        public void RemoveLastCompartment()
+        {
+                compartments.RemoveAt(compartments.Count - 1);
+        }
+
         public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
 
-            foreach(Compartment comp in compartments)
-            {
-                //To be completed according to the catalog and the DB
-                //Exemple :
-                
-                /*Piece piece = null;
+            //CUPBOARD HEIGHT -> TO FIND ANGLEBARS
+            int height = 0;
 
-                piece = Catalog.FindCleat(comp.Height - 2);
-                if(piece != null)
+            //ADD PRODUCTS FOR EACH COMPARTMENT
+            foreach (Compartment comp in compartments)
+            {
+                height += comp.Height;
+
+                foreach(Product product in comp.ItemToProduct())
                 {
-                    productList.Add(new Product(4, piece));
-                }*/
+                    productList.Add(product);
+                }
                 
             }
 
+            //ADD PRODUCTS RELATIVE TO THE CUPBOARD
+            Piece piece = Catalog.FindAngleBar(height, "color");
+            Product prod = new Product(4, piece);
+            productList.Add(prod);
+
             return productList;
+        }
+
+        public override string ToString()
+        {
+            return "Cupboard " + length.ToString() + "x" +depth.ToString();
         }
     }
 }

@@ -1,27 +1,23 @@
 using System;
 using System.Data.SQLite;
+using System.Collections.Generic;
 
-public abstract class Piece
+namespace Test_kitbox
 {
-    protected int price;
-
-    protected string id;
-
-    public Piece(int price, string id)
+  public abstract class Piece
     {
-        this.price = price;
-        this.id = id;
-    }
+        protected int price;
+        protected string id;
 
-    public int Price
-    {
-        get { return price; }
-    }
-
-    public string Id
-    {
+        public Piece(int price, string id)
+        {
+            this.price = price;
+            this.id = id;
+        }
+        public string Id
+         {
         get { return Id; }
-    }
+         }
 
     //IMPLEMENTED WITH DATABASE
     //Je suppose que askedNumber est le Piece_ID
@@ -45,6 +41,23 @@ public abstract class Piece
     }
 
 abstract public Piece Copy();
+        public int Price
+        {
+            get { return price; }
+        }
 
-    abstract override public string ToString();
+        //IMPLEMENTED WITH DATABASE
+        /*public bool IsInStock(int askedNumber)
+        {
+
+        }*/
+
+       /* public List<Supplier> GetSupplierList()
+        {
+                    List<Supplier> newList = new List<Supplier>();
+                    return newList;
+        }*/
+
+        abstract override public string ToString();
+    }
 }

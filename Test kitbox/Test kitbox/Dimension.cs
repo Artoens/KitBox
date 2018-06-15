@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
-    class Dimension
+    public class Dimension
     {
         private int[] dimensions;
         private int numberOfDim;
