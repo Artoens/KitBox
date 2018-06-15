@@ -14,8 +14,7 @@ namespace Test_kitbox
         public void static List<String> GetPieces()
         {
             List<String> pieces = new List<String>();
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=E:\MyDocs\School\ECAM\BA3\q2\KitBox\Kitbox.db;Version=3;"))
-
+            using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
