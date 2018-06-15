@@ -50,17 +50,11 @@ namespace Test_kitbox
             //get colors
             if (comboBoxH.Text != "")
                 {
-                List<string> colorlList = DimensionCatalog.GetCompartmentColors(Int32.Parse(comboBoxH.Text));
+                List<string> colorlList = DimensionCatalog.GetCompartmentColors();
+                comboBoxC.Items.AddRange(colorlList.ToArray());
 
-                foreach (string color in colorlList)
-                {
-                    comboBoxC.Items.Add(color);
-                }
                 List<string> colorlDList = DimensionCatalog.GetDoorColors(Int32.Parse(comboBoxH.Text));
-                foreach (string color in colorlDList)
-                {
-                    comboBox3.Items.Add(color);
-                }
+                comboBox3.Items.AddRange(colorlDList.ToArray());
              
             }
 
@@ -91,10 +85,7 @@ namespace Test_kitbox
             //get colors
             List<string> colorlList = DimensionCatalog.GetCompartmentColors();
 
-            foreach (string color in colorlList)
-            {
-                comboBoxC.Items.Add(color);
-            }
+            comboBoxC.Items.AddRange(colorlList.ToArray());
             DoorN.AutoCheck = true;
             DoorY.AutoCheck = true;
         }

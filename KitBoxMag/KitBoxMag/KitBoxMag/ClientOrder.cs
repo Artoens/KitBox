@@ -16,5 +16,10 @@ namespace KitBoxMag
         {
             InitializeComponent();
         }
+
+        private void ClientOrder_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
