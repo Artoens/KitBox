@@ -94,34 +94,87 @@ namespace KitBoxMag
                 }
             }
 
-            //Fourth method
-            void OrderPiece(string Piece_Code)
+        //Fourth method Done but must be verified with the variable thing
+        void OrderPiece(string P_Code)
         {
+                using (connect)
+                {
+                    connect.Open();
 
+                    using (SQLiteCommand fmd = connect.CreateCommand())
+                    {
+                        fmd.CommandText = @"UPDATE Piece SET Ordered= TRUE WHERE ID_Piece = " +P_Code+ "";
+                        SQLiteDataReader q = fmd.ExecuteReader();
+                        q.Read();
+                    }
+                }
         }
+            DELETE FROM table_name 
 
-        //Fifth method
-        void DeletePieceOrdered(string Piece_Code)
+
+            //Fifth method - set ordered to null
+            void DeletePieceOrdered(string Piece_Code)
         {
+                using (connect)
+                {
+                    connect.Open();
 
-        }
+                    using (SQLiteCommand fmd = connect.CreateCommand())
+                    {
+                        fmd.CommandText = @"UPDATE Ordered FROM Piece SET Ordered = FALSE WHERE ID_Piece = " + P_Code + "";
+                        SQLiteDataReader q = fmd.ExecuteReader();
+                        q.Read();
+                    }
+                }
+            }
             
-        //Sixth method
+        //Sixth method OK but see the variable thing
         void DeleteClientOrder(char ID_Order)
         {
+            using (connect)
+            {
+                connect.Open();
 
-        }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"DELETE FROM Order WHERE ID_Order = " + ID_Order + "";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                }
+            }
+            }
 
-        //Seventh method
+        //Seventh method OK
         List<Piece> GetAllPiecesToOrder()
         {
+                using (connect)
+                {
+                    connect.Open();
 
-        }
+                    using (SQLiteCommand fmd = connect.CreateCommand())
+                    {
+                        fmd.CommandText = @"SELECT *
+                                            FROM Piece p
+                                            INNER JOIN Stock s
+                                            WHERE s.Piece_Code = p.Piece_Code 
+                                            AND s.To_Order = 1";
+                        SQLiteDataReader q = fmd.ExecuteReader();
+
+                        while (q.Read())
+                        {
+                            GetListPieces();
+                        }
+                    }
+
+                    return pieceList;
+
+                }
+            }
 
         //Method just to simplify the other ones
         private List<Piece> GetListPieces()
         {
-                //Vider la liste !!! 
+            pieceList.Clear(); 
 
             string reference = Convert.ToString(q["Reference"]);
             int price = Convert.ToInt16(q["Price_Client"]);
