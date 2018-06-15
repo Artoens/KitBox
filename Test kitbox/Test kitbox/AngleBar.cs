@@ -22,9 +22,11 @@ namespace Test_kitbox
             this.color = color;
         }
 
+       // AngleBar(int height, string color, int price, string id
+
         override public Piece Copy()
         {
-            return new AngleBar(this.height, this.color, this.price);
+            return new AngleBar(this.height, this.color, this.price, this.id); 
         }
 
         public override string ToString()

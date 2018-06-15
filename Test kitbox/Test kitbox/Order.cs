@@ -141,9 +141,7 @@ namespace Test_kitbox
                         return 0;
                     }
 
-        public List<Product> ItemToProduct()
-        {
-            List<Product> productList = new List<Product>();
+        
 
 
                     else if (piece is Rail)
@@ -294,6 +292,7 @@ namespace Test_kitbox
                     }
                 }
             }
+        }
 
             /*
             public List<Product> ItemToProduct(Item item)
@@ -309,18 +308,30 @@ namespace Test_kitbox
             }
             */
 
-            public void AddItem(Item newItem)
+           /* public List<Product> ItemToProduct()
             {
-                itemList.Add(newItem);
-            }
+                List<Product> productList = new List<Product>();
 
-            //If you want to target the 3rd element, that is the item n°2
-            //then index = 2
-            public void RemoveItem(int index)
-            {
-                if (index >= 0 && index <= itemList.Count)
-                    itemList.RemoveAt(index);
+                //Generate products
+                Piece piece = new Cleat(14, 400);
+                Product product = new Product(8, piece);
+                productList.Add(product);
+
+                return productList;
             }
+            */
+
+        public void AddItem(Item newItem)
+        {
+            itemList.Add(newItem);
+        }
+
+        //If you want to target the 3rd element, that is the item n°2
+        //then index = 2
+        public void RemoveItem(int index)
+        {
+            if (index >= 0 && index <= itemList.Count)
+                itemList.RemoveAt(index);
         }
 
         public List<Item> ItemList

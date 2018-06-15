@@ -105,7 +105,9 @@ namespace Test_kitbox
                     " ",
                     "n° / item / availibility"
                 };
-            foreach (Product item in ProductSorter.RemoveDoubles(order.ItemToProduct()))
+
+
+            foreach (Product item in ProductSorter.RemoveDoubles(order.GenerateOrder()))
             {
                 int n = 1;
                 line = n.ToString() + "/" + item.ToString() + "/";
@@ -117,10 +119,11 @@ namespace Test_kitbox
                 {
                     line += "Not in Stock";
                 }
-                
-               lines.Add(line);
+
+                lines.Add(line);
                 n += 1;
             }
+            
             lines.ToArray();
             System.IO.File.WriteAllLines(path, lines);
         }

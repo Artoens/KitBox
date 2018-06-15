@@ -25,7 +25,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Rail(this.type, this.length, this.price);
+            return new Rail(this.type, this.length, this.price, this.id);
         }
 
         public override string ToString()
