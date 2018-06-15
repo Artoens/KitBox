@@ -34,7 +34,7 @@ namespace Test_kitbox
             get { return type; }
         }
 
-        public Panel(int length, int height,int depth, string color, string type, int price) : base(price)
+        public Panel(int length, int height,int depth, string color, string type, int price, string id) : base(price, id)
         {
             this.length = length;
             this.height = height;
@@ -45,7 +45,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Panel(this.length, this.height, this.depth, this.color, this.type, this.price);
+            return new Panel(this.length, this.height, this.depth, this.color, this.type, this.price, this.id);
         }
 
         public override string ToString()

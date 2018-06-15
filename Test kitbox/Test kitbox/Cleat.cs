@@ -10,14 +10,14 @@ namespace Test_kitbox
             get { return height; }
         }
 
-        public Cleat(int height, int price) : base(price)
+        public Cleat(int height, int price, string id) : base(price, id)
         {
             this.height = height;
         }
 
         override public Piece Copy()
         {
-            return new Cleat(this.height, this.price);
+            return new Cleat(this.height, this.price, this.id);
         }
 
         public override string ToString()
