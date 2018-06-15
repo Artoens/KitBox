@@ -26,12 +26,14 @@ namespace KitBoxMag
 
         private void ConfirmC_Click(object sender, EventArgs e)
         {
-
+            ClientOrder co = new ClientOrder();
+            co.Show();
         }
 
         private void ConfirmP_Click(object sender, EventArgs e)
         {
-
+            ConfirmRecieve cr = new ConfirmRecieve();
+            cr.Show();
         }
 
         private void Order_Click(object sender, EventArgs e)
