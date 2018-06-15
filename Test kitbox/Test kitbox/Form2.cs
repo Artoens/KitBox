@@ -98,5 +98,17 @@ namespace Test_kitbox
             DoorN.AutoCheck = true;
             DoorY.AutoCheck = true;
         }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            if(parent.Cup.NumberCompartments == 0 )
+            {
+                parent.Back();
+            }
+            else
+            {
+                parent.Next();
+            }
+        }
     }
 }
