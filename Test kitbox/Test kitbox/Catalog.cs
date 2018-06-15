@@ -9,18 +9,20 @@ namespace Test_kitbox
 {
     public static class Catalog
     {
-        private static List<Piece> pieceList = new List<Piece>();
+        private static List<Piece> pieceList = new List<Piece>();  //liste avec les piece pour chaque élément, chaque piece a un type 
 
-        public static List<String> GetPieces()
+        public void static List<String> GetPieces()
         {
-            List<String> pieces = new List<String>();
             using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\\Users\\sambe\\Desktop\\ECAM\\projet info\\KitBox\\Kitbox.db;Version=3;"))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT * FROM Piece INNER JOIN Reference ON Piece.ID_Piece = Reference.ID_Piece
-INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
+                    fmd.CommandText = @"SELECT * FROM Piece 
+                                        INNER JOIN Reference 
+                                        ON Piece.ID_Piece = Reference.ID_Piece
+                                        INNER JOIN Color 
+                                        ON Piece.ID_Color = Color.PK_Color ";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
                     while (q.Read())
@@ -121,7 +123,6 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
 
             }
 
-            return pieces;
         }
 
         public static List<Piece> PieceList
