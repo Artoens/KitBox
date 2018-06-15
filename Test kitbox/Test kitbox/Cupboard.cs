@@ -47,7 +47,7 @@ namespace Test_kitbox
                 this);
         }
 
-        public int NumberCompartments
+        public int NumberCompartments   
         {
             get { return compartments.Count; }
         }
@@ -60,6 +60,11 @@ namespace Test_kitbox
                 list.Add(GetCompartment(i));
             }
             return list;
+        }
+
+        public List<Compartment> Compartments
+        {
+            get { return compartments; }
         }
 
         public void AddCompartment(Compartment newCompartment)
@@ -76,6 +81,11 @@ namespace Test_kitbox
         {
             if(index >= 0 && index <= compartments.Count)
             compartments.RemoveAt(index);
+        }
+
+        public void RemoveLastCompartment()
+        {
+                compartments.RemoveAt(compartments.Count - 1);
         }
 
         public List<Product> ItemToProduct()
