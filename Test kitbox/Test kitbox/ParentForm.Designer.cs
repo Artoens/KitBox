@@ -28,25 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.pnlContent = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(240, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(292, 518);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(7, 271);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(236, 257);
+            this.treeView1.Size = new System.Drawing.Size(227, 257);
             this.treeView1.TabIndex = 7;
             // 
             // pnlContent
@@ -60,21 +50,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 540);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(241, 540);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.pnlContent);
             this.Name = "ParentForm";
             this.Text = "ParentForm";
             this.Load += new System.EventHandler(this.ParentForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Panel pnlContent;
     }
