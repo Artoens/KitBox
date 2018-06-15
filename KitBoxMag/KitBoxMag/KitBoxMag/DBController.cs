@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace KitBoxMag
 {
@@ -10,6 +11,15 @@ namespace KitBoxMag
     {
         List<Piece> GetAllPiecesOrdered()
         {
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+
+                }
+            
+            }
 
         }
 
