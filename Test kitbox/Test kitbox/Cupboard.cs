@@ -108,7 +108,7 @@ namespace Test_kitbox
             }
 
             //ADD PRODUCTS RELATIVE TO THE CUPBOARD
-            Piece piece = Catalog.FindAngleBar(height, "color");
+            Piece piece = Catalog.FindAngleBar(height, "white");
             Product prod = new Product(4, piece);
             productList.Add(prod);
 

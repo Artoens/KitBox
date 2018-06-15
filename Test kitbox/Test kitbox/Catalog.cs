@@ -43,7 +43,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
                             int height = Convert.ToInt16(q["Height"]);
                             int depth = Convert.ToInt16(q["Depth"]);
                             string color = Convert.ToString(q["Color"]);
-                            string type = "Panel back";            
+                            string type = "B";            
                             Piece Panel = new Panel(length, height, depth, color, type, price, id);
                             pieceList.Add(Panel);
                         }
@@ -54,7 +54,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
                             int height = Convert.ToInt16(q["Height"]);
                             int depth = Convert.ToInt16(q["Depth"]);
                             string color = Convert.ToString(q["Color"]);
-                            string type = "Panel left right";           
+                            string type = "LR";           
                             Piece Panel = new Panel(length, height, depth, color, type, price, id);
                             pieceList.Add(Panel);
                         }
@@ -65,7 +65,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
                             int height = Convert.ToInt16(q["Height"]);
                             int depth = Convert.ToInt16(q["Depth"]);
                             string color = Convert.ToString(q["Color"]);
-                            string type = "Panel top bottom";            
+                            string type = "TB";//Top Bottom panel 
                             Piece Panel = new Panel(length, height, depth, color, type, price, id);
                             pieceList.Add(Panel);
                         }
@@ -88,7 +88,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
 
                         else if (reference == "B_Rail")
                         {
-                            string type = "Rail back"; 
+                            string type = "B"; 
                             int length = Convert.ToInt16(q["Length"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
@@ -96,7 +96,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
 
                         else if (reference == "F_Rail")
                         {
-                            string type = "Rail front";
+                            string type = "F";
                             int length = Convert.ToInt16(q["Length"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
@@ -104,7 +104,7 @@ INNER JOIN Color ON Piece.ID_Color = Color.PK_Color ";
 
                         else if (reference == "LR_Rail")
                         {
-                            string type = "Rail left right";
+                            string type = "LR";
                             int length = Convert.ToInt16(q["Length"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
