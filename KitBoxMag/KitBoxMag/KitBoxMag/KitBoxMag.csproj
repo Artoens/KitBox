@@ -96,6 +96,9 @@
     <Compile Include="Stock.Designer.cs">
       <DependentUpon>Stock.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ClientOrder.resx">
+      <DependentUpon>ClientOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
