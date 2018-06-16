@@ -141,6 +141,9 @@
     </EmbeddedResource>
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierOrder.cs" />
+    <EmbeddedResource Include="ConfirmRecieve.resx">
+      <DependentUpon>ConfirmRecieve.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

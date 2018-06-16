@@ -15,6 +15,8 @@ namespace KitBoxMag
         public Client_s_Order()
         {
             InitializeComponent();
+            //MessageBox.Show("Bite");
+            dataGridView.Rows.Clear();
             dataGridView.DataSource = DBController.GetAllClientsOrder();
         }
     }
