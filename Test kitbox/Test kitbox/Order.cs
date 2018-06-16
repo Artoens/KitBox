@@ -146,11 +146,12 @@ namespace Test_kitbox
 
                     else if (piece is Rail)
                     {
+                        Rail rail = piece as Rail;
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code
-                                            WHERE p.Length = piece[1] AND p.Price_Client = piece[2]"; //Manque type en premier
+                                            WHERE p.Length = " + rail.Length + " AND p.Price_Client = " + rail.Price; //Manque type en premier
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;

@@ -28,11 +28,11 @@ namespace Test_kitbox
             Catalog.GetPieces();
             //Piece p = Catalog.FindCleat(32);
 
-            foreach(Piece piece in Catalog.PieceList)
+            /*foreach(Piece piece in Catalog.PieceList)
             {
                 if (piece is Rail)
                     MessageBox.Show(piece.ToString());
-            }
+            }*/
 
            /* //IMPORT PANEL MANUALLY TO GET DIMENSIONS
             Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);
