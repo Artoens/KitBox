@@ -38,7 +38,6 @@ namespace Test_kitbox
 
         public int InStock(Product product)
         {
-            int quantity = product.Quantity;
             Piece piece = product.Piece;
 
             using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
@@ -48,8 +47,6 @@ namespace Test_kitbox
                 {
                     // CREATE SQL READER
                     SQLiteDataReader q;
-
-                        AngleBar angleBar = piece as AngleBar;
 
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
@@ -70,7 +67,30 @@ namespace Test_kitbox
                 }
             }
         }
-        
+
+        public void RemoveFromStock(Product product)
+        {
+            Piece piece = product.Piece;
+
+            using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    // CREATE SQL READER
+                    SQLiteDataReader q;
+
+                    fmd.CommandText = @"UPDATE Stock s
+                                        SET Quantity = Quantity - " + product.Quantity +
+                                        " WHERE s.PIECE_Code = '" + piece.Id + "'";
+
+                    // EXECUTE THE SQL REQUEST
+                    q = fmd.ExecuteReader();
+                }
+            }
+        }
+
+
 
         public bool CheckStock(Product product)
         {
