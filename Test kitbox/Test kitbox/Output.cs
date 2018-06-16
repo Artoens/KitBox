@@ -62,19 +62,25 @@ namespace Test_kitbox
                 };
 
             int i = 1;
-            string availability = "Available";
+            
             foreach (Item item in order.ItemList)
              {
                 if(item is Cupboard)
                 {
                     cupboard = item as Cupboard;
+
                     foreach (Compartment compartment in cupboard.GetAllCompartments())
                     {
+                        //SET compartment AS available
+                        string availability = "Available";
+
                         int price = 0;
+
                         foreach (Product product in compartment.ItemToProduct())
                         {
                             price += product.Price;
 
+                            //IF one piece is missing => SET AS not in stock
                             if (!order.CheckStock(product))
                             {
                                 availability = "Not in stock";

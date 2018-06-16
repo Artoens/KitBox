@@ -258,15 +258,6 @@ namespace Test_kitbox
                             return panel;
                         }
                     }
-
-
-
-                    /*
-                    if (panel.Type == type && panel.Length == length && panel.Height == height 
-                        && panel.Depth == depth && panel.Color == color)
-                    {
-                        return panel;
-                    }*/
                 }
             }
 
@@ -290,6 +281,5 @@ namespace Test_kitbox
 
             return null;
         }
-
     }
 }
