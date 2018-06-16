@@ -48,14 +48,17 @@ namespace Test_kitbox
                 {
                     if (piece is AngleBar)
                     {
+                        AngleBar angleBar = piece as AngleBar;
+
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Object o
                                                 ON o.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
                                                 ON c.ID_Color = o.ID_Color
-                                            WHERE c.Color = piece[1] AND o.Height = piece[0] AND o.Price = piece[2]";
+                                            WHERE c.Color = '" + angleBar.Color + "' AND o.Height = " + angleBar.Height + " AND o.Price = " + angleBar.Price;
                         SQLiteDataReader q = fmd.ExecuteReader();
+
                         int dbQuantity = 0;
 
                         while (q.Read())
@@ -71,13 +74,15 @@ namespace Test_kitbox
 
                     else if (piece is Panel)
                     {
+                        Panel panel = piece as Panel;
+                        
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
                                                 ON c.ID_Color = p.ID_Color
-                                            WHERE p.Length = piece[0] AND p.Height = piece[1] AND p.Depth = piece[2] AND c.Color = piece[3] AND p.Price_Client = piece[5]"; //manque le type
+                                            WHERE p.Length = " + panel.Length + " AND p.Height = " + panel.Height + " AND p.Depth = " + panel.Depth + " AND c.Color = '" + panel.Color + "' AND p.Price_Client = " + panel.Price; //manque le type
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
@@ -96,13 +101,15 @@ namespace Test_kitbox
 
                     else if (piece is Door)
                     {
+                        Door door = piece as Door;
+
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
-                                                ON c.ID_Color = p.ID_Color
-                                            WHERE p.Length = piece[0] AND p.Height = piece[1] AND c.Color = piece[2] AND p.Price_Client = piece[3]";
+                                                ON c.PK_Color = p.ID_Color
+                                            WHERE p.Length = " + door.Length + " AND p.Height = " + door.Height + " AND c.Color = '" + door.Color + "' AND p.Price_Client = " + door.Price;
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
@@ -121,11 +128,13 @@ namespace Test_kitbox
 
                     else if (piece is Cleat)
                     {
+                        Cleat cleat = piece as Cleat;
+
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
-                                            WHERE p.Height = piece[0] AND p.Price_Client = piece[1]";
+                                            WHERE p.Height = " + cleat.Height + " AND p.Price_Client = " + cleat.Price;
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
@@ -147,12 +156,23 @@ namespace Test_kitbox
                     else if (piece is Rail)
                     {
                         Rail rail = piece as Rail;
-                        fmd.CommandText = @"SELECT *
-                                            FROM Stock s
-                                            INNER JOIN Piece p
-                                                ON p.Piece_Code = s.Piece_Code
-                                            WHERE p.Length = " + rail.Length + " AND p.Price_Client = " + rail.Price; //Manque type en premier
 
+                        if(rail.Type == "B_Rail" || rail.Type == "F_Rail")
+                        {
+                            fmd.CommandText = @"SELECT *
+                                                FROM Stock s
+                                                INNER JOIN Piece p
+                                                    ON p.Piece_Code = s.Piece_Code
+                                                WHERE p.Length = " + rail.Length + " AND p.Price_Client = " + rail.Price; //Manque type en premier
+                        }
+                        else
+                        {
+                            fmd.CommandText = @"SELECT *
+                                                FROM Stock s
+                                                INNER JOIN Piece p
+                                                    ON p.Piece_Code = s.Piece_Code
+                                                WHERE p.Depth = " + rail.Length + " AND p.Price_Client = " + rail.Price;
+                        }
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
 
@@ -169,11 +189,13 @@ namespace Test_kitbox
 
                     else if (piece is Knob)
                     {
+                        Knob knob = piece as Knob;
+
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
-                                            WHERE p.Dimensions = piece[0] AND p.Price_Client = piece[1]";
+                                            WHERE p.Dimensions = " + knob.Diameter + " AND p.Price_Client = " + knob.Price;
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
