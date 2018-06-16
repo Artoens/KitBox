@@ -10,12 +10,14 @@ namespace Test_kitbox
     {
         private int length;
         private int depth;
+        private string angleBarColor;
         private List<Compartment> compartments;
 
         public Cupboard(int length, int depth)
         {
             this.length = length;
             this.depth = depth;
+            this.angleBarColor = "White";
             this.compartments = new List<Compartment>();
         }
 
@@ -33,6 +35,14 @@ namespace Test_kitbox
 
             //Not checked yet
             set { this.depth = value; }
+        }
+
+        public string AngleBarColor
+        {
+            get { return angleBarColor; }
+
+            //Not checked yet
+            set { this.angleBarColor = value; }
         }
 
         //If you want to target the 3rd element, that is the compartment n°2
@@ -108,7 +118,7 @@ namespace Test_kitbox
             }
 
             //ADD PRODUCTS RELATIVE TO THE CUPBOARD
-            Piece piece = Catalog.FindAngleBar(height, "White");
+            Piece piece = Catalog.FindAngleBar(height, AngleBarColor);
             Product prod = new Product(4, piece);
             productList.Add(prod);
 
