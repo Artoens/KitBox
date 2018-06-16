@@ -189,7 +189,7 @@ namespace Test_kitbox
         }
 
         /// <summary>
-        /// This methods checks all the available colors from the list of doors in the catalog
+        /// This methods checks all the available colors from the list of angle bars in the catalog
         /// It lists available colors according to the selecter height
         /// </summary>
         /// <returns>A list of the available door colors</returns>
