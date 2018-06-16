@@ -17,7 +17,7 @@ namespace KitBoxMag
         }
         public string Id
          {
-        get { return Id; }
+        get { return id; }
          }
 
     //IMPLEMENTED WITH DATABASE

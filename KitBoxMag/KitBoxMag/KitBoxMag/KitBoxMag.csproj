@@ -91,7 +91,6 @@
     </Compile>
     <Compile Include="DBController.cs" />
     <Compile Include="Cupboard.cs" />
-    <Compile Include="DBController.cs" />
     <Compile Include="Dimension.cs" />
     <Compile Include="DimensionCatalog.cs" />
     <Compile Include="Door.cs" />

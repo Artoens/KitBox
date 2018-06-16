@@ -9,14 +9,13 @@ namespace KitBoxMag
 {
     public static class DBController
     {
-        public static List<Piece> pieceList = new List<Piece>();
-        public static List<ClientsOrder> OrderList = new List<ClientsOrder>();
 
         private static String pathdb = @"Data Source=..\..\..\..\..\Kitbox.db";
 
         //First method OK
         public static List<Piece> GetAllPiecesOrdered()
         {
+            List<Piece> pieceList = new List<Piece>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
@@ -31,7 +30,7 @@ namespace KitBoxMag
 
                     while (q.Read())
                     {
-                        GetListPieces(q);
+                        GetListPieces(q, pieceList);
                     }
                 }
 
@@ -42,6 +41,7 @@ namespace KitBoxMag
         //Second method OK
         public static List<Piece> GetAllStock()
         {
+            List<Piece> pieceList = new List<Piece>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
@@ -60,7 +60,7 @@ namespace KitBoxMag
 
                     while (q.Read())
                     {
-                        GetListPieces(q);
+                        GetListPieces(q, pieceList);
                     }
                 }
 
@@ -74,6 +74,7 @@ namespace KitBoxMag
         //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
         public static List<ClientsOrder> GetAllClientsOrder()
         {
+            List<ClientsOrder> OrderList = new List<ClientsOrder>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
@@ -150,6 +151,7 @@ namespace KitBoxMag
         //Seventh method OK
         public static List<Piece> GetAllPiecesToOrder()
         {
+            List<Piece> pieceList = new List<Piece>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
@@ -169,7 +171,7 @@ namespace KitBoxMag
 
                         while (q.Read())
                         {
-                            GetListPieces(q);
+                            GetListPieces(q, pieceList);
                         }
                 }
             }
@@ -179,9 +181,9 @@ namespace KitBoxMag
         }
 
         //Method just to simplify the other ones
-        static private List<Piece> GetListPieces(SQLiteDataReader q)
+        static private List<Piece> GetListPieces(SQLiteDataReader q, List<Piece> pieceList)
         {
-            pieceList.Clear();
+            
 
             string reference = Convert.ToString(q["Reference"]);
             int price = Convert.ToInt32(q["Price_Client"]);
