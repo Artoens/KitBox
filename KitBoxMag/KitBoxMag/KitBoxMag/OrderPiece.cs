@@ -15,6 +15,7 @@ namespace KitBoxMag
         public OrderPiece()
         {
             InitializeComponent();
+            dataGridView.DataSource = DBController.GetAllPiecesOrdered();
         }
     }
 }

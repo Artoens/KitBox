@@ -8,7 +8,9 @@ namespace Test_kitbox
 {
     public class Output
     {
-        DateTime now = DateTime.Now;
+        private static DateTime now = DateTime.Now;
+
+        public string id = now.ToString("yyyyMMddHHmmss");
         public string InterfaceOuput(Order order)
         {
             string linesString = "";
@@ -56,7 +58,7 @@ namespace Test_kitbox
             List<string> lines = new List<string>
                 {
                     "Bill made on the" + now + "for the client",
-                    " ",
+                    id,
                     "Item bought/price/availability",
                     "cupboard/" + ((totalPrice-compartmentPrices)/1000.0).ToString() + ""//pour ici
                 };

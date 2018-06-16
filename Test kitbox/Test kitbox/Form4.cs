@@ -18,5 +18,10 @@ namespace Test_kitbox
             Output outp = new Output();
             Bill.Text = outp.InterfaceOuput(order);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //enregistrer dans la base de donnée
+        }
     }
 }
