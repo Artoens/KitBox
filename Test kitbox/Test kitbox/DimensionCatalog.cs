@@ -30,9 +30,9 @@ namespace Test_kitbox
                         Dimension dimension = new Dimension(new int[] { panel.Depth, panel.Length }, 2);
 
                         alreadyIn = false;
-                        foreach(Dimension dim in dimensionList)
+                        foreach (Dimension dim in dimensionList)
                         {
-                            if(dim.ToString() == dimension.ToString())
+                            if (dim.ToString() == dimension.ToString())
                             {
                                 alreadyIn = true;
                                 break;

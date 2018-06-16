@@ -43,14 +43,16 @@ namespace Test_kitbox
 
         private void comboBoxH_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBoxC.Text = "";
-            comboBoxC.Items.Clear();
-            comboBox3.Text = "";
-            comboBox3.Items.Clear();
+
             //get colors
             if (comboBoxH.Text != "")
-                {
+            {
+                comboBoxC.Text = "";
+                comboBoxC.Items.Clear();
+                comboBox3.Text = "";
+                comboBox3.Items.Clear();
                 List<string> colorlList = DimensionCatalog.GetCompartmentColors(Int32.Parse(comboBoxH.Text));
+                MessageBox.Show(colorlList.Count.ToString());
                 comboBoxC.Items.AddRange(colorlList.ToArray());
 
                 List<string> colorlDList = DimensionCatalog.GetDoorColors(Int32.Parse(comboBoxH.Text));

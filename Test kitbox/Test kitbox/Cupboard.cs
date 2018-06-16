@@ -8,6 +8,7 @@ namespace Test_kitbox
 {
     public class Cupboard : Item
     {
+        private int height;
         private int length;
         private int depth;
         private string angleBarColor;
@@ -15,6 +16,7 @@ namespace Test_kitbox
 
         public Cupboard(int length, int depth)
         {
+            height = 20;
             this.length = length;
             this.depth = depth;
             this.angleBarColor = "White";
@@ -27,6 +29,14 @@ namespace Test_kitbox
 
             //Not checked yet
             set { this.length = value; }
+        }
+
+        public int Height
+        {
+            get { return height; }
+
+            //Not checked yet
+            set { this.height = value; }
         }
 
         public int Depth
@@ -82,6 +92,7 @@ namespace Test_kitbox
             if(compartments.Count < 7)
             {
                 compartments.Add(newCompartment);
+                height += newCompartment.Height;
             } 
         }
 
