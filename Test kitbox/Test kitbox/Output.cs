@@ -80,10 +80,14 @@ namespace Test_kitbox
                         {
                             price += product.Price;
 
+                            //To be deleted
+                            lines.Add(product.ToString() + " Available : " + order.CheckStock(product).ToString());
+
                             //IF one piece is missing => SET AS not in stock
                             if (!order.CheckStock(product))
                             {
                                 availability = "Not in stock";
+                                
                             }
                         }
                         line = "compartment n°" + i.ToString() + "/" + (price/1000.0).ToString() + "/" + availability;

@@ -16,7 +16,7 @@ namespace Test_kitbox
         }
         public string Id
          {
-        get { return Id; }
+        get { return id; }
          }
 
     //IMPLEMENTED WITH DATABASE

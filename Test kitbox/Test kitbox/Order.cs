@@ -49,107 +49,28 @@ namespace Test_kitbox
                     // CREATE SQL READER
                     SQLiteDataReader q;
 
-                    if (piece is AngleBar)
-                    {
                         AngleBar angleBar = piece as AngleBar;
 
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
-                                            INNER JOIN Object o
-                                                ON o.Piece_Code = s.Piece_Code 
-                                            INNER JOIN Color c
-                                                ON c.ID_Color = o.ID_Color
-                                            WHERE c.Color = '" + angleBar.Color + "' AND o.Height = " + angleBar.Height + " AND o.Price = " + angleBar.Price;
-                    }
-
-                    else if (piece is Panel)
-                    {
-                        Panel panel = piece as Panel;
-                        fmd.CommandText = @"SELECT *
-                                            FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
-                                            INNER JOIN Color c
-                                                ON c.PK_Color = p.ID_Color
-                                            WHERE p.Length = " + panel.Length + " AND p.Height = " + panel.Height + " AND p.Depth = " + panel.Depth + " AND c.Color = '" + panel.Color + "' AND p.Price_Client = " + panel.Price; //manque le type
-                    }
-
-                    else if (piece is Door)
-                    {
-                        Door door = piece as Door;
-                        fmd.CommandText = @"SELECT *
-                                            FROM Stock s
-                                            INNER JOIN Piece p
-                                                ON p.Piece_Code = s.Piece_Code 
-                                            INNER JOIN Color c
-                                                ON c.PK_Color = p.ID_Color
-                                            WHERE p.Length = " + door.Length + " AND p.Height = " + door.Height + " AND c.Color = '" + door.Color + "' AND p.Price_Client = " + door.Price;
-                    }
-
-                    else if (piece is Cleat)
-                    {
-                        Cleat cleat = piece as Cleat;
-
-                        fmd.CommandText = @"SELECT *
-                                            FROM Stock s
-                                            INNER JOIN Piece p
-                                            ON p.Piece_Code = s.Piece_Code 
-                                            WHERE p.Height = " + cleat.Height + " AND p.Price_Client = " + cleat.Price;
-                    }
-
-        
-
-
-                    else if (piece is Rail)
-                    {
-                        Rail rail = piece as Rail;
-
-                        if(rail.Type == "B_Rail" || rail.Type == "F_Rail")
-                        {
-                            fmd.CommandText = @"SELECT *
-                                                FROM Stock s
-                                                INNER JOIN Piece p
-                                                    ON p.Piece_Code = s.Piece_Code
-                                                WHERE p.Length = " + rail.Length + " AND p.Price_Client = " + rail.Price; //Manque type en premier
-                        }
-                        else
-                        {
-                            fmd.CommandText = @"SELECT *
-                                                FROM Stock s
-                                                INNER JOIN Piece p
-                                                    ON p.Piece_Code = s.Piece_Code
-                                                WHERE p.Depth = " + rail.Length + " AND p.Price_Client = " + rail.Price;
-                        }
-
-                    }
-
-                    else if (piece is Knob)
-                    {
-                        Knob knob = piece as Knob;
-
-                        fmd.CommandText = @"SELECT *
-                                            FROM Stock s
-                                            INNER JOIN Piece p
-                                                ON p.Piece_Code = s.Piece_Code
-                                            WHERE p.Dimensions = " + knob.Diameter + " AND p.Price_Client = " + knob.Price;
-
-                    }
+                                            WHERE p.PIECE_Code = '" + piece.Id + "'";
 
                     // EXECUTE THE SQL REQUEST
                     q = fmd.ExecuteReader();
 
-                    while(q.Read())
+                    while (q.Read())
                     {
                         int dbQuantity = Convert.ToInt32(q["Quantity"]);
                         return dbQuantity;
                     }
 
                     return 0;
-                    
                 }
             }
         }
-        ///END OF MODIFICATION
+        
 
         public bool CheckStock(Product product)
         {
