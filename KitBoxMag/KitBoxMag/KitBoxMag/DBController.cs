@@ -22,9 +22,11 @@ namespace KitBoxMag
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT *
-                                        FROM Piece
-                                        WHERE Ordered = 1";
+                    fmd.CommandText = @"SELECT p.*, r.Reference
+                                        FROM Piece p
+                                        INNER JOIN Reference r
+                                        ON p.Piece_Code = s.Piece_Code
+                                        WHERE p.Ordered = 1";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
                     while (q.Read())
@@ -79,7 +81,8 @@ namespace KitBoxMag
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
                     fmd.CommandText = @"SELECT *
-                                            FROM Order";
+                                        FROM Order";
+
                     SQLiteDataReader q = fmd.ExecuteReader();
 
                     while (q.Read())
@@ -105,7 +108,7 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Piece SET Ordered= TRUE WHERE ID_Piece = " + P_Code + "";
+                    fmd.CommandText = @"UPDATE Piece SET Ordered = TRUE WHERE ID_Piece = " + P_Code + "";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
