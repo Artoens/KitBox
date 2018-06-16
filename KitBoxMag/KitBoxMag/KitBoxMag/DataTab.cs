@@ -15,10 +15,13 @@ namespace KitBoxMag
         public System.Windows.Forms.Panel pnl;
         public System.Windows.Forms.Panel Pnl { get => pnl; set => pnl = value; }
 
+
         public DataTab()
         {
             InitializeComponent();
             this.pnl = panel1;
+
+            
         }
     }
 
