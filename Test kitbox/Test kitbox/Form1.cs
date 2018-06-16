@@ -35,7 +35,7 @@ namespace Test_kitbox
             if (comboBoxDim.Text != "")
             {
             string[] dim = comboBoxDim.Text.Split('x');
-            Cupboard Cupboard = new Cupboard(Int32.Parse(dim[0]), Int32.Parse(dim[0]));
+            Cupboard Cupboard = new Cupboard(Int32.Parse(dim[0]), Int32.Parse(dim[1]));
             parent.Cup = Cupboard;
             parent.Next();
             }

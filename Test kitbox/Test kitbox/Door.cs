@@ -23,7 +23,7 @@ namespace Test_kitbox
             get { return color; }
         }
 
-        public Door(int length, int height, string color, int price) : base (price)
+        public Door(int length, int height, string color, int price, string id) : base (price, id)
         {
             this.length = length;
             this.height = height;
@@ -32,7 +32,7 @@ namespace Test_kitbox
 
         override public Piece Copy()
         {
-            return new Door(this.length, this.height, this.color, this.price);
+            return new Door(this.length, this.height, this.color, this.price, this.id);
         }
 
         public override string ToString()

@@ -47,9 +47,24 @@ namespace Test_kitbox
                 this);
         }
 
-        public int NumberCompartments
+        public int NumberCompartments   
         {
             get { return compartments.Count; }
+        }
+
+        public List<Compartment> GetAllCompartments()
+        {
+            List<Compartment> list =  new List<Compartment>();
+            for (int i = 0; i < compartments.Count; i++)
+            {
+                list.Add(GetCompartment(i));
+            }
+            return list;
+        }
+
+        public List<Compartment> Compartments
+        {
+            get { return compartments; }
         }
 
         public void AddCompartment(Compartment newCompartment)
@@ -66,6 +81,11 @@ namespace Test_kitbox
         {
             if(index >= 0 && index <= compartments.Count)
             compartments.RemoveAt(index);
+        }
+
+        public void RemoveLastCompartment()
+        {
+                compartments.RemoveAt(compartments.Count - 1);
         }
 
         public List<Product> ItemToProduct()
@@ -88,7 +108,7 @@ namespace Test_kitbox
             }
 
             //ADD PRODUCTS RELATIVE TO THE CUPBOARD
-            Piece piece = Catalog.FindAngleBar(height, "color");
+            Piece piece = Catalog.FindAngleBar(height, "White");
             Product prod = new Product(4, piece);
             productList.Add(prod);
 

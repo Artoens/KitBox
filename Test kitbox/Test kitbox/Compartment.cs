@@ -55,13 +55,23 @@ namespace Test_kitbox
             set { this.doorColor = value; }
         }
 
+        public override string ToString()
+        {
+            string result = mainColor + " Compartment " + height.ToString();
+            if (door)
+            {
+                result += " " + doorColor + " D";
+            }
+            return result;
+        }
+
         public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
             Piece piece;
             Product product;
 
-            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGH HAVE BEEN FORGOTTEN
+            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGHT HAVE BEEN FORGOTTEN
             piece = Catalog.FindCleat(this.Height - 4);//Compartment height = Cleat height + 2cm per rail (2 rails)
             product = new Product(4, piece);
             productList.Add(product);
