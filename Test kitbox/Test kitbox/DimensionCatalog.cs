@@ -189,6 +189,31 @@ namespace Test_kitbox
         }
 
         /// <summary>
+        /// This methods checks all the available colors from the list of doors in the catalog
+        /// It lists available colors according to the selecter height
+        /// </summary>
+        /// <returns>A list of the available door colors</returns>
+        static public List<string> GetAngleBarColors(int height)
+        {
+            List<string> colorList = new List<string>();
+
+            AngleBar angleBar;
+
+            foreach (Piece piece in Catalog.PieceList)
+            {
+                if (piece is AngleBar)
+                {
+                    angleBar = piece as AngleBar;
+                    if (angleBar.Height >= height && !colorList.Contains(angleBar.Color))
+                    {
+                        colorList.Add(angleBar.Color);
+                    }
+                }
+            }
+            return colorList;
+        }
+
+        /// <summary>
         /// This methods checks all the available colors from the list of panels in the catalog
         /// It lists available colors according to the selecter height
         /// </summary>

@@ -25,19 +25,12 @@ namespace Test_kitbox
             Dimension dimension = new Dimension(new int[] {20,40,60}, 3);
 
             MessageBox.Show(dimension.ToString());*/
+
+
+            //IMPORT THE PIECES FROM THE DATABASE
             Catalog.GetPieces();
 
-            Cupboard cup = new Cupboard(100, 32);
-            Compartment comp = new Compartment(32, "White", false, null, cup);
-
-            cup.AddCompartment(comp);
-
-            MessageBox.Show(Catalog.FindRail("LR", 32).ToString());
-            
-            foreach(Product p in cup.ItemToProduct())
-            {
-                MessageBox.Show(p.ToString());
-            }
+            //MessageBox.Show(Catalog.FindAngleBar(32, "White").ToString());
 
            /* //IMPORT PANEL MANUALLY TO GET DIMENSIONS
             Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);
