@@ -2,7 +2,7 @@ using System;
 using System.Data.SQLite;
 using System.Collections.Generic;
 
-namespace Test_kitbox
+namespace KitBoxMag
 {
   public abstract class Piece
     {
