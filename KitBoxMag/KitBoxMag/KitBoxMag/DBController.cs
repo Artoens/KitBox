@@ -55,7 +55,7 @@ namespace KitBoxMag
                                     ON p.Piece_Code = s.Piece_Code
                                     INNER JOIN Reference r
                                     ON r.ID_Piece = p.ID_Piece
-                                    OUTER JOIN Color c
+                                    LEFT OUTER JOIN Color c
                                     ON c.PK_Color = p.ID_Color
                                     WHERE s.Quantity > 0";
                     SQLiteDataReader q = fmd.ExecuteReader();
@@ -187,7 +187,7 @@ namespace KitBoxMag
             pieceList.Clear();
 
             string reference = Convert.ToString(q["Reference"]);
-            int price = Convert.ToInt16(q["Price_Client"]);
+            int price = Convert.ToInt32(q["Price_Client"]);
             string id = Convert.ToString(q["Piece_Code"]);
 
             if (reference == "Angle bar")
