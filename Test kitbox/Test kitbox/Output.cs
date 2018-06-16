@@ -21,6 +21,17 @@ namespace Test_kitbox
             return linesString;
         }
 
+        public int TotalPrice(Order order)
+        {
+            int totalPrice = 0;
+            foreach (Product product in order.GenerateOrder())
+            {
+                totalPrice += product.Price;
+            }
+            return totalPrice;
+        }
+
+
         public void MakeFiles(Order order)
         {
             List<string> lines = MakeBill(order);

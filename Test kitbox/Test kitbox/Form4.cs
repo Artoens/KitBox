@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Test_kitbox
 {
     public partial class Form4 : Form
     {
+        Order order;
         Output outp = new Output();
         public Form4(Order order)
         {
+            this.order = order;
             InitializeComponent();
             Bill.Text = outp.InterfaceOuput(order);
         }
@@ -28,12 +31,15 @@ namespace Test_kitbox
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
                     fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price)
-                                            VALUES ("+ outp.id +", " + outp.Totalprice(order) +")";
+                                            VALUES ("+ outp.id +", " + outp.TotalPrice(order) +")";
                 }
             }
-            return 0;
 
-
+            List<Product> products = order.GenerateOrder();
+            foreach (Product product in products)
+            {
+                order.RemoveFromStock(product); 
+            }
         }
     }
 }
