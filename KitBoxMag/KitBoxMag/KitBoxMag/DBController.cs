@@ -45,10 +45,12 @@ namespace KitBoxMag
 
                     using (SQLiteCommand fmd = connect.CreateCommand())
                     {
-                        fmd.CommandText = @"SELECT *
+                        fmd.CommandText = @"SELECT p.*, r.Reference
                                     FROM Piece p
                                     INNER JOIN Stock s
                                         ON p.Piece_Code = s.Piece_Code
+                                    INNER JOIN Reference r
+                                        ON r.ID_Piece = p.ID_Piece
                                     WHERE s.Quantity > 0";
                         SQLiteDataReader q = fmd.ExecuteReader();
 
@@ -156,7 +158,7 @@ namespace KitBoxMag
                                             ON s.Piece_Code = p.Piece_Code
                                             INNER JOIN Reference r
                                             ON r.ID_Piece=p.ID_Piece
-                                            AND s.To_Order = 1";
+                                            WHERE s.To_Order = 1";
                         SQLiteDataReader q = fmd.ExecuteReader();
 
                         while (q.Read())
