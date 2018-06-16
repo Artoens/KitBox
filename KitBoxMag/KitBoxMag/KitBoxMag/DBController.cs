@@ -7,16 +7,18 @@ using System.Data.SQLite;
 
 namespace KitBoxMag
 {
-    public class DBController
+    public static class DBController
     {
-        private static List<Piece> pieceList = new List<Piece>();
+        public static List<Piece> pieceList = new List<Piece>();
         //ATTENTION il faudra faire une classe order!!
-        private static List<ClientsOrder> OrderList = new List<ClientsOrder>();
+        public static List<ClientsOrder> OrderList = new List<ClientsOrder>();
+
+        private static String pathdb = @"Data Source=..\..\..\..\..\Kitbox.db";
 
         //First method OK
-        public List<Piece> GetAllPiecesOrdered()
+        public static List<Piece> GetAllPiecesOrdered()
         {
-            using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
@@ -38,14 +40,13 @@ namespace KitBoxMag
             }
 
         }
-            //Second method OK
-            List<Piece> GetAllStock()
+        //Second method OK
+        public static List<Piece> GetAllStock()
             {
-                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
-                {
-                    connect.Open();
-
-                    using (SQLiteCommand fmd = connect.CreateCommand())
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
                     {
                         fmd.CommandText = @"SELECT *
                                     FROM Piece p
@@ -66,11 +67,11 @@ namespace KitBoxMag
 
             }
 
-            //Third method OK
-            //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
-            List<ClientsOrder> GetAllClientsOrder()
+        //Third method OK
+        //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
+        public static List<ClientsOrder> GetAllClientsOrder()
             {
-                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
+                using (SQLiteConnection connect = new SQLiteConnection(pathdb))
                 {
                     connect.Open();
 
@@ -94,10 +95,10 @@ namespace KitBoxMag
                 }
             }
 
-            //Fourth method Done but must be verified with the variable thing
-            void OrderPiece(string P_Code)
+        //Fourth method Done but must be verified with the variable thing
+        public static void OrderPiece(string P_Code)
             {
-                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
+                using (SQLiteConnection connect = new SQLiteConnection(pathdb))
                 {
                     connect.Open();
 
@@ -111,10 +112,10 @@ namespace KitBoxMag
             }
 
 
-            //Fifth method - set ordered to null
-            void DeletePieceOrdered(string Piece_Code)
+        //Fifth method - set ordered to null
+        public static void DeletePieceOrdered(string Piece_Code)
             {
-                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
+                using (SQLiteConnection connect = new SQLiteConnection(pathdb))
                 {
                     connect.Open();
 
@@ -127,10 +128,10 @@ namespace KitBoxMag
                 }
             }
 
-            //Sixth method OK but see the variable thing
-            void DeleteClientOrder(char ID_Order)
+        //Sixth method OK but see the variable thing
+        public static void DeleteClientOrder(char ID_Order)
             {
-                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
+                using (SQLiteConnection connect = new SQLiteConnection(pathdb))
                 {
                     connect.Open();
 
@@ -143,10 +144,10 @@ namespace KitBoxMag
                 }
             }
 
-            //Seventh method OK
-            List<Piece> GetAllPiecesToOrder()
+        //Seventh method OK
+        public static List<Piece> GetAllPiecesToOrder()
             {
-                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
+                using (SQLiteConnection connect = new SQLiteConnection(pathdb))
                 {
                     connect.Open();
 
@@ -170,8 +171,8 @@ namespace KitBoxMag
                 }
             }
 
-            //Method just to simplify the other ones
-            private List<Piece> GetListPieces(SQLiteDataReader q)
+        //Method just to simplify the other ones
+        static private List<Piece> GetListPieces(SQLiteDataReader q)
             {
                 pieceList.Clear();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KitBoxMag
 {
-    class ClientsOrder
+    public class ClientsOrder
     {
         public string Id { get; set; }
         public int Price { get; set; }

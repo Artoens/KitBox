@@ -15,6 +15,7 @@ namespace KitBoxMag
         public Stock()
         {
             InitializeComponent();
+            dataGridView.DataSource = DBController.GetAllStock();
         }
     }
 }
