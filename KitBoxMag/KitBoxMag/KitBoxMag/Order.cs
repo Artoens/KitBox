@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-namespace Test_kitbox
+namespace KitBoxMag
 {
     public class Order
     {
@@ -48,19 +48,16 @@ namespace Test_kitbox
                 {
                     if (piece is AngleBar)
                     {
-<<<<<<< HEAD
-                        AngleBar angleBar = piece as AngleBar;
-
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Object o
                                                 ON o.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
                                                 ON c.ID_Color = o.ID_Color
-                                            WHERE c.Color = '" + angleBar.Color + "' AND o.Height = " + angleBar.Height + " AND o.Price = " + angleBar.Price;
+                                            WHERE c.Color = piece[1] AND o.Height = piece[0] AND o.Price = piece[2]";
                         SQLiteDataReader q = fmd.ExecuteReader();
-
                         int dbQuantity = 0;
+
                         while (q.Read())
                         {
                             dbQuantity++;
@@ -74,22 +71,13 @@ namespace Test_kitbox
 
                     else if (piece is Panel)
                     {
-<<<<<<< HEAD
-                        Panel panel = piece as Panel;
-                        
-=======
->>>>>>> master
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
                                                 ON c.ID_Color = p.ID_Color
-<<<<<<< HEAD
-                                            WHERE p.Length = " + panel.Length + " AND p.Height = " + panel.Height + " AND p.Depth = " + panel.Depth + " AND c.Color = '" + panel.Color + "' AND p.Price_Client = " + panel.Price; //manque le type
-=======
                                             WHERE p.Length = piece[0] AND p.Height = piece[1] AND p.Depth = piece[2] AND c.Color = piece[3] AND p.Price_Client = piece[5]"; //manque le type
->>>>>>> master
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
@@ -108,23 +96,13 @@ namespace Test_kitbox
 
                     else if (piece is Door)
                     {
-<<<<<<< HEAD
-                        Door door = piece as Door;
-
-=======
->>>>>>> master
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
-<<<<<<< HEAD
-                                                ON c.PK_Color = p.ID_Color
-                                            WHERE p.Length = " + door.Length + " AND p.Height = " + door.Height + " AND c.Color = '" + door.Color + "' AND p.Price_Client = " + door.Price;
-=======
                                                 ON c.ID_Color = p.ID_Color
                                             WHERE p.Length = piece[0] AND p.Height = piece[1] AND c.Color = piece[2] AND p.Price_Client = piece[3]";
->>>>>>> master
 
                         SQLiteDataReader q = fmd.ExecuteReader();
                         int dbQuantity = 0;
@@ -143,118 +121,10 @@ namespace Test_kitbox
 
                     else if (piece is Cleat)
                     {
-<<<<<<< HEAD
-                        Cleat cleat = piece as Cleat;
-
-=======
->>>>>>> master
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
-<<<<<<< HEAD
-                                            WHERE p.Height = " + cleat.Height + " AND p.Price_Client = " + cleat.Price;
-
-                        SQLiteDataReader q = fmd.ExecuteReader();
-                        int dbQuantity = 0;
-
-                        while (q.Read())
-                        {
-                            dbQuantity++;
-                        }
-                        if (dbQuantity == quantity)
-                        {
-                            return quantity;
-                        }
-                        return 0;
-                    }
-
-        
-
-
-                    else if (piece is Rail)
-                    {
-                        Rail rail = piece as Rail;
-
-                        if(rail.Type == "B_Rail" || rail.Type == "F_Rail")
-                        {
-                            fmd.CommandText = @"SELECT *
-                                                FROM Stock s
-                                                INNER JOIN Piece p
-                                                    ON p.Piece_Code = s.Piece_Code
-                                                WHERE p.Length = " + rail.Length + " AND p.Price_Client = " + rail.Price; //Manque type en premier
-                        }
-                        else
-                        {
-                            fmd.CommandText = @"SELECT *
-                                                FROM Stock s
-                                                INNER JOIN Piece p
-                                                    ON p.Piece_Code = s.Piece_Code
-                                                WHERE p.Depth = " + rail.Length + " AND p.Price_Client = " + rail.Price;
-                        }
-                        SQLiteDataReader q = fmd.ExecuteReader();
-                        int dbQuantity = 0;
-
-                        while (q.Read())
-                        {
-                            dbQuantity++;
-                        }
-                        if (dbQuantity == quantity)
-                        {
-                            return quantity;
-                        }
-                        return 0;
-                    }
-
-                    else if (piece is Knob)
-                    {
-                        Knob knob = piece as Knob;
-
-                        fmd.CommandText = @"SELECT *
-                                            FROM Stock s
-                                            INNER JOIN Piece p
-                                                ON p.Piece_Code = s.Piece_Code 
-                                            WHERE p.Dimensions = " + knob.Diameter + " AND p.Price_Client = " + knob.Price;
-
-                        SQLiteDataReader q = fmd.ExecuteReader();
-                        int dbQuantity = 0;
-
-                        while (q.Read())
-                        {
-                            dbQuantity++;
-                        }
-                        if (dbQuantity == quantity)
-                        {
-                            return quantity;
-                        }
-
-                    }
-                }
-            }
-            return 0;
-        }
-
-        public bool CheckStock(Product product)
-        {
-            if (product.Quantity == InStock(product))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        // Si on a déjà commandé : il se passe rien
-        public void UpdateDatabase(Product product)
-        {
-            Piece piece = product.Piece;
-            string id = piece.Id;
-            int quantity = product.Quantity;
-            int stockQuantity = InStock(product);
-            int wantedQuantity = stockQuantity - quantity;
-            int orderedExtra = 0;
-            int toOrder = 0;
-
-=======
                                             WHERE p.Height = piece[0] AND p.Price_Client = piece[1]";
 
                         SQLiteDataReader q = fmd.ExecuteReader();
@@ -342,7 +212,6 @@ namespace Test_kitbox
             int orderedExtra = 0;
             int toOrder = 0;
 
->>>>>>> master
             //If everything is in stock : decrease stock of the quantity
             if (CheckStock(product))
             {

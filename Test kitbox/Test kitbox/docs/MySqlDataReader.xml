@@ -448,5 +448,4 @@
     <param name="column">The zero-based column ordinal or column name.</param>
     <returns>The value of the specified column.</returns>
   </GetUInt64>
-
 </docs>

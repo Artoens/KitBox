@@ -19,7 +19,6 @@ namespace KitBoxMag
 
         private void ClientOrder_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

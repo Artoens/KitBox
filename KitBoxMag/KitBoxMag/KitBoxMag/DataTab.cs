@@ -12,8 +12,8 @@ namespace KitBoxMag
 {
     public partial class DataTab : Form
     {
-        public Panel pnl;
-        public Panel Pnl { get => pnl; set => pnl = value; }
+        public System.Windows.Forms.Panel pnl;
+        public System.Windows.Forms.Panel Pnl { get => pnl; set => pnl = value; }
 
         public DataTab()
         {
