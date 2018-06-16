@@ -158,7 +158,7 @@ namespace KitBoxMag
                                             ON s.Piece_Code = p.Piece_Code
                                             INNER JOIN Reference r
                                             ON r.ID_Piece=p.ID_Piece
-                                            WHERE s.To_Order = 1";
+                                            WHERE s.To_Order = 1";  
                         SQLiteDataReader q = fmd.ExecuteReader();
 
                         while (q.Read())
@@ -217,7 +217,7 @@ namespace KitBoxMag
                     int height = Convert.ToInt16(q["Height"]);
                     int depth = Convert.ToInt16(q["Depth"]);
                     string color = Convert.ToString(q["Color"]);
-                    string type = "TB";//Top Bottom panel 
+                    string type = "TB"; 
                     Piece Panel = new Panel(length, height, depth, color, type, price, id);
                     pieceList.Add(Panel);
                 }
@@ -264,7 +264,7 @@ namespace KitBoxMag
 
                 else if (reference == "Knob")
                 {
-                    int diameter = Convert.ToInt16(q["Dimensions"]); //ATTENTION changer le diamètre dans la table par juste le chiffre
+                    int diameter = Convert.ToInt16(q["Dimensions"]);
                     Piece Knob = new Knob(diameter, price, id);
                     pieceList.Add(Knob);
                 }
