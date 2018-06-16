@@ -11,10 +11,10 @@ namespace KitBoxMag
     {
         private static List<Piece> pieceList = new List<Piece>();
         //ATTENTION il faudra faire une classe order!!
-        private static List<ClientOrder> OrderList = new List<ClientOrder>();
+        private static List<ClientsOrder> OrderList = new List<ClientsOrder>();
 
         //First method OK
-        public static List<Piece> GetAllPiecesOrdered()
+        public List<Piece> GetAllPiecesOrdered()
         {
             using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
             {
@@ -37,6 +37,7 @@ namespace KitBoxMag
 
             }
 
+        }
             //Second method OK
             List<Piece> GetAllStock()
             {
@@ -67,7 +68,7 @@ namespace KitBoxMag
 
             //Third method OK
             //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
-            List<ClientOrder> GetAllClientsOrder()
+            List<ClientsOrder> GetAllClientsOrder()
             {
                 using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
@@ -83,7 +84,7 @@ namespace KitBoxMag
                         {
                             string ID = Convert.ToString(q["ID_Order"]);
                             int price_order = Convert.ToInt16(q["Price"]);
-                            ClientOrder newOrder = new ClientOrder(ID, price_order);
+                            ClientsOrder newOrder = new ClientsOrder(ID, price_order);
                             OrderList.Add(newOrder);
                         }
                     }
@@ -268,6 +269,5 @@ namespace KitBoxMag
 
                 return pieceList;
             }
-        }
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="ClientOrder.Designer.cs">
       <DependentUpon>ClientOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientsOrder.cs" />
     <Compile Include="Compartment.cs" />
     <Compile Include="ConfirmRecieve.cs">
       <SubType>Form</SubType>

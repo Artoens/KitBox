@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KitBoxMag
+{
+    class ClientsOrder
+    {
+        public string Id { get; set; }
+        public int Price { get; set; }
+
+        public ClientsOrder(string id, int price)
+        {
+            this.Id = id;
+            this.Price = price;
+        }
+    }
+}
