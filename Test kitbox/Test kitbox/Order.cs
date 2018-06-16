@@ -79,7 +79,7 @@ namespace Test_kitbox
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
                                             INNER JOIN Color c
-                                                ON c.ID_Color = p.ID_Color
+                                                ON c.PK_Color = p.ID_Color
                                             WHERE p.Length = " + panel.Length + " AND p.Height = " + panel.Height + " AND p.Depth = " + panel.Depth + " AND c.Color = '" + panel.Color + "' AND p.Price_Client = " + panel.Price; //manque le type
 
                         SQLiteDataReader q = fmd.ExecuteReader();

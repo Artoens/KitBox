@@ -108,7 +108,7 @@ namespace Test_kitbox
                         else if (reference == "LR_Rail")
                         {
                             string type = "LR";
-                            int length = Convert.ToInt16(q["Length"]);
+                            int length = Convert.ToInt16(q["Depth"]);
                             Piece Rail = new Rail(type, length, price, id);
                             pieceList.Add(Rail);
                         }
@@ -196,6 +196,7 @@ namespace Test_kitbox
                 if (piece is Rail)
                 {
                     rail = piece as Rail;
+
                     if (rail.Type == type && rail.Length == length)
                     {
                         return rail;
@@ -232,11 +233,40 @@ namespace Test_kitbox
                 if (piece is Panel)
                 {
                     panel = piece as Panel;
+
+                    if(type == "TB")
+                    {
+                        if (panel.Type == type && panel.Length == length
+                        && panel.Depth == depth && panel.Color == color)
+                        {
+                            return panel;
+                        }
+                    }
+                    else if(type == "LR")
+                    {
+                        if (panel.Type == type && panel.Height == height
+                        && panel.Depth == depth && panel.Color == color)
+                        {
+                            return panel;
+                        }
+                    }
+                    else if(type == "B")
+                    {
+                        if (panel.Type == type && panel.Length == length && panel.Height == height
+                        && panel.Color == color)
+                        {
+                            return panel;
+                        }
+                    }
+
+
+
+                    /*
                     if (panel.Type == type && panel.Length == length && panel.Height == height 
                         && panel.Depth == depth && panel.Color == color)
                     {
                         return panel;
-                    }
+                    }*/
                 }
             }
 
