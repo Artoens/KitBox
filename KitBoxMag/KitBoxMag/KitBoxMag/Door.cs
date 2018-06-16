@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Test_kitbox
+namespace KitBoxMag
 {
     public class Door : Piece
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-namespace Test_kitbox
+namespace KitBoxMag
 {
     public class Order
     {

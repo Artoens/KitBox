@@ -9,7 +9,6 @@ namespace KitBoxMag
 {
     public class DBController
     {
-        SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;");
         private static List<Piece> pieceList = new List<Piece>();
         //ATTENTION il faudra faire une classe order!!
         private static List<ClientOrder> OrderList = new List<ClientOrder>();
@@ -17,7 +16,7 @@ namespace KitBoxMag
         //First method OK
         public static List<Piece> GetAllPiecesOrdered()
         {
-            using (connect)
+            using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
@@ -29,7 +28,7 @@ namespace KitBoxMag
 
                     while (q.Read())
                     {
-                        GetListPieces();
+                        GetListPieces(q);
                     }
 
                 }
@@ -41,7 +40,7 @@ namespace KitBoxMag
             //Second method OK
             List<Piece> GetAllStock()
             {
-                using (connect)
+                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
 
@@ -56,7 +55,7 @@ namespace KitBoxMag
 
                         while (q.Read())
                         {
-                            GetListPieces();
+                            GetListPieces(q);
                         }
                     }
 
@@ -70,7 +69,7 @@ namespace KitBoxMag
             //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
             List<ClientOrder> GetAllClientsOrder()
             {
-                using (connect)
+                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
 
@@ -97,7 +96,7 @@ namespace KitBoxMag
             //Fourth method Done but must be verified with the variable thing
             void OrderPiece(string P_Code)
             {
-                using (connect)
+                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
 
@@ -114,13 +113,13 @@ namespace KitBoxMag
             //Fifth method - set ordered to null
             void DeletePieceOrdered(string Piece_Code)
             {
-                using (connect)
+                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
 
                     using (SQLiteCommand fmd = connect.CreateCommand())
                     {
-                        fmd.CommandText = @"UPDATE Ordered FROM Piece SET Ordered = FALSE WHERE ID_Piece = " + P_Code + "";
+                        fmd.CommandText = @"UPDATE Ordered FROM Piece SET Ordered = FALSE WHERE ID_Piece = " + Piece_Code + "";
                         SQLiteDataReader q = fmd.ExecuteReader();
                         q.Read();
                     }
@@ -130,7 +129,7 @@ namespace KitBoxMag
             //Sixth method OK but see the variable thing
             void DeleteClientOrder(char ID_Order)
             {
-                using (connect)
+                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
 
@@ -146,7 +145,7 @@ namespace KitBoxMag
             //Seventh method OK
             List<Piece> GetAllPiecesToOrder()
             {
-                using (connect)
+                using (SQLiteConnection connect = new SQLiteConnection(@"D:\Sam\Ecam\projet info\KitBox\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
 
@@ -161,7 +160,7 @@ namespace KitBoxMag
 
                         while (q.Read())
                         {
-                            GetListPieces();
+                            GetListPieces(q);
                         }
                     }
 
@@ -171,7 +170,7 @@ namespace KitBoxMag
             }
 
             //Method just to simplify the other ones
-            private List<Piece> GetListPieces()
+            private List<Piece> GetListPieces(SQLiteDataReader q)
             {
                 pieceList.Clear();
 
