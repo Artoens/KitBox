@@ -50,7 +50,7 @@ namespace Test_kitbox
             //get colors
             if (comboBoxH.Text != "")
                 {
-                List<string> colorlList = DimensionCatalog.GetCompartmentColors();
+                List<string> colorlList = DimensionCatalog.GetCompartmentColors(Int32.Parse(comboBoxH.Text));
                 comboBoxC.Items.AddRange(colorlList.ToArray());
 
                 List<string> colorlDList = DimensionCatalog.GetDoorColors(Int32.Parse(comboBoxH.Text));
