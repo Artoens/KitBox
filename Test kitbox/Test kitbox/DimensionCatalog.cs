@@ -246,7 +246,7 @@ namespace Test_kitbox
             //Add the color to the available colors if all the pieces are available (panels B, panels LR)
             foreach (string color in sidePanelColorList)
             {
-                if (sidePanelColorList.Contains(color) && backPanelColorList.Contains(color))
+                if (sidePanelColorList.Contains(color) && backPanelColorList.Contains(color) && !colorList.Contains(color))
                 {
                     colorList.Add(color);
                 }
