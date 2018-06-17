@@ -26,7 +26,6 @@ namespace KitBoxMag
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            //MessageBox.Show("Bite");
             DataTab sa = new Stock();
             DataTab ca = new Client_s_Order();
             DataTab oa = new OrderPiece();
