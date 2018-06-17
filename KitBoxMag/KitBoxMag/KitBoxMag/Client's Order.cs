@@ -15,6 +15,7 @@ namespace KitBoxMag
         public Client_s_Order()
         {
             InitializeComponent();
+            dataGridView.DataSource = DBController.GetAllClientsOrder();
         }
     }
 }
