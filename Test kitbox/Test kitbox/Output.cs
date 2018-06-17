@@ -71,7 +71,7 @@ namespace Test_kitbox
                     "Bill made on the" + now + "for the client",
                     id,
                     "Item bought/price/availability",
-                    "cupboard/" + ((totalPrice-compartmentPrices)/1000.0).ToString() + ""//pour ici
+                    "cupboard/" + ((totalPrice-compartmentPrices)/10000.0).ToString() + ""//pour ici
                 };
 
             int i = 1;
@@ -103,16 +103,16 @@ namespace Test_kitbox
                                 
                             }
                         }
-                        line = "compartment n°" + i.ToString() + "/" + (price/1000.0).ToString() + "/" + availability;
+                        line = "compartment n°" + i.ToString() + "/" + (price/10000.0).ToString() + "/" + availability;
                         i += 1;
                         lines.Add(line);
                     }
                 }
             }
-            string totalPriceString = "Total price: " + (totalPrice/1000.0).ToString();
+            string totalPriceString = "Total price: " + (totalPrice/10000.0).ToString();
             lines.Add(totalPriceString);
             double vat = totalPrice * 1.21;
-            string vatPrice = "Total price with VAT: " + (vat/1000.0).ToString();
+            string vatPrice = "Total price with VAT: " + (vat/10000.0).ToString();
             lines.Add(vatPrice);
             return lines;
         }
