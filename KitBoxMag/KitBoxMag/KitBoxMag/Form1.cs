@@ -55,6 +55,10 @@ namespace KitBoxMag
             p.Show();
         }
 
-     
+        private void update_Click(object sender, EventArgs e)
+        {
+            Update u = new Update();
+            u.Show();
+        }
     }
 }

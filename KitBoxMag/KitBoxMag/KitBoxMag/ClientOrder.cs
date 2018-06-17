@@ -34,9 +34,9 @@ namespace KitBoxMag
             {
                 DBController.DeleteClientOrder(((ClientsOrder)orderid.SelectedItem).Id);
             }
-            catch
+            catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
             finally
             {

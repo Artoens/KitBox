@@ -121,11 +121,19 @@ namespace KitBoxMag
                     while (q.Read())
                     {
                         string ID = Convert.ToString(q["ID_Order"]);
-                        int price_order = Convert.ToInt16(q["Price"]);
+                        int price_order = Convert.ToInt32(q["Price"]);
                         ClientsOrder newOrder = new ClientsOrder(ID, price_order);
                         OrderList.Add(newOrder);
                     }
                 }
+                
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    Guid a = Guid.NewGuid();
+                    fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price) VALUES('" + a + "', 333333)";
+                    fmd.ExecuteNonQuery();
+                }
+                
 
                 return OrderList;
 
@@ -148,7 +156,7 @@ namespace KitBoxMag
                 }
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra ="+ quantity + ", To_Order = 0 WHERE Piece_Code =\"" + P_Code +"\"";
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra =" + quantity + ", To_Order = 0 WHERE Piece_Code =\"" + P_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                     Console.WriteLine("add quantity");
@@ -187,7 +195,7 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"DELETE FROM Orders WHERE ID_Order = " + ID_Order;
+                    fmd.CommandText = @"DELETE FROM Orders WHERE ID_Order = '" + ID_Order + "'";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
@@ -216,10 +224,10 @@ namespace KitBoxMag
                                         WHERE s.To_Order = 1";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
-                        while (q.Read())
-                        {
-                            GetListPieces(q, pieceList);
-                        }
+                    while (q.Read())
+                    {
+                        GetListPieces(q, pieceList);
+                    }
                 }
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
@@ -237,7 +245,7 @@ namespace KitBoxMag
                 }
             }
 
-                return pieceList;
+            return pieceList;
 
         }
 
@@ -254,7 +262,7 @@ namespace KitBoxMag
             }
             catch
             {
-                quantity = Convert.ToInt32(q["Ordered_Extra"]); 
+                quantity = Convert.ToInt32(q["Ordered_Extra"]);
             }
 
             PieceStock temp = new PieceStock(reference, quantity, price, id);
@@ -283,8 +291,71 @@ namespace KitBoxMag
                     piece.Supplier = Convert.ToString(q["Name"]);
                 }
             }
-            
+
             return pieceList;
+        }
+
+        public static List<Supplier> GetAllSupplier()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT ID_Sup, Name
+                                        FROM Supplier";
+
+                    SQLiteDataReader q = fmd.ExecuteReader();
+
+                    while (q.Read())
+                    {
+                        string ID = Convert.ToString(q["ID_Sup"]);
+                        string name = Convert.ToString(q["Name"]);
+                        Supplier supplier = new Supplier(ID, name);
+                        suppliers.Add(supplier);
+                    }
+                }
+            }
+
+            return suppliers;
+        }
+
+        public static List<string> GetAllCatalog(Supplier sup)
+        {
+            List<string> pieceList = new List<string>();
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT Piece_Code
+                                        FROM Link_Piece_Supp
+                                        WHERE ID_Sup = '" + sup.ID +"'";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+
+                    while (q.Read())
+                    {
+                        pieceList.Add(Convert.ToString(q["Piece_Code"]));
+                    }
+                }
+            }
+            return pieceList;
+        }
+
+        public static void UpdatePrice(Supplier sup, string ID_P, int price)
+        {
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Link_Piece_Supp SET Price ="+ price +" WHERE Piece_Code =" + "\"" + ID_P + "\"AND ID_Sup = '" + sup.ID + "'";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                }
+            }
         }
     }
 }
