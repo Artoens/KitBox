@@ -80,9 +80,9 @@ namespace Test_kitbox
                     // CREATE SQL READER
                     SQLiteDataReader q;
 
-                    fmd.CommandText = @"UPDATE Stock s
+                    fmd.CommandText = @"UPDATE Stock
                                         SET Quantity = Quantity - " + product.Quantity +
-                                        " WHERE s.PIECE_Code = '" + piece.Id + "'";
+                                        " WHERE PIECE_Code = '" + piece.Id + "'";
 
                     // EXECUTE THE SQL REQUEST
                     q = fmd.ExecuteReader();
