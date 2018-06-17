@@ -16,7 +16,7 @@ namespace Test_kitbox
 
         public Cupboard(int length, int depth)
         {
-            height = 20;
+            height = 0;
             this.length = length;
             this.depth = depth;
             this.angleBarColor = "White";
@@ -92,7 +92,7 @@ namespace Test_kitbox
             if(compartments.Count < 7)
             {
                 compartments.Add(newCompartment);
-                height += newCompartment.Height;
+                height += newCompartment.Height + 4;
             } 
         }
 
