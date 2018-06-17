@@ -40,52 +40,58 @@ namespace Test_kitbox
         {
             Piece piece = product.Piece;
 
-            using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+            if(piece != null)
             {
-                connect.Open();
-                using (SQLiteCommand fmd = connect.CreateCommand())
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
                 {
-                    // CREATE SQL READER
-                    SQLiteDataReader q;
+                    connect.Open();
+                    using (SQLiteCommand fmd = connect.CreateCommand())
+                    {
+                        // CREATE SQL READER
+                        SQLiteDataReader q;
 
                         fmd.CommandText = @"SELECT *
                                             FROM Stock s
                                             INNER JOIN Piece p
                                                 ON p.Piece_Code = s.Piece_Code 
-                                            WHERE p.PIECE_Code = '" + piece.Id + "'";
+                                            WHERE p.Piece_Code = '" + piece.Id + "'";
 
-                    // EXECUTE THE SQL REQUEST
-                    q = fmd.ExecuteReader();
+                        // EXECUTE THE SQL REQUEST
+                        q = fmd.ExecuteReader();
 
-                    while (q.Read())
-                    {
-                        int dbQuantity = Convert.ToInt32(q["Quantity"]);
-                        return dbQuantity;
+                        while (q.Read())
+                        {
+                            int dbQuantity = Convert.ToInt32(q["Quantity"]);
+                            return dbQuantity;
+                        }
                     }
-
-                    return 0;
                 }
             }
+
+            return 0;
         }
 
         public void RemoveFromStock(Product product)
         {
             Piece piece = product.Piece;
 
-            using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+            if(piece != null)
             {
-                connect.Open();
-                using (SQLiteCommand fmd = connect.CreateCommand())
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
                 {
-                    // CREATE SQL READER
-                    SQLiteDataReader q;
+                    connect.Open();
+                    using (SQLiteCommand fmd = connect.CreateCommand())
+                    {
+                        // CREATE SQL READER
+                        SQLiteDataReader q;
 
-                    fmd.CommandText = @"UPDATE Stock s
+                        fmd.CommandText = @"UPDATE Stock s
                                         SET Quantity = Quantity - " + product.Quantity +
-                                        " WHERE s.PIECE_Code = '" + piece.Id + "'";
+                                            " WHERE s.Piece_Code = '" + piece.Id + "'";
 
-                    // EXECUTE THE SQL REQUEST
-                    q = fmd.ExecuteReader();
+                        // EXECUTE THE SQL REQUEST
+                        q = fmd.ExecuteReader();
+                    }
                 }
             }
         }
