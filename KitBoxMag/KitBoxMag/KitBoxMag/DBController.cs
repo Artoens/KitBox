@@ -37,6 +37,18 @@ namespace KitBoxMag
                         GetListPieces(q, pieceList);
                     }
                 }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price,l.Delay
+                                FROM Piece p
+								INNER JOIN Link_Piece_Supp l
+                                ON p.Piece_Code = l.Piece_Code";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        Updateprice(q, pieceList);
+                    }
+                }
 
                 return pieceList;
 
@@ -218,6 +230,14 @@ namespace KitBoxMag
             PieceStock temp = new PieceStock(reference, quantity, price, id);
 
             pieceList.Add(temp);
+
+            return pieceList;
+        }
+
+        static private List<PieceStock> Updateprice(SQLiteDataReader q, List<PieceStock> pieceList)
+        {
+
+
 
             return pieceList;
         }
