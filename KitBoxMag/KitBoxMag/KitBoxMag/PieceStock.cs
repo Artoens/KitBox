@@ -8,8 +8,14 @@ namespace KitBoxMag
 {
     public class PieceStock : Piece
     {
+        private int delay;
         public string Name { get; }
         public int Quantity { get; }
+
+        public int GetDelay()
+        {
+            return delay;
+        }
 
         public PieceStock(string name, int quantity, int price, string id) : base(price, id)
         {
