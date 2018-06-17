@@ -129,7 +129,7 @@ namespace KitBoxMag
         }
 
         //Fifth method - set ordered to null
-        public static void DeletePieceOrdered(string Piece_Code)
+        public static void DeletePieceOrdered(string Piece_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -137,7 +137,13 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Ordered FROM Piece SET Ordered = FALSE WHERE ID_Piece = " + Piece_Code + "";
+                    fmd.CommandText = @"UPDATE Piece SET Ordered = 0 WHERE Piece_Code =" + "\"" + Piece_Code + "\"";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra = 0, Quantity = Quantity + " + quantity + " WHERE Piece_Code =\"" + Piece_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }

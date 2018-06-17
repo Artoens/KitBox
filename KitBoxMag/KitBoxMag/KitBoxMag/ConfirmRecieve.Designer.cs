@@ -33,21 +33,24 @@
             this.price = new System.Windows.Forms.Label();
             this.IDo = new System.Windows.Forms.Label();
             this.pieceref = new System.Windows.Forms.ComboBox();
+            this.Quantity = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Confirm
             // 
-            this.Confirm.Location = new System.Drawing.Point(181, 76);
+            this.Confirm.Location = new System.Drawing.Point(182, 95);
             this.Confirm.Name = "Confirm";
             this.Confirm.Size = new System.Drawing.Size(75, 23);
             this.Confirm.TabIndex = 9;
             this.Confirm.Text = "Confirm";
             this.Confirm.UseVisualStyleBackColor = true;
+            this.Confirm.Click += new System.EventHandler(this.Confirm_Click);
             // 
             // PriceL
             // 
             this.PriceL.AutoSize = true;
-            this.PriceL.Location = new System.Drawing.Point(11, 40);
+            this.PriceL.Location = new System.Drawing.Point(12, 59);
             this.PriceL.Name = "PriceL";
             this.PriceL.Size = new System.Drawing.Size(31, 13);
             this.PriceL.TabIndex = 8;
@@ -56,7 +59,7 @@
             // price
             // 
             this.price.AutoSize = true;
-            this.price.Location = new System.Drawing.Point(220, 40);
+            this.price.Location = new System.Drawing.Point(219, 59);
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(37, 13);
             this.price.TabIndex = 7;
@@ -82,12 +85,33 @@
             this.pieceref.Size = new System.Drawing.Size(157, 21);
             this.pieceref.TabIndex = 5;
             this.pieceref.Text = "piece ref";
+            this.pieceref.SelectedIndexChanged += new System.EventHandler(this.pieceref_SelectedIndexChanged);
+            // 
+            // Quantity
+            // 
+            this.Quantity.AutoSize = true;
+            this.Quantity.Location = new System.Drawing.Point(219, 37);
+            this.Quantity.Name = "Quantity";
+            this.Quantity.Size = new System.Drawing.Size(13, 13);
+            this.Quantity.TabIndex = 10;
+            this.Quantity.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Quantity";
             // 
             // ConfirmRecieve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 111);
+            this.ClientSize = new System.Drawing.Size(269, 130);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Quantity);
             this.Controls.Add(this.Confirm);
             this.Controls.Add(this.PriceL);
             this.Controls.Add(this.price);
@@ -107,5 +131,7 @@
         private System.Windows.Forms.Label price;
         private System.Windows.Forms.Label IDo;
         private System.Windows.Forms.ComboBox pieceref;
+        private System.Windows.Forms.Label Quantity;
+        private System.Windows.Forms.Label label2;
     }
 }

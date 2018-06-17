@@ -25,7 +25,7 @@ namespace KitBoxMag
         private void orderid_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClientsOrder order = (ClientsOrder)orderid.SelectedItem;
-            price.Text = ((double)order.Price/100).ToString("0.##€");
+            price.Text = ((double)order.Price/1000).ToString("0.##€");
         }
 
         private void Confirm_Click(object sender, EventArgs e)
