@@ -32,7 +32,7 @@ namespace Test_kitbox
 
 
 
-            MessageBox.Show(DimensionCatalog.GetCompartmentColors(32).Count.ToString());
+            MessageBox.Show(Catalog.FindDoor(100, 32, "White").ToString());
 
             /* //IMPORT PANEL MANUALLY TO GET DIMENSIONS
              Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);

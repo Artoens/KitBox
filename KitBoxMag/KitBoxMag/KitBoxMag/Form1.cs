@@ -21,7 +21,21 @@ namespace KitBoxMag
             Tab.TabPages[0].Controls.Add(s.pnl);
             Tab.TabPages[1].Controls.Add(c.pnl);
             Tab.TabPages[2].Controls.Add(o.pnl);
+            this.Activated += Form1_Activated;
+        }
 
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Bite");
+            DataTab sa = new Stock();
+            DataTab ca = new Client_s_Order();
+            DataTab oa = new OrderPiece();
+            Tab.TabPages[0].Controls.Clear();
+            Tab.TabPages[0].Controls.Add(sa.pnl);
+            Tab.TabPages[1].Controls.Clear();
+            Tab.TabPages[1].Controls.Add(ca.pnl);
+            Tab.TabPages[2].Controls.Clear();
+            Tab.TabPages[2].Controls.Add(oa.pnl);
         }
 
         private void ConfirmC_Click(object sender, EventArgs e)
@@ -41,5 +55,7 @@ namespace KitBoxMag
             PieceOrder p = new PieceOrder();
             p.Show();
         }
+
+     
     }
 }

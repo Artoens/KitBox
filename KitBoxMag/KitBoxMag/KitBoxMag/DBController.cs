@@ -21,16 +21,32 @@ namespace KitBoxMag
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT p.*, r.Reference
+                    fmd.CommandText = @"SELECT p.*, r.Reference, s.Ordered_Extra
                                         FROM Piece p
+                                        INNER JOIN Stock s
+                                        ON p.Piece_Code = s.Piece_Code
                                         INNER JOIN Reference r
-                                        ON p.Piece_Code = r.ID_Piece
-                                        WHERE p.Ordered = 1";
+                                        ON r.ID_Piece = p.ID_Piece
+                                        LEFT OUTER JOIN Color c
+                                        ON c.PK_Color = p.ID_Color
+                                        WHERE p.Ordered=1";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
                     while (q.Read())
                     {
                         GetListPieces(q, pieceList);
+                    }
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price,l.Delay
+                                FROM Piece p
+								INNER JOIN Link_Piece_Supp l
+                                ON p.Piece_Code = l.Piece_Code";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        Updateprice(q, pieceList);
                     }
                 }
 
@@ -101,7 +117,7 @@ namespace KitBoxMag
         }
 
         //Fourth method Done but must be verified with the variable thing
-        public static void OrderPiece(string P_Code)
+        public static void OrderPiece(string P_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -109,15 +125,23 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Piece SET Ordered = TRUE WHERE ID_Piece = " + P_Code + "";
+                    fmd.CommandText = @"UPDATE Piece SET Ordered = 1 WHERE Piece_Code =" + "\"" + P_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
+                    Console.WriteLine("ordered");
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra ="+ quantity + ", To_Order = 0 WHERE Piece_Code =\"" + P_Code +"\"";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                    Console.WriteLine("add quantity");
                 }
             }
         }
 
         //Fifth method - set ordered to null
-        public static void DeletePieceOrdered(string Piece_Code)
+        public static void DeletePieceOrdered(string Piece_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -125,7 +149,13 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Ordered FROM Piece SET Ordered = FALSE WHERE ID_Piece = " + Piece_Code + "";
+                    fmd.CommandText = @"UPDATE Piece SET Ordered = 0 WHERE Piece_Code =" + "\"" + Piece_Code + "\"";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra = 0, Quantity = Quantity + " + quantity + " WHERE Piece_Code =\"" + Piece_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
@@ -133,7 +163,7 @@ namespace KitBoxMag
         }
 
         //Sixth method OK but see the variable thing
-        public static void DeleteClientOrder(char ID_Order)
+        public static void DeleteClientOrder(string ID_Order)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -141,11 +171,12 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"DELETE FROM Order WHERE ID_Order = " + ID_Order + "";
+                    fmd.CommandText = @"DELETE FROM Orders WHERE ID_Order = " + ID_Order;
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
             }
+            GetAllClientsOrder();
         }
 
         //Seventh method OK
@@ -158,13 +189,13 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT p.*, r.Reference, c.Color
+                    fmd.CommandText = @"SELECT p.*, r.Reference, c.Color, s.Quantity
                                         FROM Piece p
                                         INNER JOIN Stock s
                                         ON s.Piece_Code = p.Piece_Code
                                         INNER JOIN Reference r
                                         ON r.ID_Piece=p.ID_Piece
-                                        OUTER JOIN Color c
+                                        LEFT OUTER JOIN Color c
                                         ON c.PK_Color = p.ID_Color
                                         WHERE s.To_Order = 1";
                     SQLiteDataReader q = fmd.ExecuteReader();
@@ -183,14 +214,30 @@ namespace KitBoxMag
         //Method just to simplify the other ones
         static private List<PieceStock> GetListPieces(SQLiteDataReader q, List<PieceStock> pieceList)
         {
+            int quantity = 0;
             string reference = Convert.ToString(q["Reference"]);
             int price = Convert.ToInt32(q["Price_Client"]);
             string id = Convert.ToString(q["Piece_Code"]);
-            int quantity = Convert.ToInt32(q["Quantity"]);
+            try
+            {
+                quantity = Convert.ToInt32(q["Quantity"]);
+            }
+            catch
+            {
+                quantity = Convert.ToInt32(q["Ordered_Extra"]); 
+            }
 
             PieceStock temp = new PieceStock(reference, quantity, price, id);
 
             pieceList.Add(temp);
+
+            return pieceList;
+        }
+
+        static private List<PieceStock> Updateprice(SQLiteDataReader q, List<PieceStock> pieceList)
+        {
+
+
 
             return pieceList;
         }

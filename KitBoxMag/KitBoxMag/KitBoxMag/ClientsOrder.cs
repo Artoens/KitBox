@@ -16,5 +16,12 @@ namespace KitBoxMag
             this.Id = id;
             this.Price = price;
         }
+
+        public override string ToString()
+        {
+            return Id;
+        }
     }
+
+    
 }

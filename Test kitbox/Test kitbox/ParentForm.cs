@@ -12,6 +12,7 @@ namespace Test_kitbox
 {
     public partial class ParentForm : Form
     {
+
         int top = 0;
         int count;
         List<Form> frm = new List<Form>();
@@ -29,6 +30,7 @@ namespace Test_kitbox
             frm.Add(new Form1(this));
             frm.Add(new Form2(this));
             frm.Add(new Form3(this));
+            frm.Add(new Form5(this));
             count = frm.Count();
             InitializeComponent();
         }
