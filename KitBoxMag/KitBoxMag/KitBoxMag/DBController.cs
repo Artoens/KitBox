@@ -35,21 +35,23 @@ namespace KitBoxMag
                     while (q.Read())
                     {
                         GetListPieces(q, pieceList);
+                        Console.WriteLine(pieceList.Count);
                     }
                 }
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT p.*, l.Price,l.Delay
-                                FROM Piece p
-								INNER JOIN Link_Piece_Supp l
-                                ON p.Piece_Code = l.Piece_Code";
+                    fmd.CommandText = @"SELECT p.*, l.Price ,l.Delay, s.Name
+                                    FROM Piece p
+									INNER JOIN Link_Piece_Supp l
+                                    ON p.Piece_Code = l.Piece_Code
+									inner join Supplier s
+									on l.ID_Sup = s.ID_Sup";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     while (q.Read())
                     {
-                        Updateprice(q, pieceList);
+                        UpdatePiecesInfo(q, pieceList);
                     }
                 }
-
                 return pieceList;
 
             }
@@ -77,6 +79,20 @@ namespace KitBoxMag
                     while (q.Read())
                     {
                         GetListPieces(q, pieceList);
+                    }
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price ,l.Delay, s.Name
+                                    FROM Piece p
+									INNER JOIN Link_Piece_Supp l
+                                    ON p.Piece_Code = l.Piece_Code
+									inner join Supplier s
+									on l.ID_Sup = s.ID_Sup";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        UpdatePiecesInfo(q, pieceList);
                     }
                 }
 
@@ -205,6 +221,20 @@ namespace KitBoxMag
                             GetListPieces(q, pieceList);
                         }
                 }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price ,l.Delay, s.Name
+                                    FROM Piece p
+									INNER JOIN Link_Piece_Supp l
+                                    ON p.Piece_Code = l.Piece_Code
+									inner join Supplier s
+									on l.ID_Sup = s.ID_Sup";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        UpdatePiecesInfo(q, pieceList);
+                    }
+                }
             }
 
                 return pieceList;
@@ -234,11 +264,26 @@ namespace KitBoxMag
             return pieceList;
         }
 
-        static private List<PieceStock> Updateprice(SQLiteDataReader q, List<PieceStock> pieceList)
+        static private List<PieceStock> UpdatePiecesInfo(SQLiteDataReader q, List<PieceStock> pieceList)
         {
+            //Console.WriteLine(Convert.ToString(q["Piece_Code"]));
+            PieceStock piece = pieceList.Where(e => Convert.ToString(q["Piece_Code"]) == e.Id).FirstOrDefault();
+            if (piece != null)
+            {
 
-
-
+                if (piece.Price > Convert.ToInt32(q["Price"]))
+                {
+                    piece.Price = Convert.ToInt32(q["Price"]);
+                    piece.ShippingDelay = Convert.ToInt32(q["Delay"]);
+                    piece.Supplier = Convert.ToString(q["Name"]);
+                }
+                else if (piece.Price == Convert.ToInt32(q["Price"]) && piece.ShippingDelay > Convert.ToInt32(q["Delay"]))
+                {
+                    piece.ShippingDelay = Convert.ToInt32(q["Delay"]);
+                    piece.Supplier = Convert.ToString(q["Name"]);
+                }
+            }
+            
             return pieceList;
         }
     }

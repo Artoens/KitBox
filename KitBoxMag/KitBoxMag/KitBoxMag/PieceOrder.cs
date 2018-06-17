@@ -34,7 +34,7 @@ namespace KitBoxMag
             try
             {
                 int n = Int32.Parse(Number.Text);
-                intPrice.Text = ((double)(((PieceStock)Piece.SelectedItem).Price * n) / 1000).ToString("0.##€");
+                intPrice.Text = ((double)(((PieceStock)Piece.SelectedItem).Price * n) / 10000).ToString("0.##€");
             }
             catch
             {

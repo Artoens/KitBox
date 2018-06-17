@@ -57,12 +57,10 @@ namespace Test_kitbox
                 
             }
 
-
             //CLOSE THE FORM & THE APP
             Application.Exit();
             //Form f = new ParentForm();
             //f.Show();
-
         }
     }
 }

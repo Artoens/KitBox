@@ -26,7 +26,7 @@ namespace KitBoxMag
 
         private void pieceref_SelectedIndexChanged(object sender, EventArgs e)
         {
-            price.Text = ((double)(((PieceStock)pieceref.SelectedItem).Price * ((PieceStock)pieceref.SelectedItem).Quantity) / 1000).ToString("0.##€");
+            price.Text = ((double)(((PieceStock)pieceref.SelectedItem).Price * ((PieceStock)pieceref.SelectedItem).Quantity) / 10000).ToString("0.##€");
             Quantity.Text = ((PieceStock)pieceref.SelectedItem).Quantity.ToString();
         }
     }
