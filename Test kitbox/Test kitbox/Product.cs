@@ -69,7 +69,15 @@ namespace Test_kitbox
         //Not done yet
         override public string ToString()
         {
-            return quantity.ToString() + " x " + piece.ToString();
+            if(piece == null)
+            {
+                return "Piece not found";
+            }
+            else
+            {
+                return quantity.ToString() + " x " + piece.ToString();
+            }
+            
         }
     }
 }
