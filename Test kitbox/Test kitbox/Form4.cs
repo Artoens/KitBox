@@ -40,6 +40,7 @@ namespace Test_kitbox
             {
                 order.RemoveFromStock(product); 
             }
+
         }
     }
 }
