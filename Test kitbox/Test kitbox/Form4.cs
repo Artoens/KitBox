@@ -28,23 +28,34 @@ namespace Test_kitbox
             
             using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
             {
+                /*
+                connect.Open();
+                SQLiteCommand insertSQL = new SQLiteCommand("INSERT INTO Orders (ID_Order, Price) VALUES(\"" + outp.id + "\"," + outp.TotalPrice(order).ToString() + ")", connect);
+
+                try
+                {
+                    insertSQL.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                
 
                 connect.Open();
-                using (SQLiteCommand fmd = connect.CreateCommand())
-                {
-                    /*fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price)
-                                            VALUES ("+ outp.id +", " + outp.TotalPrice(order) +")";*/
+                string sql = "insert into Orders (ID_Order, Price) values ('22222222', 6000)";
+                SQLiteCommand command = new SQLiteCommand(sql, connect);
+                // EXECUTE THE SQL REQUEST
+                command.ExecuteNonQuery();
+                //q.Read();
+                */
+                string InsertSql = @"INSERT INTO Orders (ID_Order, Price) VALUES($id, $price)";
+                connect.Open();
+                SQLiteCommand InsertCom = new SQLiteCommand(InsertSql, connect);
+                InsertCom.Parameters.Add("$id", DbType.String).Value = outp.id;
+                InsertCom.Parameters.Add("$price", DbType.Int32).Value = outp.TotalPrice(order);
+                InsertCom.ExecuteNonQuery(); ;
 
-                    fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price)
-                                            VALUES (18,6)";
-
-                    MessageBox.Show("Execute");
-                    // EXECUTE THE SQL REQUEST
-                    SQLiteDataReader q = fmd.ExecuteReader();
-                    q.Read();
-                    
-                    
-                }
             }
 
             //MessageBox.Show(fmd.CommandText);
@@ -58,9 +69,10 @@ namespace Test_kitbox
             }
 
             //CLOSE THE FORM & THE APP
-            Application.Exit();
-            //Form f = new ParentForm();
-            //f.Show();
+            //Application.Exit();
+            this.Close();
+            Form f = new ParentForm();
+            f.Show();
         }
     }
 }
