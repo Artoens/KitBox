@@ -48,6 +48,7 @@ namespace Test_kitbox
 
             //CLOSE THE FORM & THE APP
             //Application.Exit();
+            outp.MakeFiles(order);
             this.Close();
             Form f = new ParentForm();
             f.Show();

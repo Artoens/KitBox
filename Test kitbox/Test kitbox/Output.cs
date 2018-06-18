@@ -21,6 +21,7 @@ namespace Test_kitbox
             return linesString;
         }
 
+        //calculates the total price of the cupboard
         public int TotalPrice(Order order)
         {
             int totalPrice = 0;
@@ -31,16 +32,17 @@ namespace Test_kitbox
             return totalPrice;
         }
 
-
+        //makes the files to print the clients bill
         public void MakeFiles(Order order)
         {
             List<string> lines = MakeBill(order);
             lines.ToArray();
-            string path = (@"../../../Bill of" + now + ".txt");
+            string path = (@"../../../Bill of" + id + ".txt");
             MakeBill(order).ToArray();
             System.IO.File.WriteAllLines(path, lines);
         }
-         
+
+        //makes a bill for the client 
         public List<string> MakeBill(Order order)
         {
             string line = null;
@@ -117,7 +119,7 @@ namespace Test_kitbox
             return lines;
         }
 
-
+        //makes list of items to prepare for the vendor
         public void MakeList(Order order)
         {
             string line = null;
