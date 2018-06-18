@@ -11,7 +11,11 @@ namespace Test_kitbox
     {
         private static List<Piece> pieceList = new List<Piece>();  //liste avec les piece pour chaque élément, chaque piece a un type 
 
-        //gets all the pieces from the DataBase
+
+        /// <summary>
+        /// This method imports pieces from the DB to add them to the catalog
+        /// All the pieces will be created according to their type (Cleat, AngleBar, ...)
+        /// </summary>
         public static void GetPieces()
         {
             List<String> pieces = new List<String>();
@@ -143,6 +147,7 @@ namespace Test_kitbox
             }
         }
 
+
         public static void AddPiece(Piece piece)
         {
             pieceList.Add(piece);
@@ -150,6 +155,11 @@ namespace Test_kitbox
 
         //All the find function are meant to find a spécific type of item in our list of pieces
 
+        /// <summary>
+        /// Find an existing Cleat based on its inner caracteristics
+        /// </summary>
+        /// <param name="height"></param>
+        /// <returns>The existing Cleat if existing, or null</returns>
         public static Piece FindCleat(int height)
         {
             Cleat cleat;
@@ -168,6 +178,12 @@ namespace Test_kitbox
             return null;
         }
 
+        /// <summary>
+        /// Find an existing AngleBar based on its inner caracteristics
+        /// </summary>
+        /// <param name="height"></param>
+        /// <param name="color"></param>
+        /// <returns>The existing AngleBar if existing, or null</returns>
         public static Piece FindAngleBar(int height, string color)
         {
             AngleBar angleBar, shortestAngleBar = null;
@@ -176,11 +192,14 @@ namespace Test_kitbox
             {
                 if (piece is AngleBar)
                 {
+                    
                     angleBar = piece as AngleBar;
                     if (angleBar.Height >= height && angleBar.Color == color)
                     {
-                        if(shortestAngleBar == null || shortestAngleBar.Height > angleBar.Height)
+                        // As the angle bars can be cut, we try to find the shortest angle bar that fits with the required height
+                        if (shortestAngleBar == null || shortestAngleBar.Height > angleBar.Height)
                         {
+                            // If a shorther angle bar matching the caracteristics exists, it replaces the longer one
                             shortestAngleBar = angleBar;
                         }
                     }
@@ -190,6 +209,12 @@ namespace Test_kitbox
             return shortestAngleBar;
         }
 
+        /// <summary>
+        /// Find an existing Rail based on its inner caracteristics
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="length"></param>
+        /// <returns>The existing Rail if existing, or null</returns>
         public static Piece FindRail(string type, int length)
         {
             Rail rail;
@@ -208,6 +233,13 @@ namespace Test_kitbox
             return null;
         }
 
+        /// <summary>
+        /// Find an existing Door based on its inner caracteristics
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="height"></param>
+        /// <param name="color"></param>
+        /// <returns>The existing Door if existing, or null</returns>
         public static Piece FindDoor(int length, int height, string color)
         {
             Door door;
@@ -225,6 +257,15 @@ namespace Test_kitbox
             return null;
         }
 
+        /// <summary>
+        /// Find an existing Panel based on its inner caracteristics
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="height"></param>
+        /// <param name="depth"></param>
+        /// <param name="color"></param>
+        /// <param name="type"></param>
+        /// <returns>The existing Panel if existing, or null</returns>
         public static Piece FindPanel(int length, int height, int depth, string color, string type)
         {
             Panel panel;
@@ -234,6 +275,8 @@ namespace Test_kitbox
                 {
                     panel = piece as Panel;
 
+                    // There can be 3 different types of panels
+                    // Each one has different caracteristics (Length, Depth, Height)
                     if(type == "TB")
                     {
                         if (panel.Type == type && panel.Length == length
@@ -263,6 +306,11 @@ namespace Test_kitbox
             return null;
         }
 
+        /// <summary>
+        /// Find an existing Knob based on its inner caracteristics
+        /// </summary>
+        /// <param name="diameter"></param>
+        /// <returns>The existing Knob if existing, or null</returns>
         public static Piece FindKnob(int diameter)
         {
             Knob knob;

@@ -101,6 +101,11 @@ namespace Test_kitbox
                 compartments.RemoveAt(compartments.Count - 1);
         }
 
+        /// <summary>
+        /// This list converts the item into a list of all the products needed to put it together
+        /// These products are existing pieces from the database associated with a quantity
+        /// </summary>
+        /// <returns>Returns a list of all the products the item is made up of</returns>
         public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();

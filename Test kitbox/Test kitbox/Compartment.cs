@@ -57,14 +57,22 @@ namespace Test_kitbox
             return result;
         }
 
-        //Return the list of all the products in the compartment
+        /// <summary>
+        /// This list converts the item into a list of all the products needed to put it together
+        /// These products are existing pieces from the database associated with a quantity
+        /// </summary>
+        /// <returns>Returns a list of all the products the item is made up of</returns>
         public List<Product> ItemToProduct()
         {
+            // INIT WITH AN EMPTY LIST
             List<Product> productList = new List<Product>();
             Piece piece;
             Product product;
+
+            //CLEAT
             piece = Catalog.FindCleat(this.Height);
             product = new Product(4, piece); 
+
             productList.Add(product);
 
             //RAIL FRONT

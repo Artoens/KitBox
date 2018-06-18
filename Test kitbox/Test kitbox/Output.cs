@@ -70,7 +70,7 @@ namespace Test_kitbox
 
             List<string> lines = new List<string>
                 {
-                    "Bill made on the" + now + "for the client",
+                    "Bill made on the " + now + " for the client",
                     id,
                     "Item bought/price/availability",
                     "cupboard/" + ((totalPrice-compartmentPrices)/10000.0).ToString() + ""//pour ici

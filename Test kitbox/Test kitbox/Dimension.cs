@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Test_kitbox
 {
+    /// <summary>
+    /// This class aims at providing an easy way to deal with the different dimensions of the pieces
+    /// It only contains an array of dimensions (int) + the size of this array
+    /// </summary>
     public class Dimension
     {
         private int[] dimensions;
