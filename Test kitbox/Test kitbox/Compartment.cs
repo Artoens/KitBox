@@ -115,7 +115,7 @@ namespace Test_kitbox
                 productList.Add(product);
 
                 //IF THE DOORS ARE NOT IN GLASS
-                if(this.DoorColor != "glass")
+                if(this.DoorColor != "Verre")
                 {
                     //KNOB -- DO WE HAVE TO CHOOSE A DIAMETER ?
                     piece = Catalog.FindKnob(6);

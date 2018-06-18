@@ -39,6 +39,7 @@ namespace Test_kitbox
         public int InStock(Product product)
         {
             Piece piece = product.Piece;
+            int dbQuantity = 0;
 
             if(piece != null)
             {
@@ -61,14 +62,13 @@ namespace Test_kitbox
 
                         while (q.Read())
                         {
-                            int dbQuantity = Convert.ToInt32(q["Quantity"]);
-                            return dbQuantity;
+                            dbQuantity = Convert.ToInt32(q["Quantity"]);
+                            
                         }
                     }
                 }
             }
-
-            return 0;
+            return dbQuantity;
         }
 
         public void RemoveFromStock(Product product)
