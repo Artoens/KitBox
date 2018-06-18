@@ -12,7 +12,8 @@ namespace KitBoxMag
 
         private static String pathdb = @"Data Source=..\..\..\..\..\Kitbox.db";
 
-        //First method OK
+        //Gets all ordered pieces from the DB
+        //Returns a list of ViewModel PieceStock
         public static List<PieceStock> GetAllPiecesOrdered()
         {
             List<PieceStock> pieceList = new List<PieceStock>();
@@ -56,7 +57,8 @@ namespace KitBoxMag
 
             }
         }
-        //Second method OK
+        //Gets all stock from the DB (Quantity of the piece > 0)
+        //Returns a list of ViewModel PieceStock
         public static List<PieceStock> GetAllStock()
         {
             List<PieceStock> pieceList = new List<PieceStock>();
@@ -102,8 +104,8 @@ namespace KitBoxMag
 
         }
 
-        //Third method OK
-        //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
+        //Gets all Client's order (ID and price)
+        //Returns a list of ViewModel ClientsOrder
         public static List<ClientsOrder> GetAllClientsOrder()
         {
             List<ClientsOrder> OrderList = new List<ClientsOrder>();
@@ -140,7 +142,10 @@ namespace KitBoxMag
             }
         }
 
-        //Fourth method Done but must be verified with the variable thing
+        //Updates a piece in the DB
+        //In the db : Removes the piece from the to order list
+        //            Sets the piece in the ordered list
+        //            Sets the quantity ordered
         public static void OrderPiece(string P_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
@@ -164,7 +169,10 @@ namespace KitBoxMag
             }
         }
 
-        //Fifth method - set ordered to null
+        //Updates a piece in the DB
+        //In the db : Removes the piece from the ordered list
+        //            Sets the quantity in stock = quantity ordered
+        //            Sets the quantity ordered to 0
         public static void DeletePieceOrdered(string Piece_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
@@ -186,7 +194,8 @@ namespace KitBoxMag
             }
         }
 
-        //Sixth method OK but see the variable thing
+        //Deletes an Order from de DB
+        //Once the Order is confirm, we don't need it anymore
         public static void DeleteClientOrder(string ID_Order)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
@@ -203,7 +212,8 @@ namespace KitBoxMag
             GetAllClientsOrder();
         }
 
-        //Seventh method OK
+        //Gets all pieces to order from the DB
+        //Returns a list of ViewModel PieceStock
         public static List<PieceStock> GetAllPiecesToOrder()
         {
             List<PieceStock> pieceList = new List<PieceStock>();
@@ -249,7 +259,7 @@ namespace KitBoxMag
 
         }
 
-        //Method just to simplify the other ones
+        //Creates the View Model and add it for the others methods
         static private List<PieceStock> GetListPieces(SQLiteDataReader q, List<PieceStock> pieceList)
         {
             int quantity = 0;
@@ -272,6 +282,7 @@ namespace KitBoxMag
             return pieceList;
         }
 
+        //Updates the price of the View Model to the lowest 
         static private List<PieceStock> UpdatePiecesInfo(SQLiteDataReader q, List<PieceStock> pieceList)
         {
             //Console.WriteLine(Convert.ToString(q["Piece_Code"]));
@@ -295,6 +306,7 @@ namespace KitBoxMag
             return pieceList;
         }
 
+        //Gets all the supplier from the DB
         public static List<Supplier> GetAllSupplier()
         {
             List<Supplier> suppliers = new List<Supplier>();
@@ -322,6 +334,7 @@ namespace KitBoxMag
             return suppliers;
         }
 
+        //Gets all the pieces proposed by a supplier
         public static List<string> GetAllCatalog(Supplier sup)
         {
             List<string> pieceList = new List<string>();
@@ -344,6 +357,8 @@ namespace KitBoxMag
             return pieceList;
         }
 
+        //Updates a piece in the DB
+        //In the db : Update a price of a piece from a supplier
         public static void UpdatePrice(Supplier sup, string ID_P, int price)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))

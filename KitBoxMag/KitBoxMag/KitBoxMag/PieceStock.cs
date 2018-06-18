@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace KitBoxMag
 {
+    //View Model of a piece
     public class PieceStock : Piece
     {
         public string Supplier { get; set; }

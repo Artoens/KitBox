@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace KitBoxMag
 {
+    //Model of a supplier
     public class Supplier
     {
         private string id;
