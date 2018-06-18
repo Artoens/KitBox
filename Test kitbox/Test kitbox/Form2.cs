@@ -52,7 +52,6 @@ namespace Test_kitbox
                 comboBox3.Text = "";
                 comboBox3.Items.Clear();
                 List<string> colorlList = DimensionCatalog.GetCompartmentColors(Int32.Parse(comboBoxH.Text));
-                MessageBox.Show(colorlList.Count.ToString());
                 comboBoxC.Items.AddRange(colorlList.ToArray());
 
                 List<string> colorlDList = DimensionCatalog.GetDoorColors(Int32.Parse(comboBoxH.Text));

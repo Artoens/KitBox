@@ -24,28 +24,17 @@ namespace Test_kitbox
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            
             using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
             {
-
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    /*fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price)
-                                            VALUES ("+ outp.id +", " + outp.TotalPrice(order) +")";*/
-
-                    fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price)
-                                            VALUES (18,6)";
-
-                    MessageBox.Show("Execute");
-                    // EXECUTE THE SQL REQUEST
-                    SQLiteDataReader q = fmd.ExecuteReader();
-                    q.Read();
-                    
-                    
+                    Guid a = Guid.NewGuid();
+                    fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price) VALUES('" + a + "', 333333)";
+                    fmd.ExecuteNonQuery();
                 }
             }
+         
 
             //MessageBox.Show(fmd.CommandText);
             List<Product> products = order.GenerateOrder();
@@ -58,9 +47,11 @@ namespace Test_kitbox
             }
 
             //CLOSE THE FORM & THE APP
-            Application.Exit();
-            //Form f = new ParentForm();
-            //f.Show();
+            //Application.Exit();
+            outp.MakeFiles(order);
+            this.Close();
+            Form f = new ParentForm();
+            f.Show();
         }
     }
 }

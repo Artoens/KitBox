@@ -17,26 +17,30 @@ namespace KitBoxMag
             InitializeComponent();
         }
 
+        //Bind the combobox with de Model View
         private void ClientOrder_Load(object sender, EventArgs e)
         {
             orderid.DataSource = DBController.GetAllClientsOrder();
         }
 
+        //ON COMBOBOX CHANGED : Updates the price depend on the Client's order selected
         private void orderid_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClientsOrder order = (ClientsOrder)orderid.SelectedItem;
             price.Text = ((double)order.Price/10000).ToString("0.##€");
         }
 
+
+        //ON CLICK : Deletes the order from de database and close this form 
         private void Confirm_Click(object sender, EventArgs e)
         {
             try
             {
                 DBController.DeleteClientOrder(((ClientsOrder)orderid.SelectedItem).Id);
             }
-            catch
+            catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
             finally
             {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace KitBoxMag
 {
+    //Model of a supplier
     public class Supplier
     {
         private string id;
@@ -19,7 +20,7 @@ namespace KitBoxMag
 
         public string ID
         {
-            get { return ID; }
+            get { return id; }
         }
 
         public string Name
@@ -34,6 +35,10 @@ namespace KitBoxMag
         public static Supplier SupplierFromDatabase()
         {
             return new Supplier("ID", "name");
+        }
+        public override string ToString()
+        {
+            return name;
         }
     }
 }

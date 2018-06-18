@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace KitBoxMag
 {
+    //Parent UI View for the tabs
     public partial class DataTab : Form
     {
         public System.Windows.Forms.Panel pnl;

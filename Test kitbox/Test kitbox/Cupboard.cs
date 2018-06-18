@@ -26,32 +26,24 @@ namespace Test_kitbox
         public int Length
         {
             get { return length; }
-
-            //Not checked yet
             set { this.length = value; }
         }
 
         public int Height
         {
             get { return height; }
-
-            //Not checked yet
             set { this.height = value; }
         }
 
         public int Depth
         {
             get { return depth; }
-
-            //Not checked yet
             set { this.depth = value; }
         }
 
         public string AngleBarColor
         {
             get { return angleBarColor; }
-
-            //Not checked yet
             set { this.angleBarColor = value; }
         }
 
@@ -109,11 +101,14 @@ namespace Test_kitbox
                 compartments.RemoveAt(compartments.Count - 1);
         }
 
+        /// <summary>
+        /// This list converts the item into a list of all the products needed to put it together
+        /// These products are existing pieces from the database associated with a quantity
+        /// </summary>
+        /// <returns>Returns a list of all the products the item is made up of</returns>
         public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
-
-            //CUPBOARD HEIGHT -> TO FIND ANGLEBARS
             int height = 0;
 
             //ADD PRODUCTS FOR EACH COMPARTMENT

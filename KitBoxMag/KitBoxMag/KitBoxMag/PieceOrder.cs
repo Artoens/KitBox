@@ -12,23 +12,26 @@ namespace KitBoxMag
 {
     public partial class PieceOrder : Form
     {
+        //Bind the combobox with de Model View
         public PieceOrder()
         {
             InitializeComponent();
             Piece.DataSource = DBController.GetAllPiecesToOrder();
             Number.Text = "1";
         }
-
+        //ON COMBOBOX CHANGED : Updates the price
         private void Piece_SelectedIndexChanged(object sender, EventArgs e)
         {
             Changeprice();
         }
 
+        //ON TEXT CHANGED : Updates the price
         private void Number_TextChanged(object sender, EventArgs e)
         {
             Changeprice();
         }
 
+        //Updates the price depend on the piece and the quantity to order
         private void Changeprice()
         {
             try
@@ -47,6 +50,7 @@ namespace KitBoxMag
 
         }
 
+        //ON CLICK : Update the piece from de database (see DBController.OrderPiece method ) and close this form 
         private void command_Click(object sender, EventArgs e)
         {
             try

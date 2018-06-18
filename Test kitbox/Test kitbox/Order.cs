@@ -41,9 +41,9 @@ namespace Test_kitbox
             Piece piece = product.Piece;
             int dbQuantity = 0;
 
-            if(piece != null)
+            if (piece != null)
             {
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
                     using (SQLiteCommand fmd = connect.CreateCommand())
@@ -63,11 +63,11 @@ namespace Test_kitbox
                         while (q.Read())
                         {
                             dbQuantity = Convert.ToInt32(q["Quantity"]);
-                            
                         }
                     }
                 }
             }
+
             return dbQuantity;
         }
 
@@ -77,7 +77,7 @@ namespace Test_kitbox
 
             if(piece != null)
             {
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
                     using (SQLiteCommand fmd = connect.CreateCommand())
@@ -90,6 +90,7 @@ namespace Test_kitbox
 
                         // EXECUTE THE SQL REQUEST
                         q = fmd.ExecuteReader();
+                        q.Read();
                     }
                 }
             }
@@ -128,7 +129,7 @@ namespace Test_kitbox
                 int notStock = wantedQuantity - stockQuantity; //D'office positif
 
                 //Update quantity à 0
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                 {
 
                     connect.Open();
@@ -159,7 +160,7 @@ namespace Test_kitbox
                 if (orderedExtra >= notStock)
                 {
                     //Update OrderedExtra to (OrderedExtra - notStock
-                    using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                     {
                         connect.Open();
                         using (SQLiteCommand fmd = connect.CreateCommand())
@@ -174,7 +175,7 @@ namespace Test_kitbox
                 else
                 {
                     int rest = notStock - orderedExtra;
-                    using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                     {
                         connect.Open();
                         using (SQLiteCommand fmd = connect.CreateCommand())
@@ -188,32 +189,6 @@ namespace Test_kitbox
             }
         }
 
-            /*
-            public List<Product> ItemToProduct(Item item)
-            {
-                List<Product> productList = new List<Product>();
-
-                //Generate products
-                Piece piece = new Cleat(14, 400);
-                Product product = new Product(8, piece);
-                productList.Add(product);
-
-                return productList;
-            }
-            */
-
-           /* public List<Product> ItemToProduct()
-            {
-                List<Product> productList = new List<Product>();
-
-                //Generate products
-                Piece piece = new Cleat(14, 400);
-                Product product = new Product(8, piece);
-                productList.Add(product);
-
-                return productList;
-            }
-            */
 
         public void AddItem(Item newItem)
         {

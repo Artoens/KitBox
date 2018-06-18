@@ -12,9 +12,11 @@ namespace KitBoxMag
 {
     public partial class OrderPiece : DataTab
     {
+        //order piece tab
         public OrderPiece()
         {
             InitializeComponent();
+            //Bind it with the View Model
             dataGridView.DataSource = DBController.GetAllPiecesOrdered();
         }
     }

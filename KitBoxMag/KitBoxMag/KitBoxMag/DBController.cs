@@ -12,7 +12,8 @@ namespace KitBoxMag
 
         private static String pathdb = @"Data Source=..\..\..\..\..\Kitbox.db";
 
-        //First method OK
+        //Gets all ordered pieces from the DB
+        //Returns a list of ViewModel PieceStock
         public static List<PieceStock> GetAllPiecesOrdered()
         {
             List<PieceStock> pieceList = new List<PieceStock>();
@@ -56,7 +57,8 @@ namespace KitBoxMag
 
             }
         }
-        //Second method OK
+        //Gets all stock from the DB (Quantity of the piece > 0)
+        //Returns a list of ViewModel PieceStock
         public static List<PieceStock> GetAllStock()
         {
             List<PieceStock> pieceList = new List<PieceStock>();
@@ -102,8 +104,8 @@ namespace KitBoxMag
 
         }
 
-        //Third method OK
-        //Il faut faire un constructeur pour ClientOrder qui prend comme arguments id, price_order
+        //Gets all Client's order (ID and price)
+        //Returns a list of ViewModel ClientsOrder
         public static List<ClientsOrder> GetAllClientsOrder()
         {
             List<ClientsOrder> OrderList = new List<ClientsOrder>();
@@ -121,18 +123,29 @@ namespace KitBoxMag
                     while (q.Read())
                     {
                         string ID = Convert.ToString(q["ID_Order"]);
-                        int price_order = Convert.ToInt16(q["Price"]);
+                        int price_order = Convert.ToInt32(q["Price"]);
                         ClientsOrder newOrder = new ClientsOrder(ID, price_order);
                         OrderList.Add(newOrder);
                     }
                 }
+                
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    Guid a = Guid.NewGuid();
+                    fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price) VALUES('" + a + "', 333333)";
+                    fmd.ExecuteNonQuery();
+                }
+                
 
                 return OrderList;
 
             }
         }
 
-        //Fourth method Done but must be verified with the variable thing
+        //Updates a piece in the DB
+        //In the db : Removes the piece from the to order list
+        //            Sets the piece in the ordered list
+        //            Sets the quantity ordered
         public static void OrderPiece(string P_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
@@ -148,7 +161,7 @@ namespace KitBoxMag
                 }
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra ="+ quantity + ", To_Order = 0 WHERE Piece_Code =\"" + P_Code +"\"";
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra =" + quantity + ", To_Order = 0 WHERE Piece_Code =\"" + P_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                     Console.WriteLine("add quantity");
@@ -156,7 +169,10 @@ namespace KitBoxMag
             }
         }
 
-        //Fifth method - set ordered to null
+        //Updates a piece in the DB
+        //In the db : Removes the piece from the ordered list
+        //            Sets the quantity in stock = quantity ordered
+        //            Sets the quantity ordered to 0
         public static void DeletePieceOrdered(string Piece_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
@@ -178,7 +194,8 @@ namespace KitBoxMag
             }
         }
 
-        //Sixth method OK but see the variable thing
+        //Deletes an Order from de DB
+        //Once the Order is confirm, we don't need it anymore
         public static void DeleteClientOrder(string ID_Order)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
@@ -187,7 +204,7 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"DELETE FROM Orders WHERE ID_Order = " + ID_Order;
+                    fmd.CommandText = @"DELETE FROM Orders WHERE ID_Order = '" + ID_Order + "'";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
@@ -195,7 +212,8 @@ namespace KitBoxMag
             GetAllClientsOrder();
         }
 
-        //Seventh method OK
+        //Gets all pieces to order from the DB
+        //Returns a list of ViewModel PieceStock
         public static List<PieceStock> GetAllPiecesToOrder()
         {
             List<PieceStock> pieceList = new List<PieceStock>();
@@ -216,10 +234,10 @@ namespace KitBoxMag
                                         WHERE s.To_Order = 1";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
-                        while (q.Read())
-                        {
-                            GetListPieces(q, pieceList);
-                        }
+                    while (q.Read())
+                    {
+                        GetListPieces(q, pieceList);
+                    }
                 }
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
@@ -237,11 +255,11 @@ namespace KitBoxMag
                 }
             }
 
-                return pieceList;
+            return pieceList;
 
         }
 
-        //Method just to simplify the other ones
+        //Creates the View Model and add it for the others methods
         static private List<PieceStock> GetListPieces(SQLiteDataReader q, List<PieceStock> pieceList)
         {
             int quantity = 0;
@@ -254,7 +272,7 @@ namespace KitBoxMag
             }
             catch
             {
-                quantity = Convert.ToInt32(q["Ordered_Extra"]); 
+                quantity = Convert.ToInt32(q["Ordered_Extra"]);
             }
 
             PieceStock temp = new PieceStock(reference, quantity, price, id);
@@ -264,6 +282,7 @@ namespace KitBoxMag
             return pieceList;
         }
 
+        //Updates the price of the View Model to the lowest 
         static private List<PieceStock> UpdatePiecesInfo(SQLiteDataReader q, List<PieceStock> pieceList)
         {
             //Console.WriteLine(Convert.ToString(q["Piece_Code"]));
@@ -283,8 +302,75 @@ namespace KitBoxMag
                     piece.Supplier = Convert.ToString(q["Name"]);
                 }
             }
-            
+
             return pieceList;
+        }
+
+        //Gets all the supplier from the DB
+        public static List<Supplier> GetAllSupplier()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT ID_Sup, Name
+                                        FROM Supplier";
+
+                    SQLiteDataReader q = fmd.ExecuteReader();
+
+                    while (q.Read())
+                    {
+                        string ID = Convert.ToString(q["ID_Sup"]);
+                        string name = Convert.ToString(q["Name"]);
+                        Supplier supplier = new Supplier(ID, name);
+                        suppliers.Add(supplier);
+                    }
+                }
+            }
+
+            return suppliers;
+        }
+
+        //Gets all the pieces proposed by a supplier
+        public static List<string> GetAllCatalog(Supplier sup)
+        {
+            List<string> pieceList = new List<string>();
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT Piece_Code
+                                        FROM Link_Piece_Supp
+                                        WHERE ID_Sup = '" + sup.ID +"'";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+
+                    while (q.Read())
+                    {
+                        pieceList.Add(Convert.ToString(q["Piece_Code"]));
+                    }
+                }
+            }
+            return pieceList;
+        }
+
+        //Updates a piece in the DB
+        //In the db : Update a price of a piece from a supplier
+        public static void UpdatePrice(Supplier sup, string ID_P, int price)
+        {
+            using (SQLiteConnection connect = new SQLiteConnection(pathdb))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Link_Piece_Supp SET Price ="+ price +" WHERE Piece_Code =" + "\"" + ID_P + "\"AND ID_Sup = '" + sup.ID + "'";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                }
+            }
         }
     }
 }

@@ -26,32 +26,24 @@ namespace Test_kitbox
         public int Height 
         {
             get { return height; }
-
-            //Not checked yet
             set { this.height = value; }
         }
 
         public string MainColor
         {
             get { return mainColor; }
-
-            //Not checked yet
             set { this.mainColor = value; }
         }
         
         public bool DoorPresence
         {
             get { return door; }
-
-            //Not checked yet
             set { this.door = value; }
         }
 
         public string DoorColor
         {
             get { return doorColor; }
-
-            //Not checked yet
             set { this.doorColor = value; }
         }
 
@@ -65,15 +57,22 @@ namespace Test_kitbox
             return result;
         }
 
+        /// <summary>
+        /// This list converts the item into a list of all the products needed to put it together
+        /// These products are existing pieces from the database associated with a quantity
+        /// </summary>
+        /// <returns>Returns a list of all the products the item is made up of</returns>
         public List<Product> ItemToProduct()
         {
+            // INIT WITH AN EMPTY LIST
             List<Product> productList = new List<Product>();
             Piece piece;
             Product product;
 
-            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGHT HAVE BEEN FORGOTTEN
-            piece = Catalog.FindCleat(this.Height);//Compartment height = Cleat height + 2cm per rail (2 rails)
-            product = new Product(4, piece); // REMOVED 4cm due to a bug => change dimensions list to correct it
+            //CLEAT
+            piece = Catalog.FindCleat(this.Height);
+            product = new Product(4, piece); 
+
             productList.Add(product);
 
             //RAIL FRONT
@@ -117,15 +116,13 @@ namespace Test_kitbox
                 //IF THE DOORS ARE NOT IN GLASS
                 if(this.DoorColor != "Verre")
                 {
-                    //KNOB -- DO WE HAVE TO CHOOSE A DIAMETER ?
+                    //KNOB
                     piece = Catalog.FindKnob(6);
                     product = new Product(4, piece);
                     productList.Add(product);
                 }
                 
             }
-            
-            //RETURN THE LIST OF ALL THE PRODUCTS
             return productList;
         }
     }
