@@ -1,0 +1,46 @@
+Bill made on the 6/18/2018 3:40:21 PM for the client
+20180618154021
+Item bought/price/availability
+cupboard/3.556
+4 x Cleat - height : 32 price : 2000 Available : True
+2 x Rail Available : True
+2 x Rail Available : True
+4 x Rail Available : True
+2 x Panel Available : True
+2 x Panel Available : True
+1 x Panel Available : True
+2 x Door Available : True
+4 x Knob Available : True
+compartment n°1/92.06/Available
+4 x Cleat - height : 32 price : 2000 Available : True
+2 x Rail Available : True
+2 x Rail Available : True
+4 x Rail Available : True
+2 x Panel Available : True
+2 x Panel Available : True
+1 x Panel Available : True
+2 x Door Available : True
+4 x Knob Available : True
+compartment n°2/92.06/Available
+4 x Cleat - height : 32 price : 2000 Available : True
+2 x Rail Available : True
+2 x Rail Available : True
+4 x Rail Available : True
+2 x Panel Available : True
+2 x Panel Available : True
+1 x Panel Available : True
+2 x Door Available : True
+4 x Knob Available : True
+compartment n°3/92.06/Available
+4 x Cleat - height : 32 price : 2000 Available : True
+2 x Rail Available : True
+2 x Rail Available : True
+4 x Rail Available : True
+2 x Panel Available : True
+2 x Panel Available : True
+1 x Panel Available : True
+2 x Door Available : True
+4 x Knob Available : True
+compartment n°4/92.06/Available
+Total price: 371.796
+Total price with VAT: 449.87316
