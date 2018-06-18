@@ -35,6 +35,7 @@
             this.Stock = new System.Windows.Forms.TabPage();
             this.Orders = new System.Windows.Forms.TabPage();
             this.Com = new System.Windows.Forms.TabPage();
+            this.update = new System.Windows.Forms.Button();
             this.Tab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,11 +107,22 @@
             this.Com.Text = "Ordered Pieces";
             this.Com.UseVisualStyleBackColor = true;
             // 
+            // update
+            // 
+            this.update.Location = new System.Drawing.Point(706, 27);
+            this.update.Name = "update";
+            this.update.Size = new System.Drawing.Size(78, 40);
+            this.update.TabIndex = 5;
+            this.update.Text = "Update Price";
+            this.update.UseVisualStyleBackColor = true;
+            this.update.Click += new System.EventHandler(this.update_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.update);
             this.Controls.Add(this.Tab);
             this.Controls.Add(this.Order);
             this.Controls.Add(this.ConfirmP);
@@ -131,6 +143,7 @@
         private System.Windows.Forms.TabPage Stock;
         private System.Windows.Forms.TabPage Orders;
         private System.Windows.Forms.TabPage Com;
+        private System.Windows.Forms.Button update;
     }
 }
 

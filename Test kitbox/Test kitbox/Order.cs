@@ -42,7 +42,7 @@ namespace Test_kitbox
 
             if(piece != null)
             {
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
                     using (SQLiteCommand fmd = connect.CreateCommand())
@@ -77,7 +77,7 @@ namespace Test_kitbox
 
             if(piece != null)
             {
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                 {
                     connect.Open();
                     using (SQLiteCommand fmd = connect.CreateCommand())
@@ -90,6 +90,7 @@ namespace Test_kitbox
 
                         // EXECUTE THE SQL REQUEST
                         q = fmd.ExecuteReader();
+                        q.Read();
                     }
                 }
             }
@@ -128,7 +129,7 @@ namespace Test_kitbox
                 int notStock = wantedQuantity - stockQuantity; //D'office positif
 
                 //Update quantity à 0
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
+                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                 {
 
                     connect.Open();
@@ -159,7 +160,7 @@ namespace Test_kitbox
                 if (orderedExtra >= notStock)
                 {
                     //Update OrderedExtra to (OrderedExtra - notStock
-                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\\Users\\sambe\\Desktop\\ECAM\\projet info\\KitBox\\Kitbox.db;Version=3;"))
+                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                     {
                         connect.Open();
                         using (SQLiteCommand fmd = connect.CreateCommand())
@@ -174,7 +175,7 @@ namespace Test_kitbox
                 else
                 {
                     int rest = notStock - orderedExtra;
-                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\\Users\\sambe\\Desktop\\ECAM\\projet info\\KitBox\\Kitbox.db;Version=3;"))
+                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                     {
                         connect.Open();
                         using (SQLiteCommand fmd = connect.CreateCommand())

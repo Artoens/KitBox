@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace KitBoxMag
 {
-  public abstract class Piece
+    //parent model of a piece
+    public abstract class Piece
     {
         protected int price;
         protected string id;
@@ -16,31 +17,31 @@ namespace KitBoxMag
             this.id = id;
         }
         public string Id
-         {
-        get { return id; }
-         }
+        {
+            get { return id; }
+        }
 
 
         //IMPLEMENTED WITH DATABASE
         //Je suppose que askedNumber est le Piece_ID
 
         public bool IsInStock(int askedNumber)
-    {
-        using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
         {
-            connect.Open();
-            using (SQLiteCommand fmd = connect.CreateCommand())
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
             {
-                fmd.CommandText = @"SELECT Amount FROM Stock where Piece_ID = askedNumber";
-                SQLiteDataReader q = fmd.ExecuteReader();
-                if (q.Read())
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    return true;
+                    fmd.CommandText = @"SELECT Amount FROM Stock where Piece_ID = askedNumber";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    if (q.Read())
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
             }
         }
-    }
 
         abstract public Piece Copy();
         public int Price
@@ -48,18 +49,18 @@ namespace KitBoxMag
             get { return price; }
             set { price = value; }
         }
-        
-            //IMPLEMENTED WITH DATABASE
+
+        //IMPLEMENTED WITH DATABASE
         /*public bool IsInStock(int askedNumber)
         {
 
         }*/
 
-       /* public List<Supplier> GetSupplierList()
-        {
-                    List<Supplier> newList = new List<Supplier>();
-                    return newList;
-        }*/
+        /* public List<Supplier> GetSupplierList()
+         {
+                     List<Supplier> newList = new List<Supplier>();
+                     return newList;
+         }*/
 
         abstract override public string ToString();
     }

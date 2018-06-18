@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace KitBoxMag
 {
+    //VIEW MODEL FOR THE UI
     public class ClientsOrder
     {
         public string Id { get; set; }

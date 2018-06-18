@@ -24,39 +24,17 @@ namespace Test_kitbox
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            
             using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
             {
-                /*
                 connect.Open();
-                SQLiteCommand insertSQL = new SQLiteCommand("INSERT INTO Orders (ID_Order, Price) VALUES(\"" + outp.id + "\"," + outp.TotalPrice(order).ToString() + ")", connect);
-
-                try
+                using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    insertSQL.ExecuteNonQuery();
+                    Guid a = Guid.NewGuid();
+                    fmd.CommandText = @"INSERT INTO Orders (ID_Order, Price) VALUES('" + a + "', 333333)";
+                    fmd.ExecuteNonQuery();
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                
-
-                connect.Open();
-                string sql = "insert into Orders (ID_Order, Price) values ('22222222', 6000)";
-                SQLiteCommand command = new SQLiteCommand(sql, connect);
-                // EXECUTE THE SQL REQUEST
-                command.ExecuteNonQuery();
-                //q.Read();
-                */
-                string InsertSql = @"INSERT INTO Orders (ID_Order, Price) VALUES($id, $price)";
-                connect.Open();
-                SQLiteCommand InsertCom = new SQLiteCommand(InsertSql, connect);
-                InsertCom.Parameters.Add("$id", DbType.String).Value = outp.id;
-                InsertCom.Parameters.Add("$price", DbType.Int32).Value = outp.TotalPrice(order);
-                InsertCom.ExecuteNonQuery(); ;
-
             }
+         
 
             //MessageBox.Show(fmd.CommandText);
             List<Product> products = order.GenerateOrder();
