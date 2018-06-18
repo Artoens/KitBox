@@ -13,41 +13,59 @@ namespace KitBoxMag
         private static String pathdb = @"Data Source=..\..\..\..\..\Kitbox.db";
 
         //First method OK
-        public static List<Piece> GetAllPiecesOrdered()
+        public static List<PieceStock> GetAllPiecesOrdered()
         {
-            List<Piece> pieceList = new List<Piece>();
+            List<PieceStock> pieceList = new List<PieceStock>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT p.*, r.Reference
+                    fmd.CommandText = @"SELECT p.*, r.Reference, s.Ordered_Extra
                                         FROM Piece p
-                                        INNER JOIN Reference r
+                                        INNER JOIN Stock s
                                         ON p.Piece_Code = s.Piece_Code
-                                        WHERE p.Ordered = 1";
+                                        INNER JOIN Reference r
+                                        ON r.ID_Piece = p.ID_Piece
+                                        LEFT OUTER JOIN Color c
+                                        ON c.PK_Color = p.ID_Color
+                                        WHERE p.Ordered=1";
                     SQLiteDataReader q = fmd.ExecuteReader();
 
                     while (q.Read())
                     {
                         GetListPieces(q, pieceList);
+                        Console.WriteLine(pieceList.Count);
                     }
                 }
-
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price ,l.Delay, s.Name
+                                    FROM Piece p
+									INNER JOIN Link_Piece_Supp l
+                                    ON p.Piece_Code = l.Piece_Code
+									inner join Supplier s
+									on l.ID_Sup = s.ID_Sup";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        UpdatePiecesInfo(q, pieceList);
+                    }
+                }
                 return pieceList;
 
             }
         }
         //Second method OK
-        public static List<Piece> GetAllStock()
+        public static List<PieceStock> GetAllStock()
         {
-            List<Piece> pieceList = new List<Piece>();
+            List<PieceStock> pieceList = new List<PieceStock>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT p.*, r.Reference, c.Color
+                    fmd.CommandText = @"SELECT p.*, r.Reference, c.Color, s.Quantity
                                     FROM Piece p
                                     INNER JOIN Stock s
                                     ON p.Piece_Code = s.Piece_Code
@@ -61,6 +79,20 @@ namespace KitBoxMag
                     while (q.Read())
                     {
                         GetListPieces(q, pieceList);
+                    }
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price ,l.Delay, s.Name
+                                    FROM Piece p
+									INNER JOIN Link_Piece_Supp l
+                                    ON p.Piece_Code = l.Piece_Code
+									inner join Supplier s
+									on l.ID_Sup = s.ID_Sup";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        UpdatePiecesInfo(q, pieceList);
                     }
                 }
 
@@ -82,7 +114,7 @@ namespace KitBoxMag
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
                     fmd.CommandText = @"SELECT *
-                                        FROM Order";
+                                        FROM Orders";
 
                     SQLiteDataReader q = fmd.ExecuteReader();
 
@@ -101,7 +133,7 @@ namespace KitBoxMag
         }
 
         //Fourth method Done but must be verified with the variable thing
-        public static void OrderPiece(string P_Code)
+        public static void OrderPiece(string P_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -109,15 +141,23 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Piece SET Ordered = TRUE WHERE ID_Piece = " + P_Code + "";
+                    fmd.CommandText = @"UPDATE Piece SET Ordered = 1 WHERE Piece_Code =" + "\"" + P_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
+                    Console.WriteLine("ordered");
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra ="+ quantity + ", To_Order = 0 WHERE Piece_Code =\"" + P_Code +"\"";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                    Console.WriteLine("add quantity");
                 }
             }
         }
 
         //Fifth method - set ordered to null
-        public static void DeletePieceOrdered(string Piece_Code)
+        public static void DeletePieceOrdered(string Piece_Code, int quantity)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -125,7 +165,13 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"UPDATE Ordered FROM Piece SET Ordered = FALSE WHERE ID_Piece = " + Piece_Code + "";
+                    fmd.CommandText = @"UPDATE Piece SET Ordered = 0 WHERE Piece_Code =" + "\"" + Piece_Code + "\"";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    q.Read();
+                }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"UPDATE Stock SET Ordered_Extra = 0, Quantity = Quantity + " + quantity + " WHERE Piece_Code =\"" + Piece_Code + "\"";
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
@@ -133,7 +179,7 @@ namespace KitBoxMag
         }
 
         //Sixth method OK but see the variable thing
-        public static void DeleteClientOrder(char ID_Order)
+        public static void DeleteClientOrder(string ID_Order)
         {
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
@@ -141,30 +187,31 @@ namespace KitBoxMag
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"DELETE FROM Order WHERE ID_Order = " + ID_Order + "";
+                    fmd.CommandText = @"DELETE FROM Orders WHERE ID_Order = " + ID_Order;
                     SQLiteDataReader q = fmd.ExecuteReader();
                     q.Read();
                 }
             }
+            GetAllClientsOrder();
         }
 
         //Seventh method OK
-        public static List<Piece> GetAllPiecesToOrder()
+        public static List<PieceStock> GetAllPiecesToOrder()
         {
-            List<Piece> pieceList = new List<Piece>();
+            List<PieceStock> pieceList = new List<PieceStock>();
             using (SQLiteConnection connect = new SQLiteConnection(pathdb))
             {
                 connect.Open();
 
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
-                    fmd.CommandText = @"SELECT p.*, r.Reference, c.Color
+                    fmd.CommandText = @"SELECT p.*, r.Reference, c.Color, s.Quantity
                                         FROM Piece p
                                         INNER JOIN Stock s
                                         ON s.Piece_Code = p.Piece_Code
                                         INNER JOIN Reference r
                                         ON r.ID_Piece=p.ID_Piece
-                                        OUTER JOIN Color c
+                                        LEFT OUTER JOIN Color c
                                         ON c.PK_Color = p.ID_Color
                                         WHERE s.To_Order = 1";
                     SQLiteDataReader q = fmd.ExecuteReader();
@@ -174,6 +221,20 @@ namespace KitBoxMag
                             GetListPieces(q, pieceList);
                         }
                 }
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT p.*, l.Price ,l.Delay, s.Name
+                                    FROM Piece p
+									INNER JOIN Link_Piece_Supp l
+                                    ON p.Piece_Code = l.Piece_Code
+									inner join Supplier s
+									on l.ID_Sup = s.ID_Sup";
+                    SQLiteDataReader q = fmd.ExecuteReader();
+                    while (q.Read())
+                    {
+                        UpdatePiecesInfo(q, pieceList);
+                    }
+                }
             }
 
                 return pieceList;
@@ -181,122 +242,48 @@ namespace KitBoxMag
         }
 
         //Method just to simplify the other ones
-        static private List<Piece> GetListPieces(SQLiteDataReader q, List<Piece> pieceList)
+        static private List<PieceStock> GetListPieces(SQLiteDataReader q, List<PieceStock> pieceList)
         {
-            
-
+            int quantity = 0;
             string reference = Convert.ToString(q["Reference"]);
             int price = Convert.ToInt32(q["Price_Client"]);
             string id = Convert.ToString(q["Piece_Code"]);
-
-            if (reference == "Angle bar")
+            try
             {
-                int height = Convert.ToInt16(q["Height"]);
-                string color = Convert.ToString(q["Color"]);
-                Piece AngleBar = new AngleBar(height, color, price, id);
-                pieceList.Add(AngleBar);
+                quantity = Convert.ToInt32(q["Quantity"]);
+            }
+            catch
+            {
+                quantity = Convert.ToInt32(q["Ordered_Extra"]); 
             }
 
-            else if (reference == "B_Panel")
+            PieceStock temp = new PieceStock(reference, quantity, price, id);
+
+            pieceList.Add(temp);
+
+            return pieceList;
+        }
+
+        static private List<PieceStock> UpdatePiecesInfo(SQLiteDataReader q, List<PieceStock> pieceList)
+        {
+            //Console.WriteLine(Convert.ToString(q["Piece_Code"]));
+            PieceStock piece = pieceList.Where(e => Convert.ToString(q["Piece_Code"]) == e.Id).FirstOrDefault();
+            if (piece != null)
             {
-                int length = Convert.ToInt16(q["Length"]);
-                int height = Convert.ToInt16(q["Height"]);
-                int depth = Convert.ToInt16(q["Depth"]);
-                string color = Convert.ToString(q["Color"]);
-                string type = "B";
-                Piece Panel = new Panel(length, height, depth, color, type, price, id);
-                pieceList.Add(Panel);
+
+                if (piece.Price > Convert.ToInt32(q["Price"]))
+                {
+                    piece.Price = Convert.ToInt32(q["Price"]);
+                    piece.ShippingDelay = Convert.ToInt32(q["Delay"]);
+                    piece.Supplier = Convert.ToString(q["Name"]);
+                }
+                else if (piece.Price == Convert.ToInt32(q["Price"]) && piece.ShippingDelay > Convert.ToInt32(q["Delay"]))
+                {
+                    piece.ShippingDelay = Convert.ToInt32(q["Delay"]);
+                    piece.Supplier = Convert.ToString(q["Name"]);
+                }
             }
-
-            else if (reference == "TB_Panel")
-            {
-                int length = Convert.ToInt16(q["Length"]);
-                int height = Convert.ToInt16(q["Height"]);
-                int depth = Convert.ToInt16(q["Depth"]);
-                string color = Convert.ToString(q["Color"]);
-                string type = "TB"; 
-                Piece Panel = new Panel(length, height, depth, color, type, price, id);
-                pieceList.Add(Panel);
-            }
-
-            else if (reference == "LR_Panel")
-            {
-                int length = Convert.ToInt16(q["Length"]);
-                int height = Convert.ToInt16(q["Height"]);
-                int depth = Convert.ToInt16(q["Depth"]);
-                string color = Convert.ToString(q["Color"]);
-                string type = "LR";
-                Piece Panel = new Panel(length, height, depth, color, type, price, id);
-                pieceList.Add(Panel);
-            }
-
-
-            else if (reference == "TB_Panel")
-            {
-                int length = Convert.ToInt16(q["Length"]);
-                int height = Convert.ToInt16(q["Height"]);
-                int depth = Convert.ToInt16(q["Depth"]);
-                string color = Convert.ToString(q["Color"]);
-                string type = "TB";
-                Piece Panel = new Panel(length, height, depth, color, type, price, id);
-                pieceList.Add(Panel);
-            }
-
-            else if (reference == "Door")
-            {
-                int length = Convert.ToInt16(q["Length"]);
-                int height = Convert.ToInt16(q["Height"]);
-                string color = Convert.ToString(q["Color"]);
-                Piece Door = new Door(length, height, color, price, id);
-                pieceList.Add(Door);
-            }
-
-            else if (reference == "Cleat")
-            {
-                int height = Convert.ToInt16(q["Height"]);
-                Piece Cleat = new Cleat(height, price, id);
-                pieceList.Add(Cleat);
-            }
-
-            else if (reference == "B_Rail")
-            {
-                string type = "B";
-                int length = Convert.ToInt16(q["Length"]);
-                Piece Rail = new Rail(type, length, price, id);
-                pieceList.Add(Rail);
-            }
-
-            else if (reference == "F_Rail")
-            {
-                string type = "F";
-                int length = Convert.ToInt16(q["Length"]);
-                Piece Rail = new Rail(type, length, price, id);
-                pieceList.Add(Rail);
-            }
-
-            else if (reference == "Knob")
-            {
-                int diameter = Convert.ToInt16(q["Dimensions"]);
-                Piece Knob = new Knob(diameter, price, id);
-                pieceList.Add(Knob);
-            }
-
-            else if (reference == "LR_Rail")
-            {
-                string type = "LR";
-                int length = Convert.ToInt16(q["Length"]);
-                Piece Rail = new Rail(type, length, price, id);
-                pieceList.Add(Rail);
-            }
-
-
-            else if (reference == "Knob")
-            {
-                int diameter = Convert.ToInt16(q["Dimensions"]);
-                Piece Knob = new Knob(diameter, price, id);
-                pieceList.Add(Knob);
-            }
-
+            
             return pieceList;
         }
     }

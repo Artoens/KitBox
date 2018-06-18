@@ -20,10 +20,11 @@ namespace KitBoxMag
         get { return id; }
          }
 
-    //IMPLEMENTED WITH DATABASE
-    //Je suppose que askedNumber est le Piece_ID
 
-    public bool IsInStock(int askedNumber)
+        //IMPLEMENTED WITH DATABASE
+        //Je suppose que askedNumber est le Piece_ID
+
+        public bool IsInStock(int askedNumber)
     {
         using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
         {
@@ -41,13 +42,14 @@ namespace KitBoxMag
         }
     }
 
-abstract public Piece Copy();
+        abstract public Piece Copy();
         public int Price
         {
             get { return price; }
+            set { price = value; }
         }
-
-        //IMPLEMENTED WITH DATABASE
+        
+            //IMPLEMENTED WITH DATABASE
         /*public bool IsInStock(int askedNumber)
         {
 

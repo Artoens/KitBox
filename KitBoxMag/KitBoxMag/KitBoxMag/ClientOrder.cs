@@ -19,6 +19,29 @@ namespace KitBoxMag
 
         private void ClientOrder_Load(object sender, EventArgs e)
         {
+            orderid.DataSource = DBController.GetAllClientsOrder();
+        }
+
+        private void orderid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClientsOrder order = (ClientsOrder)orderid.SelectedItem;
+            price.Text = ((double)order.Price/10000).ToString("0.##€");
+        }
+
+        private void Confirm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DBController.DeleteClientOrder(((ClientsOrder)orderid.SelectedItem).Id);
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                Close();
+            }
         }
     }
 }

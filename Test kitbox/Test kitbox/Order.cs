@@ -84,10 +84,9 @@ namespace Test_kitbox
                     {
                         // CREATE SQL READER
                         SQLiteDataReader q;
-
-                        fmd.CommandText = @"UPDATE Stock
-                                            SET Quantity = Quantity - " + product.Quantity +
-                                            " WHERE Piece_Code = '" + piece.Id + "'";
+                                        fmd.CommandText = @"UPDATE Stock
+                                        SET Quantity = Quantity - " + product.Quantity +
+                                        " WHERE PIECE_Code = '" + piece.Id + "'";
 
                         // EXECUTE THE SQL REQUEST
                         q = fmd.ExecuteReader();
@@ -120,23 +119,13 @@ namespace Test_kitbox
             //If everything is in stock : decrease stock of the quantity
             if (CheckStock(product))
             {
-                using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
-                {
-                    connect.Open();
-                    using (SQLiteCommand fmd = connect.CreateCommand())
-                    {
-                        fmd.CommandText = @"UPDATE Stock s
-                                               SET s.Quantity = wantedQuantity
-                                               WHERE s.Piece_ID = id";
-                    }
-                }
+                RemoveFromStock(product);
             }
-
             //Si pas tout en stock
             else
             {
                 //Si partie en stock
-                int notStock = wantedQuantity - stockQuantity; //Doffice positif
+                int notStock = wantedQuantity - stockQuantity; //D'office positif
 
                 //Update quantity à 0
                 using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
@@ -191,8 +180,8 @@ namespace Test_kitbox
                         using (SQLiteCommand fmd = connect.CreateCommand())
                         {
                             fmd.CommandText = @"UPDATE Stock s
-                                                SET s.OrderedExtra = 0 AND s.ToOrder = rest
-                                                WHERE s.Piece_ID = id";
+                                                SET s.OrderedExtra = 0 AND s.ToOrder = " + rest +
+                                                "WHERE s.Piece_ID = id";
                         }
                     }
                 }
