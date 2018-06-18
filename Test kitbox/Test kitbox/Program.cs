@@ -33,7 +33,7 @@ namespace Test_kitbox
 
             
 
-            /* //IMPORT PANEL MANUALLY TO GET DIMENSIONS
+             /*//IMPORT PANEL MANUALLY TO GET DIMENSIONS
              Piece panelTB = new Panel(60, 0, 40, "blue", "TB", 54);
              Catalog.AddPiece(panelTB);
              panelTB = new Panel(60, 0, 30, "blue", "TB", 47);

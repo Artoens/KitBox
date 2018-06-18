@@ -65,13 +65,19 @@ namespace Test_kitbox
             return result;
         }
 
+        /// <summary>
+        /// This list converts the item into a list of all the products needed to put it together
+        /// These products are existing pieces from the database associated with a quantity
+        /// </summary>
+        /// <returns>Returns a list of all the products the item is made up of</returns>
         public List<Product> ItemToProduct()
         {
+            // INIT WITH AN EMPTY LIST
             List<Product> productList = new List<Product>();
             Piece piece;
             Product product;
 
-            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGHT HAVE BEEN FORGOTTEN
+            //CLEAT
             piece = Catalog.FindCleat(this.Height);//Compartment height = Cleat height + 2cm per rail (2 rails)
             product = new Product(4, piece); // REMOVED 4cm due to a bug => change dimensions list to correct it
             productList.Add(product);
@@ -117,7 +123,7 @@ namespace Test_kitbox
                 //IF THE DOORS ARE NOT IN GLASS
                 if(this.DoorColor != "glass")
                 {
-                    //KNOB -- DO WE HAVE TO CHOOSE A DIAMETER ?
+                    //KNOB -- DO WE HAVE TO CHOOSE A DIAMETER ? // NO
                     piece = Catalog.FindKnob(6);
                     product = new Product(4, piece);
                     productList.Add(product);
