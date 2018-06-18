@@ -45,7 +45,6 @@ namespace Test_kitbox
 
         public Piece Piece
         {
-            //Should return a copy
             get
             {
                 if (piece == null)
@@ -65,8 +64,7 @@ namespace Test_kitbox
                 }
             }
         }
-
-        //Not done yet
+        
         override public string ToString()
         {
             if(piece == null)

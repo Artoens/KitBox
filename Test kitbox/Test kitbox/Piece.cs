@@ -19,9 +19,6 @@ namespace Test_kitbox
         get { return id; }
          }
 
-    //IMPLEMENTED WITH DATABASE
-    //Je suppose que askedNumber est le Piece_ID
-
     public bool IsInStock(int askedNumber)
     {
         using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\Users\15171\Desktop\Kitbox.db;Version=3;"))
@@ -40,24 +37,13 @@ namespace Test_kitbox
         }
     }
 
-abstract public Piece Copy();
-        public int Price
-        {
-            get { return price; }
-        }
+    abstract public Piece Copy();
 
-        //IMPLEMENTED WITH DATABASE
-        /*public bool IsInStock(int askedNumber)
-        {
+    public int Price
+    {
+        get { return price; }
+    }
 
-        }*/
-
-       /* public List<Supplier> GetSupplierList()
-        {
-                    List<Supplier> newList = new List<Supplier>();
-                    return newList;
-        }*/
-
-        abstract override public string ToString();
+    abstract override public string ToString();
     }
 }

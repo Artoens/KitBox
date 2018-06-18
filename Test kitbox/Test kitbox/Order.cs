@@ -107,7 +107,7 @@ namespace Test_kitbox
             return false;
         }
 
-        // Si on a déjà commandé : il ne se passe rien
+        // if it's already ordered nothing will happen
         public void UpdateDatabase(Product product)
         {
             Piece piece = product.Piece;
@@ -122,11 +122,10 @@ namespace Test_kitbox
             {
                 RemoveFromStock(product);
             }
-            //Si pas tout en stock
+            //IF everything isn't in stock
             else
             {
-                //Si partie en stock
-                int notStock = wantedQuantity - stockQuantity; //D'office positif
+                int notStock = wantedQuantity - stockQuantity; 
 
                 //Update quantity à 0
                 using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
@@ -159,7 +158,6 @@ namespace Test_kitbox
                 //If everything in OrderedExtra
                 if (orderedExtra >= notStock)
                 {
-                    //Update OrderedExtra to (OrderedExtra - notStock
                     using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=..\\..\\..\\..\\Kitbox.db;Version=3;"))
                     {
                         connect.Open();

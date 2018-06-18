@@ -5,7 +5,6 @@ namespace Test_kitbox
     public class Door : Piece
     {
         private int length;
-
         public int Length
         {
             get { return length; }
