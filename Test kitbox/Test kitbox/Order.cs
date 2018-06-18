@@ -170,7 +170,7 @@ namespace Test_kitbox
                 if (orderedExtra >= notStock)
                 {
                     //Update OrderedExtra to (OrderedExtra - notStock
-                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\\Users\\sambe\\Desktop\\ECAM\\projet info\\KitBox\\Kitbox.db;Version=3;"))
+                    using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
                     {
                         connect.Open();
                         using (SQLiteCommand fmd = connect.CreateCommand())
@@ -185,7 +185,7 @@ namespace Test_kitbox
                 else
                 {
                     int rest = notStock - orderedExtra;
-                    using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=C:\\Users\\sambe\\Desktop\\ECAM\\projet info\\KitBox\\Kitbox.db;Version=3;"))
+                    using (SQLiteConnection connect = new SQLiteConnection("Data Source=..\\..\\..\\..\\Kitbox.db"))
                     {
                         connect.Open();
                         using (SQLiteCommand fmd = connect.CreateCommand())
