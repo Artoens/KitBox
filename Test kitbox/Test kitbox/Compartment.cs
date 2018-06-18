@@ -26,32 +26,24 @@ namespace Test_kitbox
         public int Height 
         {
             get { return height; }
-
-            //Not checked yet
             set { this.height = value; }
         }
 
         public string MainColor
         {
             get { return mainColor; }
-
-            //Not checked yet
             set { this.mainColor = value; }
         }
         
         public bool DoorPresence
         {
             get { return door; }
-
-            //Not checked yet
             set { this.door = value; }
         }
 
         public string DoorColor
         {
             get { return doorColor; }
-
-            //Not checked yet
             set { this.doorColor = value; }
         }
 
@@ -65,15 +57,14 @@ namespace Test_kitbox
             return result;
         }
 
+        //Return the list of all the products in the compartment
         public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
             Piece piece;
             Product product;
-
-            //CHECK THIS LIST CAREFULLY, CONDITIONS MIGHT HAVE BEEN FORGOTTEN
-            piece = Catalog.FindCleat(this.Height);//Compartment height = Cleat height + 2cm per rail (2 rails)
-            product = new Product(4, piece); // REMOVED 4cm due to a bug => change dimensions list to correct it
+            piece = Catalog.FindCleat(this.Height);
+            product = new Product(4, piece); 
             productList.Add(product);
 
             //RAIL FRONT
@@ -117,15 +108,13 @@ namespace Test_kitbox
                 //IF THE DOORS ARE NOT IN GLASS
                 if(this.DoorColor != "glass")
                 {
-                    //KNOB -- DO WE HAVE TO CHOOSE A DIAMETER ?
+                    //KNOB
                     piece = Catalog.FindKnob(6);
                     product = new Product(4, piece);
                     productList.Add(product);
                 }
                 
             }
-            
-            //RETURN THE LIST OF ALL THE PRODUCTS
             return productList;
         }
     }

@@ -11,6 +11,7 @@ namespace Test_kitbox
     {
         private static List<Piece> pieceList = new List<Piece>();  //liste avec les piece pour chaque élément, chaque piece a un type 
 
+        //gets all the pieces from the DataBase
         public static void GetPieces()
         {
             List<String> pieces = new List<String>();
@@ -126,6 +127,7 @@ namespace Test_kitbox
 
         }
 
+        //makes a list of all the pieces
         public static List<Piece> PieceList
         {
             get
@@ -146,7 +148,7 @@ namespace Test_kitbox
             pieceList.Add(piece);
         }
 
-        //UpdateFromDB
+        //All the find function are meant to find a spécific type of item in our list of pieces
 
         public static Piece FindCleat(int height)
         {
@@ -203,7 +205,6 @@ namespace Test_kitbox
                     }
                 }
             }
-
             return null;
         }
 
@@ -221,7 +222,6 @@ namespace Test_kitbox
                     }
                 }
             }
-
             return null;
         }
 
@@ -260,7 +260,6 @@ namespace Test_kitbox
                     }
                 }
             }
-
             return null;
         }
 
@@ -278,7 +277,6 @@ namespace Test_kitbox
                     }
                 }
             }
-
             return null;
         }
     }

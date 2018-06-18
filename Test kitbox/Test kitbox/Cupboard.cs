@@ -26,32 +26,24 @@ namespace Test_kitbox
         public int Length
         {
             get { return length; }
-
-            //Not checked yet
             set { this.length = value; }
         }
 
         public int Height
         {
             get { return height; }
-
-            //Not checked yet
             set { this.height = value; }
         }
 
         public int Depth
         {
             get { return depth; }
-
-            //Not checked yet
             set { this.depth = value; }
         }
 
         public string AngleBarColor
         {
             get { return angleBarColor; }
-
-            //Not checked yet
             set { this.angleBarColor = value; }
         }
 
@@ -112,8 +104,6 @@ namespace Test_kitbox
         public List<Product> ItemToProduct()
         {
             List<Product> productList = new List<Product>();
-
-            //CUPBOARD HEIGHT -> TO FIND ANGLEBARS
             int height = 0;
 
             //ADD PRODUCTS FOR EACH COMPARTMENT
